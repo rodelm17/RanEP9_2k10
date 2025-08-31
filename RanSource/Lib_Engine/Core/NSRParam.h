@@ -339,6 +339,10 @@ namespace RPARAM
 
 	extern BOOL bVIPSystem;
 
+	/* VIP Mob Leader - Group Aggro Range Bypass, Ace17, 2024/12/19 */
+	extern BOOL bVIPMobLeader;              // Enable/Disable VIP mob leader feature
+	extern int nVIPMobLeaderRange;          // Extended range multiplier (0 = infinite, 1 = normal, 2 = double, etc.)
+
 	extern BOOL bAllowBTGParty;
 
 	extern BOOL bMultipleCaptchaShowTimer;

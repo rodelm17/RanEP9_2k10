@@ -2,6 +2,7 @@
 #include "./GLCrow.h"
 #include "./GLGaeaServer.h"
 #include "./stl_func.h"
+#include "../../Lib_Engine/Core/NSRParam.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -35,7 +36,7 @@ STARGETID GLCrow::FindEnemyChar ()
 									m_wSkillShowInvisibleRange,
 									GetPosition() ) )	continue;
 
-		//	´ë·Ã½Ã¿¡´Â ¸÷ÀÌ ÄÉ¸¯ÅÍ¸¦ ¼±°øÇÏÁö ¾ÊÀ½.
+		//	ï¿½ï¿½Ã½Ã¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½É¸ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		if ( pChar->GETCONFTING()->IsCONFRONTING() )				continue;
 
 		/*crow school, Juver, 2018/08/02 */
@@ -48,7 +49,7 @@ STARGETID GLCrow::FindEnemyChar ()
 		float fTarLeng = FLT_MAX;
 		if ( emAttRgType==EMATT_SHORT )
 		{
-			//	Note : ±Ù°Å¸® °ø°ÝÀÏ °æ¿ì.
+			//	Note : ï¿½Ù°Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½.
 			if ( pChar->IsFreeARSlot() )
 			{
 				D3DXVECTOR3 vLengA = pChar->GetPosition() - m_vPos;
@@ -59,13 +60,36 @@ STARGETID GLCrow::FindEnemyChar ()
 		}
 		else
 		{
-			//	Note : Àå°Å¸® °ø°ÝÀÏ °æ¿ì.
+			//	Note : ï¿½ï¿½Å¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½.
 			D3DXVECTOR3 vLengA = pChar->GetPosition() - m_vPos;
 			fTarLeng = D3DXVec3Length(&vLengA);
 			if ( fTarLeng <= nRange )			bTarget = TRUE;
-		}
+				}
 
-		if ( !bTarget )											continue;
+	/* VIP Mob Leader - Group Aggro Range Bypass, Ace17, 2024/12/19 */
+	if ( !bTarget && RPARAM::bVIPMobLeader && IsGroupMember() )
+	{
+		// Check kung may group target (leader na-attack)
+		if ( m_pLandMan->GET_GROUPTARGET( GetGroupName() ).dwID != EMTARGET_NULL )
+		{
+			if ( RPARAM::nVIPMobLeaderRange == 0 )
+			{
+				// Infinite range - complete bypass
+				bTarget = TRUE;
+			}
+			else if ( RPARAM::nVIPMobLeaderRange > 1 )
+			{
+				// Extended range - multiply normal range
+				int nExtendedRange = nRange * RPARAM::nVIPMobLeaderRange;
+				if ( fTarLeng <= nExtendedRange )
+				{
+					bTarget = TRUE;
+				}
+			}
+		}
+	}
+
+	if ( !bTarget )											continue;
 
 		switch ( emACT_UP )
 		{
@@ -180,7 +204,7 @@ VEC_SK_TAR GLCrow::DetectTarget ( const D3DXVECTOR3 &vDetectPosA, const D3DXVECT
 			vecTargetID.push_back( STARGETID(pChar->GetCrow(),  pChar->GetCtrlID(), pChar->GetPosition() ) );
 		}
 
-		// ¼ÒÈ¯¼ö°¡ ¹üÀ§¾È¿¡ ÀÖÀ»°æ¿ì¿¡´Â ¼ÒÈ¯¼öµµ ½ºÅ³ Å¸°Ù ¸®½ºÆ®¿¡ Ãß°¡ÇÑ´Ù.
+		// ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½È¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ñ´ï¿½.
 		/*skill summon, Juver, 2017/10/09 */
 		for ( int ii=0; ii<SKILL_SUMMON_MAX_CLIENT_NUM; ++ii )
 		{
@@ -246,7 +270,30 @@ VEC_SK_TAR GLCrow::DetectTarget ( const D3DXVECTOR3 &vDetectPos, const int nRang
 			vecTargetID.push_back( STARGETID(pChar->GetCrow(),  pChar->GetCtrlID(), pChar->GetPosition() ) );
 		}
 
-		// ¼ÒÈ¯¼ö°¡ ¹üÀ§¾È¿¡ ÀÖÀ»°æ¿ì¿¡´Â ¼ÒÈ¯¼öµµ ½ºÅ³ Å¸°Ù ¸®½ºÆ®¿¡ Ãß°¡ÇÑ´Ù.
+		/* VIP Mob Leader - Group Aggro Range Bypass for DetectTarget, Ace17, 2024/12/19 */
+		if ( fTarLeng > nRange && RPARAM::bVIPMobLeader && IsGroupMember() )
+		{
+			// Check kung may group target (leader na-attack)
+			if ( m_pLandMan->GET_GROUPTARGET( GetGroupName() ).dwID != EMTARGET_NULL )
+			{
+				if ( RPARAM::nVIPMobLeaderRange == 0 )
+				{
+					// Infinite range - complete bypass
+					vecTargetID.push_back( STARGETID(pChar->GetCrow(),  pChar->GetCtrlID(), pChar->GetPosition() ) );
+				}
+				else if ( RPARAM::nVIPMobLeaderRange > 1 )
+				{
+					// Extended range - multiply normal range
+					int nExtendedRange = nRange * RPARAM::nVIPMobLeaderRange;
+					if ( fTarLeng <= nExtendedRange )
+					{
+						vecTargetID.push_back( STARGETID(pChar->GetCrow(),  pChar->GetCtrlID(), pChar->GetPosition() ) );
+					}
+				}
+			}
+		}
+
+		// ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½È¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å³ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ñ´ï¿½.
 		/*skill summon, Juver, 2017/10/09 */
 		for ( int ii=0; ii<SKILL_SUMMON_MAX_CLIENT_NUM; ++ii )
 		{
@@ -313,8 +360,8 @@ void GLCrow::RunNextAct ()
 	}
 	else
 	{
-		//	Note : ÀÓÀÇÀÇ À§Ä¡¿¡¼­ idle »óÅÂ¿¡ ÀÖ´Â ¸÷Àº ÀÚ±â À§Ä¡·Î ´Ù½Ã µ¹¾Æ°£´Ù.
-		//		¸Ê ÀÔ±¸¿¡ ¸÷µéÀ» ¸ô¾Æ ³õ¾Æ¼­ ´Ù¸¥ ÇÃ·¡ÀÌ¾î¿¡°Ô ÇÇÇØ¸¦ ÁÖ´Â ÇàÀ§ ¹æÁö¿ë.
+		//	Note : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ idle ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú±ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½.
+		//		ï¿½ï¿½ ï¿½Ô±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¼ï¿½ ï¿½Ù¸ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¸ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		//
 		D3DXVECTOR3 vDist = m_vPos - m_vGenPos;
 		float fDist = D3DXVec3Length(&vDist);
@@ -328,10 +375,10 @@ void GLCrow::RunNextAct ()
 
 BOOL GLCrow::CheckGroupAttack()
 {
-	// ±×·ì ¸®´õÀÏ °æ¿ì Å¸°ÙÀÌ Á×±â Àü±îÁø Å¸°ÙÀ» ¹Ù²ÙÁö ¾Ê´Â´Ù.
+	// ï¿½×·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½×±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
 	if( IsGroupLeader() )
 	{
-		// ÇöÀç ±×·ì Å¸°ÙÀÌ Á¸ÀçÇÏ´ÂÁö Ã¼Å© 
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ Ã¼Å© 
 		if( m_pLandMan->GET_GROUPTARGET( GetGroupName() ).dwID == EMTARGET_NULL )
 		{
 			if ( GLGaeaServer::GetInstance().GetTarget ( m_pLandMan, m_TargetID ) ) return TRUE;
@@ -339,7 +386,7 @@ BOOL GLCrow::CheckGroupAttack()
 			return FALSE;
 		}
 	}else{
-		// ¸¸¾à ±×·ì ¸®´õ°¡ Å¸°ÙÀÌ ¾øÀ» °æ¿ì
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		PGLCROW pGLLeader = m_pLandMan->GET_GROUPLEADER(GetGroupName());
 		if( pGLLeader && pGLLeader->GetTargetID().dwID == EMTARGET_NULL ) return TRUE;
 	}
@@ -352,23 +399,23 @@ void GLCrow::GroupAttackProcess( const STARGETID sTargetID  )
 {
 	if( !IsGroupMember() ) return;
 
-	// ±×·ì ¸®´õÀÏ °æ¿ì ÇØ´ç Å¸°Ù¿¡ ÀüºÎ´Ù °ø°ÝÀ» ÇÑ´Ù
+	// ï¿½×·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ Å¸ï¿½Ù¿ï¿½ ï¿½ï¿½ï¿½Î´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½
 	if( IsGroupLeader() )
 	{
 
-		// ÇöÀç ±×·ì Å¸°ÙÀÌ Á¸ÀçÇÏ´ÂÁö Ã¼Å© 
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ Ã¼Å© 
 		if( m_pLandMan->GET_GROUPTARGET( GetGroupName() ).dwID == EMTARGET_NULL )
 		{
-			// ±×·ì Å¸°Ù¿¡ µî·ÏÀ» ÇÑ´Ù.
+			// ï¿½×·ï¿½ Å¸ï¿½Ù¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 			m_pLandMan->SET_GROUPTARGET( GetGroupName(), sTargetID );
 
 			SETGROUPMEM setGroupMember		= m_pLandMan->GET_GROUPMEMBER(GetGroupName());
 			SETGROUPMEM_ITER setMember_iter = setGroupMember.begin();
 			for( ; setMember_iter != setGroupMember.end(); ++setMember_iter )
 			{
-				// ¸â¹ö°¡ ¾Æ´Ï¸é ³Ñ¾î°£´Ù.
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½Ñ¾î°£ï¿½ï¿½.
 				if( !m_pLandMan->IS_GROUPMEMBER(GetGroupName(), *setMember_iter ) ) continue;
-				// ÀÚ½ÅÀÌ¸é ³Ñ¾î°£´Ù.
+				// ï¿½Ú½ï¿½ï¿½Ì¸ï¿½ ï¿½Ñ¾î°£ï¿½ï¿½.
 				if( m_dwGlobID == *setMember_iter ) continue;
 				PGLCROW pGLCrow = m_pLandMan->GetCrow(*setMember_iter);
 				if( !pGLCrow ) continue;
@@ -393,7 +440,7 @@ void GLCrow::NewTarget( const STARGETID &sTargetID, BOOL bCheckMember /* = FALSE
 
 	m_vOrgTarPos = m_vPos;
 
-	//	Note : Å¸°ÙÀ¸·Î ÁöÁ¤.
+	//	Note : Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	m_TargetID.emCrow = sTargetID.emCrow;
 	m_TargetID.dwID = pTarget->GetCtrlID();
 	m_TargetID.vPos = pTarget->GetPosition();
@@ -430,7 +477,7 @@ DWORD GLCrow::FindOptAType ( const STARGETID &sTargetID, bool branvar )
 	D3DXVECTOR3 vDX = m_vPos - pTarget->GetPosition();
 	float fLength = D3DXVec3Length ( &vDX );
 
-	//	Note : ±ÙÁ¢ÀÌ ¿ì¼±ÀÎÁö Á¡°Ë.
+	//	Note : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ì¼±ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	bool bprior_near(false);
 	if ( g_fMAXNEAR>fLength && !bTarStateRun )	bprior_near = true;
 
@@ -459,7 +506,7 @@ DWORD GLCrow::FindOptAType ( const STARGETID &sTargetID, bool branvar )
 			if ( !pSkill )								continue;
 			if ( sATTACK.skill_tar == CROWSKTAR_OUR )	continue;
 
-			//	µô·¡ÀÌ ½Ã°£, Á¶°Ç¼öÄ¡¸¦ È®ÀÎÇÏ¿© »ç¿ë °¡´ÉÇÑÁö Á¡°Ë.
+			//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½, ï¿½ï¿½ï¿½Ç¼ï¿½Ä¡ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			EMSKILLCHECK emcheck = CHECHSKILL ( DWORD(i) );
 			if ( emcheck!=EMSKILL_OK && emcheck!=EMSKILL_NOTSP )	continue;
 			
@@ -474,25 +521,25 @@ DWORD GLCrow::FindOptAType ( const STARGETID &sTargetID, bool branvar )
 			else										bnear = false;
 		}
 
-		//	¿ì¼±¼øÀ§ °è»ê.
+		//	ï¿½ì¼±ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½.
 		int nprior(0);
 
-		//	¿ì¼±¼øÀ§¿¡ ·£´ý¼º ¼öÄ¡¸¦ ¾à°£ ºÎ¿©. ( ·£´ý ¼±ÅÃ )
+		//	ï¿½ì¼±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½à°£ ï¿½Î¿ï¿½. ( ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ )
 		if ( branvar )					nprior += int ( (RANDOM_POS) * SCROWDATA::EMMAXATTACK );
 		
-		//	½ºÅ³ÀÇ °æ¿ì °¡»êÁ¡.
+		//	ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		if ( bskill )					nprior += 11;
 		
-		//	ÇöÁ¦ ±ÙÁ¢ÀÌ À¯¸®ÇÑ°¡ Àå°Å¸®°¡ À¯¸®ÇÑ°¡¿¡ µû¶ó ¿ì¼± ¼øÀ§ º¯°æ.
+		//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ì¼± ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		if ( bprior_near )
 		{
-			//	±ÙÁ¢ ¿ì¼±.
+			//	ï¿½ï¿½ï¿½ï¿½ ï¿½ì¼±.
 			if ( bnear )				nprior += 10;
 			else						nprior += 5;
 		}
 		else
 		{
-			//	Àå°Å¸® ¿ì¼±.
+			//	ï¿½ï¿½Å¸ï¿½ ï¿½ì¼±.
 			if ( bnear )				nprior += 5;
 			else						nprior += 10;
 		}
@@ -581,7 +628,7 @@ bool GLCrow::FindLongTracePos ( const D3DXVECTOR3 &vCur, const D3DXVECTOR3 &vTar
 		D3DXVec3TransformCoord ( &vTestPos, &vMarkPos, &matRotY );
 		vTestPos = vTar + vTestPos;
 
-		//	À¯È¿ÇÑ À§Ä¡ÀÎÁö Á¡°Ë.
+		//	ï¿½ï¿½È¿ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		BOOL bNaviCo(FALSE);
 		DWORD dwCoID(0);
 		D3DXVECTOR3 vNaviCo(0,0,0);
@@ -606,14 +653,14 @@ bool GLCrow::FindLongTracePos ( const D3DXVECTOR3 &vCur, const D3DXVECTOR3 &vTar
 
 bool GLCrow::DoShortTracing ( const WORD wTARRANGE, const float fElapsedTime )
 {
-	//	Note : Å¸°ÙÀÇ À§Ä¡ Á¤º¸¸¦ °¡Á®¿È.
-	//		(ÁÖÀÇ) ¹Ýµå½Ã Å¸°ÙÀÌ Á¸ÀçÇÑ´Ù´Â °¡Á¤ÇÏ¿¡ µ¿ÀÛ.
+	//	Note : Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+	//		(ï¿½ï¿½ï¿½ï¿½) ï¿½Ýµï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´Ù´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	//
 	GLACTOR *pTarget = GLGaeaServer::GetInstance().GetTarget ( m_pLandMan, m_TargetID );
 	if ( !pTarget )		return false;
 
 	GLARoundSlot* pARoundSlot = pTarget->GETSLOT ();
-	GASSERT ( pARoundSlot && "glchar ¸¸ÀÌ ±ÙÁ¢ À§Ä¡ ½½·ÔÀ» °¡Áö°í ÀÖ½À´Ï´Ù." );
+	GASSERT ( pARoundSlot && "glchar ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½." );
 
 	WORD wTarBodyRadius(0);
 	D3DXVECTOR3 vTarPos(0,0,0);
@@ -627,7 +674,7 @@ bool GLCrow::DoShortTracing ( const WORD wTARRANGE, const float fElapsedTime )
 	fDist = D3DXVec3Length ( &vTarDist );
 
 	
-	//	Note : °Å¸®¿¡ µû¸¥ Å¸°Ù ¸®»û °Ë»ç.
+	//	Note : ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½.
 	//
 	if ( fDist < GLCONST_CHAR::fMOB_TRACING )
 	{
@@ -649,14 +696,14 @@ bool GLCrow::DoShortTracing ( const WORD wTARRANGE, const float fElapsedTime )
 
 	
 
-	//	Note : Å¸°ÙÀ» ³ëÄ¡´Â °æ¿ì.
+	//	Note : Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½.
 	if ( !IsFLAG(EMTARGET) )
 	{
 		ReSetFLAG(EMTRACING);
 		return false;
 	}
 
-	//	Note : Áï½Ã »ç¿ë °¡´É °Å¸®¿¡ ÀÖ´ÂÁö °Ë»ç.
+	//	Note : ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½.
 	//
 	m_fStayTimer -= fElapsedTime;
 
@@ -672,7 +719,7 @@ bool GLCrow::DoShortTracing ( const WORD wTARRANGE, const float fElapsedTime )
 		ReSetFLAG(EMATTACKABLE);
 	}
 
-	//	Note : À§Ä¡ °íÁ¤Çü ¸÷ÀÏ °æ¿ì.
+	//	Note : ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½.
 	if ( m_pCrowData->IsPosHold() )
 	{
 		if ( fDist<wActionAble )
@@ -685,7 +732,7 @@ bool GLCrow::DoShortTracing ( const WORD wTARRANGE, const float fElapsedTime )
 		return false;
 	}
 
-	//	Note : 'ÃßÀûÁß' »óÅÂ¸¦ ¸®»ûÇÒÁö °Ë»ç.
+	//	Note : 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½' ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½.
 	//
 	if ( IsFLAG(EMTRACING) )
 	{
@@ -695,15 +742,15 @@ bool GLCrow::DoShortTracing ( const WORD wTARRANGE, const float fElapsedTime )
 		D3DXVECTOR3 vEndDist = m_TargetID.vPos-vTarPos;
 		float fEndDist = D3DXVec3Length ( &vEndDist );
 
-		//	ÀÌµ¿ÀÌ ³¡³´°Å³ª ÃßÀû À§Ä¡¶û Å¸°¹À§Ä¡°¡ ³Ê¹« ¶³¾îÁ³À» °æ¿ì "ÃßÀûÁß »óÅÂ"¸¦ ¸®»ûÇÔ.
+		//	ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ê¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½"ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		//
 		if ( !IsACTION(GLAT_MOVE) || fEndDist>wTracingRange )
 		{
-			ReSetFLAG(EMTRACING);	//	'ÃßÀûÁß' »óÅÂ ¸®»û.
+			ReSetFLAG(EMTRACING);	//	'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½' ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		}
 		else
 		{
-			//	Å¸°ÙÀÌ ÀÖÀ» ¶§¿¡´Â Å¸°Ù ÁÖº¯½½·ÔÀÌ Á¾Àü ¼³Á¤ ½½·Ôº¸´Ù ÃÖÀû Á¶°ÇÀÎ ½½·ÔÀÌ ÀÖ´ÂÁö Á¡°Ë.
+			//	Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½Öºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			//
 			if ( !pTarget->IsAction(GLAT_MOVE) )
 			{
@@ -720,18 +767,18 @@ bool GLCrow::DoShortTracing ( const WORD wTARRANGE, const float fElapsedTime )
 						D3DXVECTOR3 vNewTraceDist = vNewTracePos - m_vPos;
 						float fNewTraceDist = D3DXVec3LengthSq ( &vNewTraceDist );
 
-						//	´Ù¸¥ ÃÖÀû ½½·ÔÀÌ ÀÖÀ»¶§.
+						//	ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 						//
 						if ( fNewTraceDist < fOldTraceDist )
 						{
 							m_dwAttPosSlot = dwAttPosSlot;
 							pARoundSlot->SetTargetOptSlot ( m_dwGlobID, dwAttPosSlot );
 
-							//	Note : 'Ãß°Ý' ½ÃÀÛ.
+							//	Note : 'ï¿½ß°ï¿½' ï¿½ï¿½ï¿½ï¿½.
 							if ( m_pCrowData->m_sAction.m_bRun )	ToRun();
 							MoveTo ( vNewTracePos );
 
-							//	´ÙÀ½ 'Ãß°Ý' ½Ã°£ À¯°Ý ÁöÁ¤.
+							//	ï¿½ï¿½ï¿½ï¿½ 'ï¿½ß°ï¿½' ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 							m_fStayTimer = RANDOM_POS * 0.3f;
 						}
 					}
@@ -740,11 +787,11 @@ bool GLCrow::DoShortTracing ( const WORD wTARRANGE, const float fElapsedTime )
 		}
 	}
 
-	//	Note : 'ÃßÀû'»óÅÂ°¡ ¾Æ´Ò °æ¿ì Ãß°Ý ¿©ºÎ¸¦ °áÁ¤ÇÔ.
+	//	Note : 'ï¿½ï¿½ï¿½ï¿½'ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 	//
 	if ( !IsFLAG(EMTRACING) )
 	{
-		//	Note : 'Ãß°Ý' ¿©ºÎ °áÁ¤.
+		//	Note : 'ï¿½ß°ï¿½' ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		BOOL bToTrace = FALSE;
 		if ( !IsFLAG(EMATTACKABLE) && m_fStayTimer<=0.0f )
 		{
@@ -758,7 +805,7 @@ bool GLCrow::DoShortTracing ( const WORD wTARRANGE, const float fElapsedTime )
 			m_fStayTimer = 0.0f;
 		}
 		
-		//	Note : 'Ãß°Ý' ÇÏ±â À§ÇØ¼­ ÀÌµ¿.
+		//	Note : 'ï¿½ß°ï¿½' ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Ìµï¿½.
 		//
 		if ( bToTrace )
 		{
@@ -772,26 +819,26 @@ bool GLCrow::DoShortTracing ( const WORD wTARRANGE, const float fElapsedTime )
 			SLEVEL_ETC_FUNC *pLevelEtcFunc = m_pLandMan->GetLevelEtcFunc();
 			if ( GLARoundSlot::SLOT_SIZE!=m_dwAttPosSlot )
 			{
-				//	Note : 'Ãß°Ý' ½ÃÀÛ.
+				//	Note : 'ï¿½ß°ï¿½' ï¿½ï¿½ï¿½ï¿½.
 				SetFLAG(EMTRACING);
 				
 				if ( m_pCrowData->m_sAction.m_bRun )	ToRun();
 				MoveTo ( vTracePos );
 
-				//	´ÙÀ½ 'Ãß°Ý' ½Ã°£ À¯°Ý ÁöÁ¤.
+				//	ï¿½ï¿½ï¿½ï¿½ 'ï¿½ß°ï¿½' ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 				m_fStayTimer = RANDOM_POS * 0.3f;
 			}
 			else
 			{
 				if ( pLevelEtcFunc && pLevelEtcFunc->m_bUseFunction[EMETCFUNC_MOBCHASE] )
 				{
-					//	Note : 'Ãß°Ý' ½ÃÀÛ.
+					//	Note : 'ï¿½ß°ï¿½' ï¿½ï¿½ï¿½ï¿½.
 					SetFLAG(EMTRACING);
 
 					if ( m_pCrowData->m_sAction.m_bRun )	ToRun();
 					MoveTo ( vTarPos );
 
-					//	´ÙÀ½ 'Ãß°Ý' ½Ã°£ À¯°Ý ÁöÁ¤.
+					//	ï¿½ï¿½ï¿½ï¿½ 'ï¿½ß°ï¿½' ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 					m_fStayTimer = RANDOM_POS * 0.3f;
 				}
 				else
@@ -809,8 +856,8 @@ bool GLCrow::DoShortTracing ( const WORD wTARRANGE, const float fElapsedTime )
 
 bool GLCrow::DoLongTracing ( const WORD wTARRANGE, const float fElapsedTime )
 {
-	//	Note : Å¸°ÙÀÇ À§Ä¡ Á¤º¸¸¦ °¡Á®¿È.
-	//		(ÁÖÀÇ) ¹Ýµå½Ã Å¸°ÙÀÌ Á¸ÀçÇÑ´Ù´Â °¡Á¤ÇÏ¿¡ µ¿ÀÛ.
+	//	Note : Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+	//		(ï¿½ï¿½ï¿½ï¿½) ï¿½Ýµï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´Ù´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	//
 	GLACTOR *pTarget = GLGaeaServer::GetInstance().GetTarget ( m_pLandMan, m_TargetID );
 	if ( !pTarget )		return false;
@@ -826,7 +873,7 @@ bool GLCrow::DoLongTracing ( const WORD wTARRANGE, const float fElapsedTime )
 	vTarDist = m_vPos-vTarPos;
 	fDist = D3DXVec3Length ( &vTarDist );
 
-	//	Note : °Å¸®¿¡ µû¸¥ Å¸°Ù ¸®»û °Ë»ç.
+	//	Note : ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½.
 	//
 
 	
@@ -845,14 +892,14 @@ bool GLCrow::DoLongTracing ( const WORD wTARRANGE, const float fElapsedTime )
 		}
 	}
 
-	//	Note : Å¸°ÙÀ» ³õÄ¡´Â °æ¿ì.
+	//	Note : Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½.
 	if ( !IsFLAG(EMTARGET) )
 	{
 		ReSetFLAG(EMTRACING);
 		return false;
 	}
 
-	//	Note : Áï½Ã »ç¿ë °¡´É °Å¸®¿¡ ÀÖ´ÂÁö °Ë»ç.
+	//	Note : ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½.
 	//
 	m_fStayTimer -= fElapsedTime;
 
@@ -868,7 +915,7 @@ bool GLCrow::DoLongTracing ( const WORD wTARRANGE, const float fElapsedTime )
 		ReSetFLAG(EMATTACKABLE);
 	}
 
-	//	Note : À§Ä¡ °íÁ¤Çü ¸÷ÀÏ °æ¿ì.
+	//	Note : ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½.
 	if ( m_pCrowData->IsPosHold() )
 	{
 		if ( fDist<wActionAble )
@@ -881,7 +928,7 @@ bool GLCrow::DoLongTracing ( const WORD wTARRANGE, const float fElapsedTime )
 		return false;
 	}
 
-	//	Note : 'ÃßÀûÁß' »óÅÂ¸¦ ¸®»ûÇÒÁö °Ë»ç.
+	//	Note : 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½' ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½.
 	//
 	if ( IsFLAG(EMTRACING) )
 	{
@@ -891,19 +938,19 @@ bool GLCrow::DoLongTracing ( const WORD wTARRANGE, const float fElapsedTime )
 		D3DXVECTOR3 vEndDist = m_TargetID.vPos-vTarPos;
 		float fEndDist = D3DXVec3Length ( &vEndDist );
 
-		//	ÀÌµ¿ÀÌ ³¡³´°Å³ª ÃßÀû À§Ä¡¶û Å¸°¹À§Ä¡°¡ ³Ê¹« ¶³¾îÁ³À» °æ¿ì "ÃßÀûÁß »óÅÂ"¸¦ ¸®»ûÇÔ.
+		//	ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ê¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½"ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		//
 		if ( !IsACTION(GLAT_MOVE) || fEndDist>wTracingRange || fEndDist<wActionAbleMin )
 		{
-			ReSetFLAG(EMTRACING);	//	'ÃßÀûÁß' »óÅÂ ¸®»û.
+			ReSetFLAG(EMTRACING);	//	'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½' ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		}
 	}
 
-	//	Note : 'ÃßÀû'»óÅÂ°¡ ¾Æ´Ò °æ¿ì Ãß°Ý ¿©ºÎ¸¦ °áÁ¤ÇÔ.
+	//	Note : 'ï¿½ï¿½ï¿½ï¿½'ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 	//
 	if ( !IsFLAG(EMTRACING) )
 	{
-		//	Note : 'ÃßÀû' ¿©ºÎ °áÁ¤.
+		//	Note : 'ï¿½ï¿½ï¿½ï¿½' ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		BOOL bToTrace = FALSE;
 		if ( !IsFLAG(EMATTACKABLE) && m_fStayTimer<=0.0f )
 		{
@@ -917,7 +964,7 @@ bool GLCrow::DoLongTracing ( const WORD wTARRANGE, const float fElapsedTime )
 			m_fStayTimer = 0.0f;
 		}
 		
-		//	Note : 'Ãß°Ý' ÇÏ±â À§ÇØ¼­ ÀÌµ¿.
+		//	Note : 'ï¿½ß°ï¿½' ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Ìµï¿½.
 		//
 		if ( bToTrace )
 		{
@@ -935,13 +982,13 @@ bool GLCrow::DoLongTracing ( const WORD wTARRANGE, const float fElapsedTime )
 				return false;
 			}
 
-			//	Note : 'Ãß°Ý' ½ÃÀÛ.
+			//	Note : 'ï¿½ß°ï¿½' ï¿½ï¿½ï¿½ï¿½.
 			SetFLAG(EMTRACING);
 			
 			if ( m_pCrowData->m_sAction.m_bRun )	ToRun();
 			MoveTo ( vTracePos );
 
-			//	´ÙÀ½ 'Ãß°Ý' ½Ã°£ À¯°Ý ÁöÁ¤.
+			//	ï¿½ï¿½ï¿½ï¿½ 'ï¿½ß°ï¿½' ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			m_fStayTimer = RANDOM_POS * 0.3f;
 		}
 	}
@@ -962,7 +1009,7 @@ bool GLCrow::SkillReAction ( float fTime, float fElapsedTime )
 		return false;
 	}
 
-	//	½ºÅ³ Á¤º¸ °¡Á®¿È.
+	//	ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 	PGLSKILL pSkill = GLSkillMan::GetInstance().GetData ( m_idACTIVESKILL.wMainID, m_idACTIVESKILL.wSubID );
 	if ( !pSkill )				return false;
 	SKILL::CDATA_LVL &sSKILL_DATA = pSkill->m_sAPPLY.sDATA_LVL[m_wACTIVESKILL_LVL];
@@ -1013,7 +1060,7 @@ bool GLCrow::SkillReAction ( float fTime, float fElapsedTime )
 		return false;
 	}
 
-	//	Note : ½ºÅ³ »ç¿ë ¿©ºÎ °áÁ¤.
+	//	Note : ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	//
 	BOOL bactionable(FALSE);
 	if ( bShortTrace )		bactionable = IsFLAG(EMATTACKABLE) && !IsFLAG(EMTRACING);
@@ -1021,7 +1068,7 @@ bool GLCrow::SkillReAction ( float fTime, float fElapsedTime )
 
 	if ( bactionable )
 	{
-		//	Note : ½Ã¾ß°¡ È®º¸µÇ´Â°¡?
+		//	Note : ï¿½Ã¾ß°ï¿½ È®ï¿½ï¿½ï¿½Ç´Â°ï¿½?
 		//
 		GLACTOR *pTarget = GLGaeaServer::GetInstance().GetTarget ( m_pLandMan, m_TargetID );
 		if ( !pTarget )
@@ -1077,7 +1124,7 @@ bool GLCrow::AttackReAction ( float fTime, float fElapsedTime )
 		return false;
 	}
 
-	//	Note : °ø°Ý ¿©ºÎ °áÁ¤.
+	//	Note : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	//
 	BOOL bactionable(FALSE);
 	if ( bShortTrace )		bactionable = IsFLAG(EMATTACKABLE) && !IsFLAG(EMTRACING);
@@ -1085,7 +1132,7 @@ bool GLCrow::AttackReAction ( float fTime, float fElapsedTime )
 
 	if ( bactionable )
 	{
-		//	Note : ½Ã¾ß°¡ È®º¸µÇ´Â°¡?
+		//	Note : ï¿½Ã¾ß°ï¿½ È®ï¿½ï¿½ï¿½Ç´Â°ï¿½?
 		//
 		GLACTOR *pTarget = GLGaeaServer::GetInstance().GetTarget ( m_pLandMan, m_TargetID );
 		if ( !pTarget )
@@ -1124,7 +1171,7 @@ void GLCrow::RunSchedule ( float fTime, float fElapsedTime )
 			m_fStayTimer -= fElapsedTime;
 			if ( m_fStayTimer<0.0f )	ReSetFLAG(EMSTAY);
 		}
-		else if ( !IsFLAG(EMTARGET) )	RunNextAct ();		// »õ·Î¿î ¾×¼Ç.
+		else if ( !IsFLAG(EMTARGET) )	RunNextAct ();		// ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½×¼ï¿½.
 	}
 
 	if ( IsFLAG(EMTARGET) )
@@ -1155,9 +1202,9 @@ void GLCrow::RunSchedule ( float fTime, float fElapsedTime )
 			m_fTargetTimer -= fElapsedTime;
 			if ( m_fTargetTimer<0.0f )
 			{
-				m_fTargetTimer = 0.1f;	// ´ÙÀ½ °Ë»ö À¯°Ý.
+				m_fTargetTimer = 0.1f;	// ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½.
 				
-				//	Note : °Ë»ö ½ÃÀÛ.
+				//	Note : ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½.
 				STARGETID targetID = FindEnemyChar ();
 				if ( targetID.dwID != EMTARGET_NULL )
 				{

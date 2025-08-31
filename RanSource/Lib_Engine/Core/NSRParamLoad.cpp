@@ -489,6 +489,10 @@ namespace RPARAM
 
 		cFILE.getflag ( "GAME_FEATURE", "bVIPSystem", 0, 1, bVIPSystem );
 
+		/* VIP Mob Leader - Group Aggro Range Bypass, Ace17, 2024/12/19 */
+		cFILE.getflag ( "GAME_FEATURE", "bVIPMobLeader", 0, 1, bVIPMobLeader );
+		cFILE.getflag ( "GAME_FEATURE", "nVIPMobLeaderRange", 0, 1, nVIPMobLeaderRange );
+
 		cFILE.getflag ( "GAME_FEATURE", "bAllowBTGParty", 0, 1, bAllowBTGParty );
 		
 		cFILE.getflag ( "GAME_FEATURE", "bMultipleCaptchaShowTimer", 0, 1, bMultipleCaptchaShowTimer );

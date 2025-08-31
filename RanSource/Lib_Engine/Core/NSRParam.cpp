@@ -363,6 +363,10 @@ namespace RPARAM
 
 	BOOL bVIPSystem = FALSE;
 
+	/* VIP Mob Leader - Group Aggro Range Bypass, Ace17, 2024/12/19 */
+	BOOL bVIPMobLeader = FALSE;             // Default: disabled
+	int nVIPMobLeaderRange = 1;             // Default: normal range
+
 	BOOL bAllowBTGParty = FALSE;
 	BOOL bMultipleCaptchaShowTimer = FALSE;
 	float fCaptchaShowTimer = 300.0f;

@@ -1,0 +1,36 @@
+USE [RanUser]
+GO
+
+/****** Object:  Table [dbo].[HWIDWatchlist]    Script Date: 05/05/2020 03:34:30 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[HWIDWatchlist](
+	[idx] [bigint] IDENTITY(1,1) NOT NULL,
+	[HWID] [varchar](65) NOT NULL,
+	[Date] [datetime] NOT NULL,
+	[Note] [varchar](1024) NULL,
+ CONSTRAINT [PK_HWIDWatchlist] PRIMARY KEY CLUSTERED 
+(
+	[idx] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[HWIDWatchlist] ADD  CONSTRAINT [DF_HWIDWatchlist_HWID]  DEFAULT ('') FOR [HWID]
+GO
+
+ALTER TABLE [dbo].[HWIDWatchlist] ADD  CONSTRAINT [DF_HWIDWatchlist_Date]  DEFAULT (getdate()) FOR [Date]
+GO
+
+

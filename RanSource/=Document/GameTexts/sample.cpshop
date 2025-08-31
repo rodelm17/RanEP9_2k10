@@ -1,0 +1,13 @@
+[SHOP_BASIC]
+SHOP_TITLE	= Merchant
+;
+;shop type(category)
+; shop id, shop name
+[SHOP_TYPE_LIST]
+;SHOP_TYPE = 1, common1
+;
+;shop item
+;shop id, item mid, item sid, item att, item def, item res fire, item res ice, item res elect, item res poison, item res spirit, item gen RV,price contri, price gold, 
+[SHOP_ITEM_LIST]
+;SHOP_ITEM = 1, 93, 1,[0,0,0,0,0,0,0,0][1000][2000]
+;

@@ -1,0 +1,10 @@
+;currency shop
+;EJCode
+;
+[BASIC]
+TITLE = TestShop
+;
+;
+;mid, sid, damage, defense, resist[f,i,e,p,s], generate rv , price money, price gamepoints, price warchips
+[ITEM_LIST]
+ITEM=[0,0][1,2][0,0,0,0,0][0][1000,2000,3000]

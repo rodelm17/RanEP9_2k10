@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<TEXT>
+
+<SENTENSE Ver="1" Id="IDC_TITLE_STATIC">
+<VALUE Lang="Common">RAN-Online</VALUE>
+</SENTENSE>
+<SENTENSE Ver="1" Id="IDC_BUTTON_START">
+<VALUE Lang="Common">Game Start</VALUE>
+</SENTENSE>
+<WORD Ver="1" Id="IDS_MESSAGE">
+<VALUE Lang="Common" Index="0">Game is ready to play!</VALUE>
+<VALUE Lang="Common" Index="1">Patch list file is being transmitted.</VALUE>
+<VALUE Lang="Common" Index="2">Error occurs while patch list file transmitting.</VALUE>
+<VALUE Lang="Common" Index="3">Size of downloaded file is wrong.</VALUE>
+<VALUE Lang="Common" Index="4">Loading patch file list.</VALUE>
+<VALUE Lang="Common" Index="5">Loading patch file list fails.</VALUE>
+<VALUE Lang="Common" Index="6">Comparing patch file list.</VALUE>
+<VALUE Lang="Common" Index="7">Comparing patch file list fails.</VALUE>
+<VALUE Lang="Common" Index="8">Error occurs while patch file is transmitting.</VALUE>
+<VALUE Lang="Common" Index="9">Checking Paths.</VALUE>
+<VALUE Lang="Common" Index="10">Error occurs while checking Paths.</VALUE>
+<VALUE Lang="Common" Index="11">Some files failed to download, Run launcher again</VALUE>
+<VALUE Lang="Common" Index="12">Some files failed to install, Run launcher again</VALUE>
+</WORD>
+
+
+
+
+</TEXT>

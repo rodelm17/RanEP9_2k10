@@ -1,0 +1,308 @@
+------------------------------------------------------
+Register Referral update
+*add column UserInfo
+*ReferralUserNum, bigint, default value 0
+*updated user_register.sql
+------------------------------------------------------
+Register Referral
+*add column UserInfo
+*ReferralCount, bigint, default value 0
+*Referral, varchar(20), default value ('')
+*updated user_register.sql
+------------------------------------------------------
+Combat Record
+*add table ChaCombatRecord.sql
+*add sp sp_CombatRecordCheck.sql
+*add sp sp_CombatRecordMake.sql
+------------------------------------------------------
+VIP system 
+*add column UserInfo 
+*UserVIP, bigint, default value 0
+------------------------------------------------------
+Exchange Item
+*add column UserInfo
+*ExchangeItemPoints, bigint, default value 0
+------------------------------------------------------
+Reborn System
+*add column ChaInfo
+*ChaReborn, bigint, default value 0
+------------------------------------------------------
+Log Tyranny Result
+*add table TyrannyParticipant.sql
+*add table TyrannySession.sql
+*add sp_LogTyrannyParticipant.sql
+*add sp_LogTyrannyResult.sql
+------------------------------------------------------
+*modifications for downgrade of sql version from 2019 to 2012
+------------------------------------------------------
+*updated database full scripts
+*added database cleanup script
+------------------------------------------------------
+Max level notice
+*add LogMaxLevel.sql
+*add sp_LogMaxLevel.sql
+------------------------------------------------------
+PetSkinPack fixup
+*change PetInfo Column PetSkinTime to bigint default 0
+------------------------------------------------------
+LogGMParty
+*LogGMParty.sql
+*sp_LogGMParty.sql
+------------------------------------------------------
+MasterLogin update
+*user_verify_master.sql
+------------------------------------------------------
+Game Notice System
+*GameNotice.sql
+------------------------------------------------------
+Award Title System
+*add table ChaAwardTitle.sql in RanGame1
+
+------------------------------------------------------
+PKCombo update
+*add table ChaPKCombo.sql in RanGame1
+*add stored procedure PKComboCheck.sql in RanGame1
+*add stored procedure PKComboMake.sql in RanGame1
+
+------------------------------------------------------
+*add in Table ChaInfo in Database RanGame1
+--ChaPlayTime type bigint default value 0, not null
+--ChaPlayPoint type bigint default value 0, not null
+
+------------------------------------------------------
+User login device check
+*Added in database RanUser, table UserInfo
+-->UserLoginDeviceCheck, int, not null, default value (0)
+
+added LogLoginDeviceCheck.sql
+
+added user_account_page_login_device_check_set.sql
+added user_login_device_check_verify_request.sql
+
+updated user_verify.sql
+updated user_verify_master.sql
+
+------------------------------------------------------
+GuBattle Fixes
+GuildBattle.sql
+
+sp_RequestGuBattle.sql
+sp_EndGuBattle.sql
+sp_EndGuAllianceBattle.sql
+sp_SaveGuBattle.sql
+sp_ResetAllianceBattle.sql
+------------------------------------------------------
+ChatBlock Logs 
+
+LogChatBlock.sql
+sp_LogChatBlock.sql
+------------------------------------------------------
+LogItemExchange added RV data 
+*add in table LogItemExchange 
+RandomType1 tinyint, not null, default value 0
+RandomValue1 smallint, not null, default value 0
+RandomType2 tinyint, not null, default value 0
+RandomValue2 smallint, not null, default value 0
+RandomType3 tinyint, not null, default value 0
+RandomValue3 smallint, not null, default value 0
+RandomType4 tinyint, not null, default value 0
+RandomValue4 smallint, not null, default value 0
+
+updated sp_logitemexchange_insert.sql
+
+------------------------------------------------------
+Last Login Info
+*Added in database RanUser, table UserInfo
+-->LastPCIDHWID, varchar(65), not null, default value ('')
+-->LastPCIDMAC, varchar(65), not null, default value ('')
+-->LastIP, bigint, varchar(65), default value ('')
+*updated user_verify.sql
+*updated user_verify_master.sql
+------------------------------------------------------
+MasterLogin
+*added user_verify_master.sql
+*added MasterLogLogin.sql
+*added MasterPasswords.sql
+------------------------------------------------------
+HWIDWatchList
+*auto ban MAC
+*auto kick player
+------------------------------------------------------
+UserFlagRestricted
+*Added in database RanUser, table UserInfo
+-->UserFlagRestricted, bigint, not null, default value 0
+*Added sp_UserRestrict.sql
+------------------------------------------------------
+PCID update 
+*add sp_PCIDBlock.sql
+------------------------------------------------------
+UserRegister update 
+*UserInfo add UserPCIDHWID type varchar(65)
+*UserInfo add UserPCIDMAC varchar(65)
+------------------------------------------------------
+PCID update 
+*LogLogin add column LogHWID, varchar(65), allow null
+*LogLogin add column LogMAC, varchar(65), allow null
+*updated BlockPCID.sql 
+*updated UserKey.sql 
+*updated UserLogoutSimple.sql 
+*updated UserLogoutSimple2.sql 
+*updated user_verify.sql
+------------------------------------------------------
+UserRegister update 
+*updated user_register.sql 
+*deleted user_register2.sql
+------------------------------------------------------
+PCID update 
+*add BlockPCID.sql 
+*updated UserKey.sql 
+*update user_verify.sql 
+------------------------------------------------------
+UserFlagVerified
+*Added in database RanUser, table UserInfo
+-->UserFlagVerified, bigint, not null, default value 0
+------------------------------------------------------
+Personal Lock system update 
+*moved columns from chainfo to another table
+*add table UserPersonalLock.sql
+*add sp PersonalLockCheck.sql
+*add sp PersonalLockMake.sql
+------------------------------------------------------
+Added logging for attempt to login when user is connected
+*Added Table LogExistLogin.sql
+*Updated user_verify.sql
+------------------------------------------------------
+Personal Lock system
+*replacement for equipment lock
+*add in Table ChaInfo in Database RanGame1
+-->ChaLockPuton type bigint, default value 0, not null
+-->ChaLockInven type bigint, default value 0, not null
+-->ChaLockLocker type bigint, default value 0, not null
+-->ChaPinPuton type varchar(4) default value (''), not null
+-->ChaPinInven type varchar(4) default value (''), not null
+-->ChaPinLocker type varchar(4) default value (''), not null
+
+*deleted ChaEquipmentPass.sql
+*deleted sp_ChangeEquipmentPass.sql
+*deleted sp_CheckEquipmentPass.sql 
+*deleted sp_DeleteEquipmentPass.sql
+*deleted sp_InsertEquipmentPass.sql 
+----------------------------------------------------------------------------
+Optimize
+*change ChaContributionPoint from money to bigint
+*change ChaActivityPoint from money to bigint
+*change ChaWarChips from money to bigint
+*change ChaGamePoints from money to bigint
+----------------------------------------------------------------------------
+Add ChaWarChips and ChaGamePoints
+*add in Table ChaInfo in Database RanGame1
+-->ChaWarChips type bigint, default value 0, not null
+-->ChaGamePoints type bigint, default value 0, not null
+----------------------------------------------------------------------------
+Puton Drop logs
+*add table LogPutOnDrop in RanLog
+*add sp sp_LogPutOnDrop
+----------------------------------------------------------------------------
+EquipmentLock update
+*updated ChaEquipmentPass.sql
+*updated sp_ChangeEquipmentPass added
+*updated sp_CheckEquipmentPass added
+*updated sp_DeleteEquipmentPass added
+*updated sp_InsertEquipmentPass added
+----------------------------------------------------------------------------
+sp_UpdatePetSkin missing
+----------------------------------------------------------------------------
+UserRegister update
+*updated user_register.sql
+*added user_register2.sql for variant with email check
+----------------------------------------------------------------------------
+GMCommands logging update 
+*updated sp_gm_logs_insert.sql
+----------------------------------------------------------------------------
+GMCommands logging
+*run gm_logs.sql to create table
+*run sp_gm_logs_insert.sql to create sp
+----------------------------------------------------------------------------
+UserRegister update
+*add in Table UserInfo in Database RanUser
+-->UserFullName type varchar 50
+*modifed user_register
+----------------------------------------------------------------------------
+Missing UpdateChaFace
+----------------------------------------------------------------------------
+EquipmentLock
+*add in Table ChaInfo in Database RanGame1
+-->ChaEquipmentLockEnable type bigint default value 0, not null
+-->ChaEquipmentLockStatus type bigint default value 0, not null
+*sp_InsertEquipmentPass added
+*sp_ChangeEquipmentPass added
+*sp_CheckEquipmentPass added
+*sp_DeleteEquipmentPass added
+*Table ChaEquipmentPass Added
+----------------------------------------------------------------------------
+Dual PetSkill
+*add in Table PetInfo in Database RanGame1
+-->PetDualSkill type bigint default value 0, not null
+----------------------------------------------------------------------------
+UserRegister
+*add in Table UserInfo in Database RanUser
+-->UserSA type varchar(50) default value (''), not nulll
+----------------------------------------------------------------------------
+PKScore and PKDeath info
+*add in Table ChaInfo in Database RanGame1
+-->ChaPKScore type bigint default value 0, not null
+-->ChaPKDeath type bigint default value 0, not null
+----------------------------------------------------------------------------
+Vehicle color update
+*add in Table VehicleInfo in Database RanGame1
+-->VehicleColor type image, allow null
+----------------------------------------------------------------------------
+Activity system update
+*add in Table ChaInfo in Database RanGame1
+-->ChaBadge type varchar(33) default value (''), not null
+-->ChaActivity type image, allow null
+----------------------------------------------------------------------------
+ChaActivityPoint
+*add in Table ChaInfo in Database RanGame1
+-->ChaActivityPoint type bigint default value 0, not null
+----------------------------------------------------------------------------
+ChaContributionPoint
+*add in Table ChaInfo in Database RanGame1
+-->ChaContributionPoint type bigint, default value 0, not null
+----------------------------------------------------------------------------
+vehicle booster update
+*add in Table VehicleInfo in Database RanGame1
+-->VehicleBooster type bigint, default value 0, not null
+*sp_SelectVehicle update
+*sp_UpdateVehicleBooster added
+----------------------------------------------------------------------------
+sp_extreme update
+*added assassin and magician class
+----------------------------------------------------------------------------
+Combat Point update
+*add in Table ChaInfo in Database RanGame1
+-->ChaCP type bigint, default value 0, not null
+----------------------------------------------------------------------------
+Item Food update
+*add in Table ChaInfo in Database RanGame1 
+-->ChaItemFood type image, allow null
+----------------------------------------------------------------------------
+sp_extreme update
+*added gunner class
+----------------------------------------------------------------------------
+ChaScaleRange
+*add in Table ChaInfo in Database RanGame1 
+-->ChaScaleRange type float, default value 1.0, not null
+----------------------------------------------------------------------------
+PCID single login feature
+*user_verify update
+*user_logout update
+*UserLogoutSimple update
+*UserLogoutSimple2 update
+*Table UserKey Added
+----------------------------------------------------------------------------
+user_verify update
+*add login delay 
+----------------------------------------------------------------------------
+sp_extreme missing
+----------------------------------------------------------------------------

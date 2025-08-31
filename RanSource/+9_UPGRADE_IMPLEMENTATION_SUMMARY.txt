@@ -1,0 +1,103 @@
++9 UPGRADE IMPLEMENTATION SUMMARY
+=================================
+
+PROBLEM IDENTIFIED ✅
+====================
+
+**Issue**: Background characters in login screen weren't showing +9 upgrade effects
+**Root Cause**: Equipment pieces were loading correctly, but grind levels were stuck at 0
+
+DEBUGGING COMPLETED ✅
+======================
+
+**Logging Added**: Comprehensive logging to DXLANDSKINOBJ::Render()
+**Log Location**: `%USERPROFILE%\Documents\Ran Online\ErrorLog\log.YYYYMMDDHHMM.txt`
+**Log Results**: Confirmed background characters ARE loading with equipment
+
+**Sample Log Output**:
+```
+[2025-08-30 21:18:54] DXLANDSKINOBJ::Render CALLED for: man[0] (FileName: login_man.chf)
+[2025-08-30 21:18:54]   - SkinChar created successfully
+[2025-08-30 21:18:54]   - Character has 27 equipment pieces
+[2025-08-30 21:18:54]     Piece 0: m_face02.cps (Grind Level: 0)
+[2025-08-30 21:18:54]     Piece 1: CUN0023.cps (Grind Level: 0)  ← Upper Body
+[2025-08-30 21:18:54]     Piece 2: CDN0023.cps (Grind Level: 0)  ← Lower Body
+[2025-08-30 21:18:54]     Piece 3: GBN0041_K.cps (Grind Level: 0) ← Gloves
+[2025-08-30 21:18:54]     Piece 4: BBN0036_M_E.cps (Grind Level: 0) ← Boots
+[2025-08-30 21:18:54]     Piece 6: CFN0045_K.cps (Grind Level: 0) ← Weapon
+[2025-08-30 21:18:54]     Piece 7: m_hair02.cps (Grind Level: 0) ← Hair
+```
+
+SOLUTION IMPLEMENTED ✅
+======================
+
+**Code Added**: +9 upgrade logic in DXLANDSKINOBJ::Render()
+**Location**: `Lib_Engine/DxOctree/DXLANDSKINOBJ.cpp`
+
+**What It Does**:
+1. **Detects all equipment pieces** with valid files
+2. **Sets grind level to 9** for each piece
+3. **Logs the upgrade process** for debugging
+4. **Applies to ALL background characters** from log_in.wld
+
+**Code Snippet**:
+```cpp
+// AUTO +9 UPGRADE FOR BACKGROUND CHARACTERS
+// Set +9 upgrade level for all equipment pieces that exist
+CDebugSet::ToLogFile( "  - Applying +9 upgrades to equipment pieces..." );
+
+for ( int i = 0; i < PIECE_SIZE; i++ )
+{
+    if ( m_pSkinChar->GetPiece(i) && m_pSkinChar->GetPiece(i)->GetFileName() && strlen(m_pSkinChar->GetPiece(i)->GetFileName()) > 0 )
+    {
+        // Get current grind level
+        int currentLevel = m_pSkinChar->GetPiece(i)->GetGrindLevel();
+        CDebugSet::ToLogFile( "    Piece %d: %s (Grind Level: %d -> 9)", i, m_pSkinChar->GetPiece(i)->GetFileName(), currentLevel );
+        
+        // Set to +9
+        m_pSkinChar->GetPiece(i)->SetGrindLevel(9);
+    }
+}
+```
+
+EQUIPMENT PIECES COVERED ✅
+==========================
+
+**Piece 1**: Upper Body (CUN0023.cps) → +9 Armor Effect
+**Piece 2**: Lower Body (CDN0023.cps) → +9 Armor Effect  
+**Piece 3**: Gloves (GBN0041_K.cps) → +9 Armor Effect
+**Piece 4**: Boots (BBN0036_M_E.cps) → +9 Armor Effect
+**Piece 6**: Weapon (CFN0045_K.cps) → +9 Weapon Effect
+
+NEXT STEPS ✅
+=============
+
+1. **Compile the client** with the new +9 upgrade code
+2. **Run the client** and go to login screen
+3. **Check the logs** to see +9 upgrades being applied
+4. **Verify visual effects** - Background characters should now show +9 lightning effects
+
+EXPECTED RESULTS ✅
+==================
+
+**Before**: Background characters with normal equipment (no +9 effects)
+**After**: Background characters with +9 upgrade effects (lightning, glow, etc.)
+
+**Log Output Should Show**:
+```
+[2025-08-30 21:18:54]     Piece 1: CUN0023.cps (Grind Level: 0 -> 9)
+[2025-08-30 21:18:54]     Piece 2: CDN0023.cps (Grind Level: 0 -> 9)
+[2025-08-30 21:18:54]     Piece 3: GBN0041_K.cps (Grind Level: 0 -> 9)
+[2025-08-30 21:18:54]     Piece 4: BBN0036_M_E.cps (Grind Level: 0 -> 9)
+[2025-08-30 21:18:54]     Piece 6: CFN0045_K.cps (Grind Level: 0 -> 9)
+```
+
+TECHNICAL DETAILS ✅
+===================
+
+**Rendering Path**: GameClient → DxGlobalStage → DxLobyStage → DxLandMan → DXLANDSKINOBJ → DxSkinChar
+**Target Files**: Characters loaded from `log_in.wld` (background NPCs)
+**Equipment System**: Uses `DxCharPart::SetGrindLevel(9)` for actual upgrade levels
+**Scope**: Only affects background characters, not player-selectable characters
+
+**Status**: READY FOR TESTING! 🚀

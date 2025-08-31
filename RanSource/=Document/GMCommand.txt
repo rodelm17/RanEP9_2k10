@@ -1,0 +1,380 @@
+-----------------------------------------------------------------------
+/dsp param
+*param off			-->turn off all dsp functions
+*param console 		-->show debug information
+*param fps			-->show debug frame rate
+*param gate 		-->show gate information
+*param player		-->show players information inside the current map 
+*param allplayer	-->show players information in all maps
+*param event		-->show events information
+-----------------------------------------------------------------------
+/shop_info param1, param2
+*param1	-->item mid
+*param2 -->item sid
+
+*show item information in the market
+*command only works in map 22 0 as market
+-----------------------------------------------------------------------
+/profile param 
+*param off, on 		-->turn on/off performance profiler
+-----------------------------------------------------------------------
+/chatlog option1, option2
+*option1 normal, private, party, guild, toall, alliance, system, all
+*option2 on, off	-->turn chatlog on/off
+-----------------------------------------------------------------------
+/weather param1 
+/weather param1, param2, param3
+/weather param1, param2, param3, param4
+*param1 clear						-->removes all active weather
+*param1 rain, snow, spore, leave	-->select weather by type
+*param2 -->map mid
+*param3	-->map sid
+*param4 -->time(seconds)
+-----------------------------------------------------------------------
+/time 24
+*set server time
+-----------------------------------------------------------------------
+/month 12
+*set server month
+-----------------------------------------------------------------------
+/itemhold param 
+*param off, on		-->enable, disable drop item ownership
+-----------------------------------------------------------------------
+/move2gate gateid
+/m2g gateid
+*move to specified gate
+-----------------------------------------------------------------------
+/move2pos param1, param2, param3, param4
+/m2p param1, param2, param3, param4
+*param1 -->map mid
+*param2 -->map sid
+*param3 -->pos x
+*param4 -->pos y
+*move to specified map and position
+-----------------------------------------------------------------------
+/move2char_cn charname
+/m2c_cn charname
+*move to character 
+-----------------------------------------------------------------------
+/move2char_ci charid
+/m2c_ci charid
+*move to character 
+-----------------------------------------------------------------------
+/visible param
+*param on 			-->normal mode visible from/to everyone
+*param off 			-->invisible from other players
+*param none			-->everything is invisible
+-----------------------------------------------------------------------
+/msgview param 
+*param off			-->turn of msgview 
+*param charname		-->view whisper msg of the character
+-----------------------------------------------------------------------
+/genchar_cn charname 
+/genchar_ci charid 
+
+*recall character to your location
+-----------------------------------------------------------------------
+/kickuser charid 
+
+*disconnect character from the game
+-----------------------------------------------------------------------
+/limit_event_begin param1, param2, param3, param4, param5, param6
+/limit_event_begin param1, param2, param3, param4, param5, param6, param7
+/limit_event_end 
+*param1		-->start level requirement
+*param2		-->end level requirement
+*param3		-->play time 
+*param4		-->boost time 
+*param5		-->exp rate 
+*param6		-->item gain rate
+*param7		-->event minute 
+-----------------------------------------------------------------------
+/eventexp_begin param 
+/eventexp_end
+*param exp rate
+-----------------------------------------------------------------------
+/eventitem_begin param
+/eventitem_end
+*param item gain rate
+-----------------------------------------------------------------------
+/eventmoney_begin param
+/eventmoney_end
+*param money gain rate
+-----------------------------------------------------------------------
+/pk_mode param 
+*param on 	-->pk enabled 
+*param off 	-->pk disabled
+-----------------------------------------------------------------------
+/where_npc param1, param2
+*param1 -->crow mid
+*param2 -->crow sid 
+
+*find location of a npc
+-----------------------------------------------------------------------
+/crow_list param 
+*param mob, npc, zone_name, gate_name
+
+*show crow list 
+-----------------------------------------------------------------------
+/bighead param 
+*param on, off 
+-----------------------------------------------------------------------
+/bighand param 
+*param on, off 
+-----------------------------------------------------------------------
+/mob_gen param1, param2
+/mob_gen param1, param2, param3, param4
+*param1 -->crow mid
+*param2 -->crow sid
+*param3 -->pos x
+*param4 -->pos y
+
+*generate crow 
+-----------------------------------------------------------------------
+/mob_del param1, param2 
+*param1 -->crow mid
+*param2 -->crow sid
+
+*remove generated crow
+-----------------------------------------------------------------------
+/mob_gen_ex param1, param2, param3, param4, param5, param6, param7, param8, param9
+*param1 -->crow mid
+*param2 -->crow sid 
+*param3 -->map mid
+*param4 -->map sid
+*param5 -->pos x
+*param6 -->pos y
+*param7 -->range 
+*param8 -->number of mobs 
+*param9 -->channel
+
+*generate multiple crow 
+-----------------------------------------------------------------------
+/mob_del_ex param1, param2, param3, param4, param5 
+*param1 -->crow mid
+*param2 -->crow sid 
+*param3 -->map mid
+*param4 -->map sid
+*param5 -->channel
+
+*remove multiple generated crow 
+-----------------------------------------------------------------------
+/lev_new param 
+*param 	-->level file name to load
+
+*generate lev instance
+-----------------------------------------------------------------------
+/lev_del
+
+*remove lev instance
+-----------------------------------------------------------------------
+/chatblock_ua param1, param2, param3 
+*param1 -->username
+*param2 -->time(minutes)
+*param3 -->reason must enclose with "reason"
+
+*blocks user from doing chats
+-----------------------------------------------------------------------
+/chatblock_cn param1, param2, param3 
+*param1 -->charname
+*param2 -->time(minutes)
+*param3 -->reason must enclose with "reason"
+
+*blocks user from doing chats
+-----------------------------------------------------------------------
+/chatblock_ci param1, param2, param3 
+*param1 -->charid
+*param2 -->time(minutes)
+*param3 -->reason must enclose with "reason"
+
+*blocks user from doing chats
+-----------------------------------------------------------------------
+/charinfo_cn param 
+*param -->character name
+
+*display character information 
+-----------------------------------------------------------------------
+/charinfo_ci param 
+*param -->charid
+
+*display character information 
+-----------------------------------------------------------------------
+/freepk_on param 
+*param -->time(seconds)
+
+*turn on free pk
+-----------------------------------------------------------------------
+/freepk_off
+
+*turn off free pk
+-----------------------------------------------------------------------
+/warning_msg param 
+*param on/off -->turn warning message on/off
+-----------------------------------------------------------------------
+/event_ex_begin param1, param2 
+/event_ex_end param1
+*param1 speed 	-->increase movement speed 
+*param1 aspeed 	-->increase attack speed
+*param1 attack	-->increase attack damage
+*param2 		-->rate
+-----------------------------------------------------------------------
+/m2mp param1, param2, param3, param4
+*param1 -->map mid
+*param2 -->map sid
+*param3 -->pos x
+*param4 -->pos y
+
+*move to specified map and position
+-----------------------------------------------------------------------
+/setvend_on
+/setvend_off
+
+*enable/disable private market
+-----------------------------------------------------------------------
+/setmega_on
+/setmega_off
+
+*enable/disable use of megaphone
+-----------------------------------------------------------------------
+/get_item param1, param2, param3, param4
+/get_item param1, param2, param4
+*param1 -->item mid 
+*param2 -->item sid 
+*param3 -->item num 
+*param4 -->command pass
+
+*insert item 
+-----------------------------------------------------------------------
+/get_item_range param1, param2, param3, param4, param5, param6 
+/get_item_range param1, param2, param3, param4, param5 
+*param1 -->item mid start
+*param2 -->item sid start 
+*param3 -->item mid end
+*param4 -->item sid end 
+*param5 -->command pass 
+*param6 -->item num
+
+*insert multiple items by range 
+-----------------------------------------------------------------------
+/get_inven_open	param
+*param -->command pass 
+
+*unlock all inventory slots
+-----------------------------------------------------------------------
+/get_skill_all	param
+*param -->command pass 
+
+*insert all class compatible skills
+-----------------------------------------------------------------------
+/get_skill	param1, param2, param3
+*param1	-->skill mid
+*param2 -->skill sid
+*param3 -->command pass
+
+*insert skills
+-----------------------------------------------------------------------
+/get_level param1, param2 
+*param1 -->target level 
+*param2 -->command pass 
+
+*adjust character level 
+-----------------------------------------------------------------------
+/get_stats param1, param2, param3 
+/get_stats param2, param3 
+*param1 pow, dex, int, vit, stm -->select stat type
+*param2 -->number of ststs
+*param3 -->command pass 
+
+*insert stats 
+-----------------------------------------------------------------------
+/get_statpoint param1, param2 
+*param1 -->number of stats
+*param2 -->command pass
+
+*insert stats points
+-----------------------------------------------------------------------
+/get_skillpoint param1, param2
+*param1 -->number of skills points
+*param2 -->command pass
+
+*insert skill points
+-----------------------------------------------------------------------
+/send_item param1, param2, param3, param4
+*param1 -->target char id
+*param2 -->item mid
+*param3 -->item sid
+*param4 -->command pass
+
+*send item to target character
+-----------------------------------------------------------------------
+/get_crow_time param1, param2, param3, param4, param5
+/get_crow_time param1, param2, param5
+*param1 -->mob mid 
+*param2 -->mob sid
+*param3 -->map mid
+*param4 -->map sid
+*param5 -->command pass
+
+*get crow respawn time information 
+-----------------------------------------------------------------------
+/contri_event_tw_start param1, param2
+/contri_event_tw_end param2 
+*param1 -->rate
+*param2 -->command pass
+
+*contribution reward event for tyranny
+-----------------------------------------------------------------------
+/contri_event_sw_start param1, param2
+/contri_event_sw_end param2 
+*param1 -->rate
+*param2 -->command pass
+
+*contribution reward event for schoolwars
+-----------------------------------------------------------------------
+/contri_event_ctf_start param1, param2
+/contri_event_ctf_end param2 
+*param1 -->rate
+*param2 -->command pass
+
+*contribution reward event for capture the flag
+-----------------------------------------------------------------------
+/kickout param1, param2, param3 
+*param1 -->usernum
+*param2 -->time interval(seconds)
+*param3 -->command pass
+
+*kickout user from the game for every (time interval)
+-----------------------------------------------------------------------
+/pcid param1, param2, param3
+*param1 -->type 
+*param2 -->chanum(charid)
+*param3 -->command pass 
+
+
+*pcid information and blocking
+
+*type 0 -->get players pcid information
+*type 1 -->block using hwid
+*type 2 -->block using mac 
+*type 3 -->block using both hwid and mac
+
+*player will be disconnected if type is blocking
+-----------------------------------------------------------------------
+/restricted param1, param2, param3
+*param1 -->chanum(charid) 
+*param2 -->on/off
+*param3 -->command pass 
+
+-----------------------------------------------------------------------
+/inven_clear param1
+*param1 -->command pass 
+
+-----------------------------------------------------------------------
+/cz param1
+*param1 zoom increase percentage
+
+-----------------------------------------------------------------------
+/genchar_pt param1
+*param1 party id( use charinfo to get party id )
+
+-----------------------------------------------------------------------

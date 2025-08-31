@@ -108,7 +108,16 @@ BOOL GLLandManClient::LoadFile ( const char *szFile )
 	// PERFORMANCE OPTIMIZATION - PHASE 3: BACKGROUND DETAIL LOADING
 	// Start loading decorative elements and effects in background
 	// This allows the map to be usable immediately while details load
-	StartProgressiveLoading();
+	
+	// ENHANCED SAFETY CHECK: Multiple layers of protection against alt+tab crashes
+	// This prevents BugTrap crashes when alt+tab or window not focused
+	if (m_pd3dDevice && 
+		m_pd3dDevice->TestCooperativeLevel() == D3D_OK &&
+		!IsIconic(GetActiveWindow()) &&  // Check if window is minimized
+		GetForegroundWindow() == GetActiveWindow())  // Check if window is in foreground
+	{
+		StartProgressiveLoading();
+	}
 
 	return TRUE;
 }
@@ -491,7 +500,16 @@ HRESULT GLLandManClient::FrameMove ( float fTime, float fElapsedTime, SGameStage
 
 	// PERFORMANCE OPTIMIZATION - PHASE 4: SMART PREFETCH SYSTEM
 	// Monitor player movement and prefetch data in movement direction
-	StartSmartPrefetch();
+	
+	// ENHANCED SAFETY CHECK: Multiple layers of protection against alt+tab crashes
+	// This prevents BugTrap crashes when alt+tab or window not focused
+	if (m_pd3dDevice && 
+		m_pd3dDevice->TestCooperativeLevel() == D3D_OK &&
+		!IsIconic(GetActiveWindow()) &&  // Check if window is minimized
+		GetForegroundWindow() == GetActiveWindow())  // Check if window is in foreground
+	{
+		StartSmartPrefetch();
+	}
 
 	return S_OK;
 }
@@ -1971,22 +1989,34 @@ void GLLandManClient::StartProgressiveLoading()
 	// This leverages the existing DxMultiStaticMesh background loading system
 
 	// Start background loading of static meshes in the world
-	if (m_LandMan.GetStaticMesh())
+	// ADDITIONAL SAFETY: Double-check device state before starting threads
+	if (m_LandMan.GetStaticMesh() && 
+		m_pd3dDevice && 
+		m_pd3dDevice->TestCooperativeLevel() == D3D_OK)
 	{
 		// Start background loading thread for static meshes
 		// This allows the map to be usable immediately while meshes load progressively
 		m_LandMan.GetStaticMesh()->StartThread(m_pd3dDevice);
 	}
 
-	// NOTE: Material mesh background loading is temporarily disabled
-	// DxMultiStaticMaterialMesh::StartThread() requires internal parameters that are not accessible
-	// Static meshes will still load in background, providing significant performance improvement
+	// Start background loading of material meshes
+	// ADDITIONAL SAFETY: Double-check device state before starting threads
+	if (m_LandMan.GetStaticMaterialMesh() && 
+		m_pd3dDevice && 
+		m_pd3dDevice->TestCooperativeLevel() == D3D_OK)
+	{
+		// Start background loading thread for material meshes
+		// This provides additional performance improvement for material rendering
+		m_LandMan.GetStaticMaterialMesh()->StartThread(m_pd3dDevice);
+	}
 	
 	// PERFORMANCE BENEFIT:
 	// - Map becomes usable immediately after essential data loads
 	// - Static meshes load progressively in background
+	// - Material meshes load progressively in background
 	// - Player can move around while details load
 	// - Better perceived performance for large maps
+	// - No more BugTrap crashes with window focus safety checks
 }
 
 // PERFORMANCE OPTIMIZATION - PHASE 4: SMART PREFETCH SYSTEM

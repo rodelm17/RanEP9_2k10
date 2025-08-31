@@ -231,10 +231,10 @@ public:
 public:
 	BOOL LoadFile ( const char *szFile );
 
-	// PERFORMANCE OPTIMIZATION - PHASE 3: PROGRESSIVE LOADING SYSTEM
+	// PERFORMANCE OPTIMIZATION - PHASE 3: PROGRESSIVE LOADING SYSTEM - by Ace17 31/08/2025
 	void StartProgressiveLoading();
 	
-	// PERFORMANCE OPTIMIZATION - PHASE 4: SMART PREFETCH SYSTEM
+	// PERFORMANCE OPTIMIZATION - PHASE 4: SMART PREFETCH SYSTEM - by Ace17 31/08/2025
 	void StartSmartPrefetch();
 	void PrefetchNearbyMaps(const D3DXVECTOR3& vPosition);
 	void PrefetchStaticMeshes(const D3DXVECTOR3& vPosition);

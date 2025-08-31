@@ -105,7 +105,7 @@ BOOL GLLandManClient::LoadFile ( const char *szFile )
 	hr = m_LandTree.MakeTree ();
 	if ( FAILED(hr) )	return hr;
 
-	// PERFORMANCE OPTIMIZATION - PHASE 3: BACKGROUND DETAIL LOADING
+	// PERFORMANCE OPTIMIZATION - PHASE 3: BACKGROUND DETAIL LOADING - by Ace17 31/08/2025
 	// Start loading decorative elements and effects in background
 	// This allows the map to be usable immediately while details load
 	
@@ -498,7 +498,7 @@ HRESULT GLLandManClient::FrameMove ( float fTime, float fElapsedTime, SGameStage
 		}
 	}
 
-	// PERFORMANCE OPTIMIZATION - PHASE 4: SMART PREFETCH SYSTEM
+	// PERFORMANCE OPTIMIZATION - PHASE 4: SMART PREFETCH SYSTEM - by Ace17 31/08/2025
 	// Monitor player movement and prefetch data in movement direction
 	
 	// ENHANCED SAFETY CHECK: Multiple layers of protection against alt+tab crashes
@@ -1979,7 +1979,7 @@ void GLLandManClient::SetFlags( SMAPNODE* pnode )
 	m_bResetSkillDelayOnDie	= pnode->bResetSkillDelayOnDie;
 }
 
-// PERFORMANCE OPTIMIZATION - PHASE 3: PROGRESSIVE LOADING SYSTEM
+// PERFORMANCE OPTIMIZATION - PHASE 3: PROGRESSIVE LOADING SYSTEM - by Ace17 31/08/2025
 void GLLandManClient::StartProgressiveLoading()
 {
 	// This function starts background loading of non-essential map elements
@@ -2019,7 +2019,7 @@ void GLLandManClient::StartProgressiveLoading()
 	// - No more BugTrap crashes with window focus safety checks
 }
 
-// PERFORMANCE OPTIMIZATION - PHASE 4: SMART PREFETCH SYSTEM
+// PERFORMANCE OPTIMIZATION - PHASE 4: SMART PREFETCH SYSTEM - by Ace17 31/08/2025
 void GLLandManClient::StartSmartPrefetch()
 {
 	// This function implements intelligent prefetching based on player movement direction

@@ -1967,9 +1967,9 @@ void GLLandManClient::StartProgressiveLoading()
 	// This function starts background loading of non-essential map elements
 	// allowing the map to be usable immediately while details load progressively
 	
-	// PERFORMANCE OPTIMIZATION: Start background loading of static meshes
+		// PERFORMANCE OPTIMIZATION: Start background loading of static meshes
 	// This leverages the existing DxMultiStaticMesh background loading system
-	
+
 	// Start background loading of static meshes in the world
 	if (m_LandMan.GetStaticMesh())
 	{
@@ -1977,13 +1977,10 @@ void GLLandManClient::StartProgressiveLoading()
 		// This allows the map to be usable immediately while meshes load progressively
 		m_LandMan.GetStaticMesh()->StartThread(m_pd3dDevice);
 	}
-	
-	// Start background loading of material meshes
-	if (m_LandMan.GetStaticMaterialMesh())
-	{
-		// Start background loading thread for material meshes
-		m_LandMan.GetStaticMaterialMesh()->StartThread(m_pd3dDevice);
-	}
+
+	// NOTE: Material mesh background loading is temporarily disabled
+	// DxMultiStaticMaterialMesh::StartThread() requires internal parameters that are not accessible
+	// Static meshes will still load in background, providing significant performance improvement
 	
 	// PERFORMANCE BENEFIT:
 	// - Map becomes usable immediately after essential data loads

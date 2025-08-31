@@ -1,0 +1,37 @@
+USE [RanUser]
+GO
+
+/****** Object:  Table [dbo].[BlockPCID]    Script Date: 4/15/2020 8:47:51 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[BlockPCID](
+	[BlockIdx] [int] IDENTITY(1,1) NOT NULL,
+	[BlockHWID] [varchar](65) NOT NULL,
+	[BlockMAC] [varchar](65) NOT NULL,
+	[BlockTYPE] [bigint] NOT NULL,
+	[BlockReason] [varchar](512) NULL,
+	[BlockDate] [datetime] NULL,
+ CONSTRAINT [PK_BlockPCID] PRIMARY KEY CLUSTERED 
+(
+	[BlockIdx] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[BlockPCID] ADD  CONSTRAINT [DF_BlockPCID_BlockHWID]  DEFAULT ('') FOR [BlockHWID]
+GO
+
+ALTER TABLE [dbo].[BlockPCID] ADD  CONSTRAINT [DF_BlockPCID_BlockMAC]  DEFAULT ('') FOR [BlockMAC]
+GO
+
+ALTER TABLE [dbo].[BlockPCID] ADD  CONSTRAINT [DF_BlockPCID_BlockTYPE]  DEFAULT ((0)) FOR [BlockTYPE]
+GO
+
+ALTER TABLE [dbo].[BlockPCID] ADD  CONSTRAINT [DF_BlockPCID_BlockDate]  DEFAULT (getdate()) FOR [BlockDate]
+GO
+
+

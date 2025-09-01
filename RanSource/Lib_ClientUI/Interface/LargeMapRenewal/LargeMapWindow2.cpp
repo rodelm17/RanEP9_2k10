@@ -332,6 +332,11 @@ void CLargeMapWindow2::LoadMap( SNATIVEID sMapID )
 	{
 		m_pButtonMapList->SetText( pMapNode->strMapName.c_str(), NS_UITEXTCOLOR::WHITE );
 		GLLevelFile cLevelFile;
+		
+
+		
+
+		
 		if( cLevelFile.LoadFile ( pMapNode->strFile.c_str(), TRUE, NULL ) )
 		{
 			CString strText = GLGaeaClient::GetInstance().GetMapName ( sMapID );
@@ -339,8 +344,15 @@ void CLargeMapWindow2::LoadMap( SNATIVEID sMapID )
 
 			MOBSCHEDULELIST * GLMobSchList = cLevelFile.GetMobSchManClient()->GetMobSchList();
 			SGLNODE<GLMobSchedule*>* pCur = GLMobSchList->m_pHead;
+			
+
+			int nMobCount = 0;
+			
+
+			
 			while ( pCur )
 			{
+				nMobCount++;
 				PCROWDATA pCROW = GLCrowDataMan::GetInstance().GetCrowData( pCur->Data->m_CrowID );
 				if ( !pCROW ) 
 				{
@@ -361,18 +373,37 @@ void CLargeMapWindow2::LoadMap( SNATIVEID sMapID )
 				}
 				pCur = pCur->pNext;
 			}
-		}
+			
 
-		std::map<DWORD, int>::iterator iter = vecCrowDataList.begin();
-		std::map<DWORD, int>::iterator iter_end = vecCrowDataList.end();
+			
 
-		for ( ; iter != iter_end; ++iter )
-		{
-			SNATIVEID sID = iter->first;
-			PCROWDATA pCROW = GLCrowDataMan::GetInstance().GetCrowData( sID );
-			if( pCROW )	LoadMob( pCROW );
+			
+
+			
+
+
+
+			
+
+			
+			std::map<DWORD, int>::iterator iter = vecCrowDataList.begin();
+			std::map<DWORD, int>::iterator iter_end = vecCrowDataList.end();
+
+			int nLoadedCount = 0;
+			for ( ; iter != iter_end; ++iter )
+			{
+				SNATIVEID sID = iter->first;
+				PCROWDATA pCROW = GLCrowDataMan::GetInstance().GetCrowData( sID );
+				if( pCROW )
+				{
+					LoadMob( pCROW );
+					nLoadedCount++;
+				}
+			}
+			
+
 		}
-	}	
+	}
 
 	if( m_pImage ) m_pImage->SetGateList( sMapID );
 	if( m_pInfo ) 

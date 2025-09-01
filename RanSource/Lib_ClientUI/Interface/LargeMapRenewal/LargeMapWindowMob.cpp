@@ -268,9 +268,14 @@ void CLargeMapWindowMob::LoadMob ( PCROWDATA pCrow )
 	m_nIndex++;
 
 	ResetAllCrowRender (m_nIndex);
-	SetCrowRender( 0, 10 );
+	
+	// Show only the actual number of mobs, up to the maximum viewable slots
+	int nShowCount = min(m_nIndex, nMAX_ONE_VIEW_SLOT);
+	if (nShowCount > 0) {
+		SetCrowRender( 0, nShowCount );
+	}
 
-	m_pScrollBar->GetThumbFrame()->SetState( m_nIndex, 10 );
+	m_pScrollBar->GetThumbFrame()->SetState( m_nIndex, nMAX_ONE_VIEW_SLOT );
 }
 
 void CLargeMapWindowMob::SetMonsterInfo()
@@ -357,7 +362,7 @@ void CLargeMapWindowMob::UpdateMonsterList()
 		}
 	}
 
-	if ( m_nIndex == 0 ) m_pScrollBar->SetVisibleSingle(FALSE);
+	if ( m_nIndex <= nMAX_ONE_VIEW_SLOT ) m_pScrollBar->SetVisibleSingle(FALSE);
 	else m_pScrollBar->SetVisibleSingle(TRUE);
 }
 

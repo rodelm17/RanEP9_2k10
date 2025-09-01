@@ -147,7 +147,7 @@ BOOL GLLevelFile::LoadAllCsvFile( LPDIRECT3DDEVICEQ pd3dDevice )
 	return TRUE;
 }
 
-//	Note : ÆÄÀÏ ±¸Á¶°¡ º¯°æ½Ã¿¡´Â GLAGLandManÀÇ LoadFile() ÇÔ¼öÀÇ ÆÄÀÏ ÀĞ±â ±¸Á¶ ¶ÇÇÑ °ËÅä ÇÏ¿©¾ß ÇÔ.
+//	Note : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ GLAGLandManï¿½ï¿½ LoadFile() ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ğ±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½.
 //
 BOOL GLLevelFile::LoadFile ( const char *szFile, BOOL bCLIENT, LPDIRECT3DDEVICEQ pd3dDevice )
 {
@@ -263,7 +263,7 @@ BOOL GLLevelFile::LoadFile ( const char *szFile, BOOL bCLIENT, LPDIRECT3DDEVICEQ
 		return FALSE;
 	}
 
-	//	Note : ÇöÁ¦ ·¡º§¿¡ ¸Â´Â ¹Ì´Ï¸ã ¼³Á¤ ·Îµå.
+	//	Note : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â´ï¿½ ï¿½Ì´Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½.
 	//
 	m_sLevelAxisInfo.LoadFile ( szFile );
 
@@ -272,7 +272,7 @@ BOOL GLLevelFile::LoadFile ( const char *szFile, BOOL bCLIENT, LPDIRECT3DDEVICEQ
 
 BOOL GLLevelFile::LOAD_000 ( basestream &SFile, BOOL bCLIENT )
 {
-	//	Note : ÆÄÀÏ ±¸Á¶ º¯°æÀü
+	//	Note : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	//
 	DWORD dwVer;
 	SFile >> dwVer;
@@ -950,7 +950,14 @@ BOOL GLLevelFile::LOAD_201 ( basestream &SFile, BOOL bCLIENT, LPDIRECT3DDEVICEQ 
 	{
 		m_MobSchMan.LoadFile ( SFile );
 	}else{
-		SFile.SetOffSet ( SFile.GetfTell() + dwBLOCKSIZE );
+		/*fix large map window ep9 - Ace17*/
+		try {
+			m_MobSchManClient.LoadFile( SFile );
+		}
+		catch (...) {
+			// Fallback: Skip mob schedule if loading fails
+			SFile.SetOffSet ( SFile.GetfTell() + dwBLOCKSIZE );
+		}
 	}
 
 	//landgate
@@ -1026,7 +1033,14 @@ BOOL GLLevelFile::LOAD_202 ( basestream &SFile, BOOL bCLIENT, LPDIRECT3DDEVICEQ 
 	{
 		m_MobSchMan.LoadFile ( SFile );
 	}else{
-		SFile.SetOffSet ( SFile.GetfTell() + dwBLOCKSIZE );
+		/*fix large map window ep9 - Ace17*/
+		try {
+			m_MobSchManClient.LoadFile( SFile );
+		}
+		catch (...) {
+			// Fallback: Skip mob schedule if loading fails
+			SFile.SetOffSet ( SFile.GetfTell() + dwBLOCKSIZE );
+		}
 	}
 
 	//landgate
@@ -1102,7 +1116,14 @@ BOOL GLLevelFile::LOAD_203 ( basestream &SFile, BOOL bCLIENT, LPDIRECT3DDEVICEQ 
 	{
 		m_MobSchMan.LoadFile ( SFile );
 	}else{
-		SFile.SetOffSet ( SFile.GetfTell() + dwBLOCKSIZE );
+		/*fix large map window ep9 - Ace17*/
+		try {
+			m_MobSchManClient.LoadFile( SFile );
+		}
+		catch (...) {
+			// Fallback: Skip mob schedule if loading fails
+			SFile.SetOffSet ( SFile.GetfTell() + dwBLOCKSIZE );
+		}
 	}
 
 	//landgate
@@ -1164,7 +1185,7 @@ BOOL GLLevelFile::LOAD_203 ( basestream &SFile, BOOL bCLIENT, LPDIRECT3DDEVICEQ 
 
 BOOL GLLevelFile::SaveFile ( const char *szFile )
 {
-	/// ÀúÀåÇÏ±âÀü¿¡ ¸÷ ½ºÄÉÁì¿¡ ¸®´õ ±×·ìÀÌ Á¦´ë·Î ¼³Á¤µÇ¾î ÀÖ´ÂÁö Ã¼Å©ÇÑ´Ù.
+	/// ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ì¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ñ´ï¿½.
 	MOBSCHEDULELIST *pMobScheduleList = m_MobSchMan.GetMobSchList();
 	MOBSCHEDULENODE *pHead = pMobScheduleList->m_pHead;
 

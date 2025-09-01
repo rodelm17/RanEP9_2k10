@@ -493,6 +493,20 @@ namespace RPARAM
 		cFILE.getflag ( "GAME_FEATURE", "bVIPMobLeader", 0, 1, bVIPMobLeader );
 		cFILE.getflag ( "GAME_FEATURE", "nVIPMobLeaderRange", 0, 1, nVIPMobLeaderRange );
 
+		// Configuration validation for VIP Mob Leader
+		if ( nVIPMobLeaderRange < 0 || nVIPMobLeaderRange > 1000 )
+		{
+			// Invalid configuration - reset to safe defaults
+			nVIPMobLeaderRange = 1;
+			CDebugSet::ToLogFile( _T("VIP Mob Leader: Invalid range reset to safe default") );
+		}
+
+		if ( bVIPMobLeader && nVIPMobLeaderRange == 0 )
+		{
+			// Infinite range enabled - log for monitoring
+			CDebugSet::ToLogFile( _T("VIP Mob Leader: Infinite range mode enabled - extra safety active") );
+		}
+
 		cFILE.getflag ( "GAME_FEATURE", "bAllowBTGParty", 0, 1, bAllowBTGParty );
 		
 		cFILE.getflag ( "GAME_FEATURE", "bMultipleCaptchaShowTimer", 0, 1, bMultipleCaptchaShowTimer );

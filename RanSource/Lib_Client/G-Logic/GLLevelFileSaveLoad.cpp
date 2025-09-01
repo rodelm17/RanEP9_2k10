@@ -290,7 +290,7 @@ BOOL GLLevelFile::LOAD_000 ( basestream &SFile, BOOL bCLIENT )
 	{
 		m_MobSchMan.LoadFile ( SFile );
 	}
-	/*dmk14 large map window ep9*/
+	/*fix large map window ep9 - Ace17*/
 	else m_MobSchManClient.LoadFile( SFile );
 
 	return TRUE;
@@ -305,7 +305,7 @@ BOOL GLLevelFile::LOAD_101 ( basestream &SFile, BOOL bCLIENT )
 	{
 		m_MobSchMan.LoadFile ( SFile );
 	}
-	/*dmk14 large map window ep9*/
+	/*fix large map window ep9 - Ace17*/
 	else m_MobSchManClient.LoadFile( SFile );
 
 	return TRUE;
@@ -951,13 +951,7 @@ BOOL GLLevelFile::LOAD_201 ( basestream &SFile, BOOL bCLIENT, LPDIRECT3DDEVICEQ 
 		m_MobSchMan.LoadFile ( SFile );
 	}else{
 		/*fix large map window ep9 - Ace17*/
-		try {
-			m_MobSchManClient.LoadFile( SFile );
-		}
-		catch (...) {
-			// Fallback: Skip mob schedule if loading fails
-			SFile.SetOffSet ( SFile.GetfTell() + dwBLOCKSIZE );
-		}
+		m_MobSchManClient.LoadFile( SFile );
 	}
 
 	//landgate
@@ -1034,13 +1028,7 @@ BOOL GLLevelFile::LOAD_202 ( basestream &SFile, BOOL bCLIENT, LPDIRECT3DDEVICEQ 
 		m_MobSchMan.LoadFile ( SFile );
 	}else{
 		/*fix large map window ep9 - Ace17*/
-		try {
-			m_MobSchManClient.LoadFile( SFile );
-		}
-		catch (...) {
-			// Fallback: Skip mob schedule if loading fails
-			SFile.SetOffSet ( SFile.GetfTell() + dwBLOCKSIZE );
-		}
+		m_MobSchManClient.LoadFile( SFile );
 	}
 
 	//landgate
@@ -1117,13 +1105,7 @@ BOOL GLLevelFile::LOAD_203 ( basestream &SFile, BOOL bCLIENT, LPDIRECT3DDEVICEQ 
 		m_MobSchMan.LoadFile ( SFile );
 	}else{
 		/*fix large map window ep9 - Ace17*/
-		try {
-			m_MobSchManClient.LoadFile( SFile );
-		}
-		catch (...) {
-			// Fallback: Skip mob schedule if loading fails
-			SFile.SetOffSet ( SFile.GetfTell() + dwBLOCKSIZE );
-		}
+		m_MobSchManClient.LoadFile( SFile );
 	}
 
 	//landgate

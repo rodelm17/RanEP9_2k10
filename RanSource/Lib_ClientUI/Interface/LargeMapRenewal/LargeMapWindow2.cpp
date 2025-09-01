@@ -31,7 +31,7 @@ CLargeMapWindow2::CLargeMapWindow2 ():
 	,m_pImage(NULL)
 	,m_pSetting(NULL)
 	,m_pInfo(NULL)
-	/*dmk14 map preview*/
+	/*map preview buttons*/
 	,m_pButtonMyPos(NULL)
 	,m_pButtonPrev(NULL)
 	,m_pButtonNext(NULL)
@@ -99,17 +99,15 @@ void CLargeMapWindow2::CreateSubControl()
 	m_pInfo->CreateSubControl();
 	RegisterControl( m_pInfo );
 
-	/*dmk14 map preview*/
-	const int nAlignCenterBoth = TEXT_ALIGN_CENTER_X | TEXT_ALIGN_CENTER_Y;
+	/*map preview buttons*/
 	CD3DFontPar* pFont = DxFontMan::GetInstance().LoadDxFont ( _DEFAULT_FONT, 9, _DEFAULT_FONT_SHADOW_FLAG );
-	//////////////////////////////////////////////////////////////////////////
+	
 	RnButton::CreateArg arg;
 	arg.defaultTextureKey = "RNBUTTON_DEFAULT_TEXTURE";
 	arg.mouseOverTextureKey = "RNBUTTON_OVER_TEXTURE";
 	arg.mouseClickTextureKey = "RNBUTTON_CLICK_TEXTURE";
 	arg.pFont = pFont;
 	arg.dwColor = NS_UITEXTCOLOR::WHITE;
-	//////////////////////////////////////////////////////////////////////////
     m_pButtonMyPos = new RnButton();
     m_pButtonMyPos->CreateSub( this, "MAP_WINDOW_CHANGEMAP_MYPOS_BTN", UI_FLAG_DEFAULT, MAP_WINDOW_MAP_MYPOS_BTN );
 	arg.text = ("<<");
@@ -333,10 +331,6 @@ void CLargeMapWindow2::LoadMap( SNATIVEID sMapID )
 		m_pButtonMapList->SetText( pMapNode->strMapName.c_str(), NS_UITEXTCOLOR::WHITE );
 		GLLevelFile cLevelFile;
 		
-
-		
-
-		
 		if( cLevelFile.LoadFile ( pMapNode->strFile.c_str(), TRUE, NULL ) )
 		{
 			CString strText = GLGaeaClient::GetInstance().GetMapName ( sMapID );
@@ -345,14 +339,8 @@ void CLargeMapWindow2::LoadMap( SNATIVEID sMapID )
 			MOBSCHEDULELIST * GLMobSchList = cLevelFile.GetMobSchManClient()->GetMobSchList();
 			SGLNODE<GLMobSchedule*>* pCur = GLMobSchList->m_pHead;
 			
-
-			int nMobCount = 0;
-			
-
-			
 			while ( pCur )
 			{
-				nMobCount++;
 				PCROWDATA pCROW = GLCrowDataMan::GetInstance().GetCrowData( pCur->Data->m_CrowID );
 				if ( !pCROW ) 
 				{
@@ -374,22 +362,9 @@ void CLargeMapWindow2::LoadMap( SNATIVEID sMapID )
 				pCur = pCur->pNext;
 			}
 			
-
-			
-
-			
-
-			
-
-
-
-			
-
-			
 			std::map<DWORD, int>::iterator iter = vecCrowDataList.begin();
 			std::map<DWORD, int>::iterator iter_end = vecCrowDataList.end();
 
-			int nLoadedCount = 0;
 			for ( ; iter != iter_end; ++iter )
 			{
 				SNATIVEID sID = iter->first;
@@ -397,11 +372,8 @@ void CLargeMapWindow2::LoadMap( SNATIVEID sMapID )
 				if( pCROW )
 				{
 					LoadMob( pCROW );
-					nLoadedCount++;
 				}
 			}
-			
-
 		}
 	}
 
@@ -429,7 +401,6 @@ void CLargeMapWindow2::ClearMobList( SNATIVEID sMapID )
 	m_pImage->ClearMobList();
 	m_pInfo->ClearMobList();
 	m_nIndex = 0;
-	
 }
 
 void CLargeMapWindow2::LoadMob( PCROWDATA pCrow, D3DXVECTOR3 vPos, GLCHARLOGIC_CLIENT *pCHAR )

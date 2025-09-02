@@ -8,6 +8,9 @@
 #include <string>
 #include <map>
 
+// Windows headers for CRITICAL_SECTION
+#include <windows.h>
+
 #include "./GLCharClient.h"
 #include "./GLCrowClient.h"
 #include "./GLMaterialClient.h"
@@ -22,6 +25,16 @@
 #include "../SGameStageInfo.h"
 
 struct SMAPNODE;
+
+// COMPARATOR: Custom comparator for SNATIVEID to work with std::map
+// Compatible with older C++ standards - placed after includes where SNATIVEID is defined
+struct SNATIVEIDComparator
+{
+	bool operator()(const SNATIVEID& lhs, const SNATIVEID& rhs) const
+	{
+		return lhs.dwID < rhs.dwID;
+	}
+};
 
 //#include "GLContrlMsg.h"
 //#include "GLogicData.h"
@@ -139,6 +152,20 @@ protected:
 	CHARMAPID				m_PCArray;
 	CHARMAP					m_mapPC;
 
+	// PRODUCTION-GRADE PREFETCH: Cache for prefetched map data
+	// This stores level file data that has been preloaded for faster map transitions
+	// Using std::map with custom comparator for SNATIVEID
+	std::map<SNATIVEID, GLLevelFile*, SNATIVEIDComparator>	m_mapPrefetchedLevelData;
+	
+	// THREAD SAFETY: Critical section for prefetch operations
+	// This prevents race conditions when multiple threads access prefetch data
+	CRITICAL_SECTION					m_csPrefetch;
+	
+	// MEMORY MANAGEMENT: Cache size limit to prevent unlimited memory growth
+	// This prevents memory leaks when going back and forth between many maps
+	// Compatible with older C++ standards
+	static const DWORD					MAX_PREFETCH_CACHE_SIZE = 10; // Maximum 10 maps in cache
+
 public:
 	BOOL DropItem ( SDROP_CLIENT_ITEM *pItemDrop );
 	BOOL DropMoney ( LONGLONG lnAmount, D3DXVECTOR3 vPos, DWORD dwGlobID, float fAge );
@@ -232,13 +259,35 @@ public:
 	BOOL LoadFile ( const char *szFile );
 
 	// PERFORMANCE OPTIMIZATION - PHASE 3: PROGRESSIVE LOADING SYSTEM - by Ace17 31/08/2025
+	// Compatible with older C++ standards
 	void StartProgressiveLoading();
 	
 	// PERFORMANCE OPTIMIZATION - PHASE 4: SMART PREFETCH SYSTEM - by Ace17 31/08/2025
+	// Compatible with older C++ standards
 	void StartSmartPrefetch();
 	void PrefetchNearbyMaps(const D3DXVECTOR3& vPosition);
 	void PrefetchStaticMeshes(const D3DXVECTOR3& vPosition);
 	void PrefetchMapData(const SNATIVEID& sMapID);
+	
+	// PRODUCTION-GRADE PREFETCH: Helper functions for actual data caching
+	// Compatible with older C++ standards
+	void PrefetchWorldFile(const char* szWldFile);
+	void PrefetchMobData(GLLevelFile* pLevelFile);
+	void ClearPrefetchedData();
+	
+	// THREAD-SAFE ACCESS: Get prefetched data safely
+	// Compatible with older C++ standards
+	GLLevelFile* GetPrefetchedData(const SNATIVEID& sMapID);
+	
+	// REPEATED ACCESS OPTIMIZATION: Check if map is already cached
+	// Compatible with older C++ standards
+	BOOL IsMapPrefetched(const SNATIVEID& sMapID);
+	
+	// REPEATED ACCESS OPTIMIZATION: Load file using prefetched data if available
+	BOOL LoadFileOptimized(const char* szFile);
+	
+	// MEMORY MANAGEMENT: Manage cache size to prevent memory leaks
+	void ManageCacheSize();
 
 	/*force revive, Juver, 2018/07/09 */
 	void SetFlags( SMAPNODE* pnode );

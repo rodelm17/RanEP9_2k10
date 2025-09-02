@@ -486,7 +486,7 @@ PLANDMANCLIENT GLGaeaClient::CreateLandMClient ( SNATIVEID sMapID, D3DXVECTOR3 &
 		{
 			// We have cached data - use optimized loading
 			// This makes map loading much faster (like 2nd visit)
-			pLandMClient->Create ( pMapNode->strFile.c_str(), m_pd3dDevice, vBasicPos, &sMapID, pMapNode->bPeaceZone );
+		pLandMClient->Create ( pMapNode->strFile.c_str(), m_pd3dDevice, vBasicPos, &sMapID, pMapNode->bPeaceZone );
 		}
 		else
 		{

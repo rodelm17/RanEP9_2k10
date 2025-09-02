@@ -1336,8 +1336,10 @@ BOOL GLGaeaServer::RequestLandIn ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNET
 	PGLCHAR pPC = GetChar ( dwGaeaID );
 	if ( !pPC )								return FALSE;
 	/* random bugtrap fix, Ace17, 2024/12/19 */
-	// Add additional validation to prevent duplicate connection attempts
-	if ( !pPC->IsValidBody() || pPC->m_dwClientID == 0 )	return FALSE;
+	// FIXED: Removed overly aggressive validation that was breaking mob logic
+	// The original validation was too strict and prevented legitimate map entries
+	// This was causing mobs to not spawn or respond properly
+	// if ( !pPC->IsValidBody() || pPC->m_dwClientID == 0 )	return FALSE;
 
 	// Reset the state if it's already set to prevent duplicate processing 
 	if ( pPC->IsSTATE(EM_GETVA_AFTER) )

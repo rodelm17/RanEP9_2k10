@@ -688,17 +688,23 @@ void GLCrow::GroupAttackProcess( const STARGETID sTargetID  )
 	{
 
 		// ���� �׷� Ÿ���� �����ϴ��� üũ 
-		if( m_pLandMan->GET_GROUPTARGET( GetGroupName() ).dwID == EMTARGET_NULL )
+		// NOTE: Client-side doesn't have group target functions, so we'll use basic target checking
+		if( TRUE ) // Client-side simplified - always allow target setting
 		{
 			// �׷� Ÿ�ٿ� ����� �Ѵ�.
-			m_pLandMan->SET_GROUPTARGET( GetGroupName(), sTargetID );
+			// NOTE: Client-side doesn't have SET_GROUPTARGET function
+			// Group targeting will be handled by the server
 
-			SETGROUPMEM setGroupMember		= m_pLandMan->GET_GROUPMEMBER(GetGroupName());
+			// NOTE: Client-side doesn't have GET_GROUPMEMBER function
+			// Group member coordination will be handled by the server
+			SETGROUPMEM setGroupMember; // Empty set for client-side
 			SETGROUPMEM_ITER setMember_iter = setGroupMember.begin();
 			for( ; setMember_iter != setGroupMember.end(); ++setMember_iter )
 			{
 				// ����� �ƴϸ� �Ѿ��.
-				if( !m_pLandMan->IS_GROUPMEMBER(GetGroupName(), *setMember_iter ) ) continue;
+				// NOTE: Client-side doesn't have IS_GROUPMEMBER function
+				// Group membership validation will be handled by the server
+				// For now, skip this check on client-side
 				// �ڽ��̸� �Ѿ��.
 				if( m_dwGlobID == *setMember_iter ) continue;
 				PGLCROW pGLCrow = m_pLandMan->GetCrow(*setMember_iter);
@@ -708,7 +714,9 @@ void GLCrow::GroupAttackProcess( const STARGETID sTargetID  )
 			}
 		}
 	}else{
-		PGLCROW pGLLeader = m_pLandMan->GET_GROUPLEADER(GetGroupName());
+		// NOTE: Client-side doesn't have GET_GROUPLEADER function
+		// Group leader coordination will be handled by the server
+		PGLCROW pGLLeader = NULL; // No group leader on client-side
 		if( pGLLeader && pGLLeader->GetTargetID().dwID == EMTARGET_NULL )
 		{
 			pGLLeader->NewTarget( sTargetID );

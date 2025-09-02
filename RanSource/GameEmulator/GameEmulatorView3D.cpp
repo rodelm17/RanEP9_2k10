@@ -18,6 +18,7 @@
 #include "../Lib_Engine/Common/SUBPATH.h"
 #include "../Lib_Client/dxparamset.h"
 #include "../Lib_Engine/Common/CommonWeb.h"
+#include "../Lib_Engine/Core/NSRParam.h"
 #include "../Lib_Engine/GUInterface/Cursor.h"
 #include "../Lib_Engine/DxCommon/DxFontMan.h"
 #include "../Lib_Engine/DxCommon/D3DFont.h"
@@ -273,7 +274,22 @@ HRESULT CGameEmulatorView::InitDeviceObjects()
 	}
 
 	if ( m_sCharacterSetting.strCharName.size() )
-		StringCchCopy( sCharData2.m_szName, CHAR_SZNAME, m_sCharacterSetting.strCharName.c_str() );
+	{
+		std::string strDisplayName = m_sCharacterSetting.strCharName;
+		
+		// Apply nNameType logic: 0 = normal, 1+ = with #1 suffix
+		if ( RPARAM::nNameType != 0 )
+		{
+			// Remove existing #1 suffix if present
+			if ( strDisplayName.length() >= 2 && strDisplayName.substr(strDisplayName.length() - 2) == "#1" )
+			{
+				strDisplayName = strDisplayName.substr(0, strDisplayName.length() - 2);
+			}
+			strDisplayName += "#1";
+		}
+		
+		StringCchCopy( sCharData2.m_szName, CHAR_SZNAME, strDisplayName.c_str() );
+	}
 
 	if ( m_sCharacterSetting.wLevel != 0 )
 		sCharData2.m_wLevel = m_sCharacterSetting.wLevel;
@@ -393,7 +409,20 @@ HRESULT CGameEmulatorView::InitDeviceObjects()
 	CCursor::GetInstance().InitDeviceObjects ();
 
 	CString strTitle;
-	strTitle.Format( "%s(%d) %s", m_sCharacterSetting.strCharName.c_str(), sCharData2.m_dwUserLvl, m_sCharacterSetting.strCharSet.c_str() );
+	std::string strDisplayName = m_sCharacterSetting.strCharName;
+	
+	// Apply nNameType logic: 0 = normal, 1+ = with #1 suffix
+	if ( RPARAM::nNameType != 0 )
+	{
+		// Remove existing #1 suffix if present
+		if ( strDisplayName.length() >= 2 && strDisplayName.substr(strDisplayName.length() - 2) == "#1" )
+		{
+			strDisplayName = strDisplayName.substr(0, strDisplayName.length() - 2);
+		}
+		strDisplayName += "#1";
+	}
+	
+	strTitle.Format( "%s(%d) %s", strDisplayName.c_str(), sCharData2.m_dwUserLvl, m_sCharacterSetting.strCharSet.c_str() );
 	AfxGetMainWnd()->SetWindowText( strTitle.GetString() );
 
 	return S_OK;

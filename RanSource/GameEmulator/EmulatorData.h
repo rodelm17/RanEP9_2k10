@@ -46,7 +46,7 @@ struct SCharacterSetting
 
 	SCharacterSetting()
 		: strCharSet("class00.charset")
-		, strCharName("Marckies")
+		, strCharName("Ace17")
 		, dwUserLevelIndex(0)
 		, wLevel(1)
 		, wStats(0)

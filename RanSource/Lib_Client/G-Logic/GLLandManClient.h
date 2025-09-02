@@ -157,6 +157,10 @@ protected:
 	// Using std::map with custom comparator for SNATIVEID
 	std::map<SNATIVEID, GLLevelFile*, SNATIVEIDComparator>	m_mapPrefetchedLevelData;
 	
+	// ACTUAL CACHING: Cache for world file data (DxLandMan objects)
+	// This stores the actual loaded world files for instant map entry
+	std::map<std::string, DxLandMan*>						m_mapCachedWorldFiles;
+	
 	// THREAD SAFETY: Critical section for prefetch operations
 	// This prevents race conditions when multiple threads access prefetch data
 	CRITICAL_SECTION					m_csPrefetch;
@@ -265,6 +269,11 @@ public:
 	// PERFORMANCE OPTIMIZATION - PHASE 4: SMART PREFETCH SYSTEM - by Ace17 31/08/2025
 	// Compatible with older C++ standards
 	void StartSmartPrefetch();
+	
+	// FIXED: Background prefetch functions to prevent FPS drops
+	// Compatible with older C++ standards
+	void StartBackgroundPrefetch();
+	static DWORD WINAPI BackgroundPrefetchThread(LPVOID lpParam);
 	void PrefetchNearbyMaps(const D3DXVECTOR3& vPosition);
 	void PrefetchStaticMeshes(const D3DXVECTOR3& vPosition);
 	void PrefetchMapData(const SNATIVEID& sMapID);
@@ -273,6 +282,7 @@ public:
 	// Compatible with older C++ standards
 	void PrefetchWorldFile(const char* szWldFile);
 	void PrefetchMobData(GLLevelFile* pLevelFile);
+	void PrefetchCharacterSkinData();
 	void ClearPrefetchedData();
 	
 	// THREAD-SAFE ACCESS: Get prefetched data safely

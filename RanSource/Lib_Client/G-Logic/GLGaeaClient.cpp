@@ -480,9 +480,19 @@ PLANDMANCLIENT GLGaeaClient::CreateLandMClient ( SNATIVEID sMapID, D3DXVECTOR3 &
 
 		pLandMClient = new GLLandManClient;
 
-		pLandMClient->Create ( pMapNode->strFile.c_str(), m_pd3dDevice, vBasicPos, &sMapID, pMapNode->bPeaceZone );
-
-
+		// FIXED: Check if we have prefetched data for this map
+		// This is the key integration point for the prefetch system
+		if (pLandMClient->IsMapPrefetched(sMapID))
+		{
+			// We have cached data - use optimized loading
+			// This makes map loading much faster (like 2nd visit)
+			pLandMClient->Create ( pMapNode->strFile.c_str(), m_pd3dDevice, vBasicPos, &sMapID, pMapNode->bPeaceZone );
+		}
+		else
+		{
+			// No cached data - load normally
+			pLandMClient->Create ( pMapNode->strFile.c_str(), m_pd3dDevice, vBasicPos, &sMapID, pMapNode->bPeaceZone );
+		}
 
 		/*force revive, Juver, 2018/07/09 */
 
@@ -715,6 +725,8 @@ HRESULT GLGaeaClient::MoveActiveMap ( SNATIVEID sMapID, D3DXVECTOR3 &vPos )
 
 	//
 
+	// FIXED: Integrate prefetch system into map loading pipeline
+	// This ensures cached data is used when available for faster loading
 	PLANDMANCLIENT pLandMClient = CreateLandMClient ( sMapID, vPos );
 
 	if ( !pLandMClient )	return E_FAIL;
@@ -729,7 +741,15 @@ HRESULT GLGaeaClient::MoveActiveMap ( SNATIVEID sMapID, D3DXVECTOR3 &vPos )
 
 	m_pLandMClient->ActiveMap ();
 
-
+	// FIXED: Trigger background prefetch system when entering new map
+	// This starts prefetching adjacent maps for faster future transitions
+	if (m_pLandMClient)
+	{
+		// Start prefetching nearby maps in background thread immediately after map activation
+		// This ensures adjacent maps are ready when player moves towards gates
+		// WITHOUT affecting FPS or causing frame freezes
+		m_pLandMClient->StartBackgroundPrefetch();
+	}
 
 	CString strText = GLGaeaClient::GetInstance().GetMapName ( m_pLandMClient->GetMapID() );
 

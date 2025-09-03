@@ -414,6 +414,15 @@ void CLargeMapWindow2::LoadMob( PCROWDATA pCrow )
 	if ( !pCrow ) return;
 	if ( m_pInfo ) m_pInfo->LoadMob(pCrow);
 	m_sNativeID[m_nIndex] = pCrow->sNativeID;
+	
+	// Fix: Synchronize m_bMOB with checkbox state when loading mob
+	// This ensures mob icons respect the checkbox state from the beginning
+	// Fixed by: Ace17 - Large Map Window mob icons checkbox synchronization issue
+	if ( m_pInfo && m_nIndex < MAXCROW )
+	{
+		m_bMOB[m_nIndex] = m_pInfo->IsChecked(m_nIndex);
+	}
+	
 	m_nIndex++;
 }
 

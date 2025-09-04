@@ -798,7 +798,7 @@ PGLCHAR GLGaeaServer::CreatePC ( PCHARDATA2 pCharData, DWORD _dwClientID, DWORD 
 	pPChar->m_dwGaeaID = _dwGaeaID;
 	pPChar->SetPartyID ( m_cPartyFieldMan.GetPartyID ( _dwGaeaID ) );
 	
-	BOOL bOk = DropPC ( pLandMan->GetMapID(), vStartPos, pPChar, pCharData->m_sSaveMapID );
+	BOOL bOk = DropPC ( pLandMan->GetMapID(), vStartPos, pPChar, pCharData->m_sSaveMapID ); // Ace17: First login welcome announcement system
 	if ( !bOk )
 	{
 		CDebugSet::ToFileWithTime ( "_gaea_server_create_pc.txt", "DropPC failed [%s]", pCharData->m_szName );

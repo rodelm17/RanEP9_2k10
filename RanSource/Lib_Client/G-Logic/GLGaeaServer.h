@@ -394,7 +394,7 @@ public:
 	void ChangeNameMap ( PGLCHAR pChar, const TCHAR* pszPhoneNumber );
 
 protected:
-			BOOL DropPC ( SNATIVEID MapID, D3DXVECTOR3 vPos, PGLCHAR pPC, SNATIVEID sLastMapID = SNATIVEID(false) ); // Ace17: First login welcome announcement system
+	BOOL DropPC ( SNATIVEID MapID, D3DXVECTOR3 vPos, PGLCHAR pPC, SNATIVEID sLastMapID = SNATIVEID(false) ); // Ace17: First login welcome announcement system
 	BOOL DropOutPC ( DWORD dwGaeaID, bool bForce = false );
 
 public:

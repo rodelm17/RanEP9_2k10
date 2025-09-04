@@ -68,7 +68,8 @@ int CCreateNewCharacter::Execute(CServer* pServer)
 
     CAgentServer* pAgentServer = reinterpret_cast<CAgentServer*> (pServer);
     pAgentServer->MsgCreateCharacterBack(nChaNum, m_dwClient, m_dwUserNum, m_strUserIP.GetString(), m_uPort);
-
+   // Ace17: First login welcome announcement system
+   // Removing Old Logic 
     return DB_OK;
 }
 

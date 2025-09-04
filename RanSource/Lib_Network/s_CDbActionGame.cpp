@@ -18,15 +18,15 @@
 ******************************************************************************/
 
 ///////////////////////////////////////////////////////////////////////////////
-// Ä³¸¯ÅÍ »ý¼º
+// Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 CCreateNewCharacter::CCreateNewCharacter(
-	int nIndex, // Ä³¸¯ÅÍ ÀÎµ¦½º
-    DWORD dwUserNum, // »ç¿ëÀÚ¹øÈ£
-    DWORD dwSvrGrp, // ¼­¹ö±×·ì¹øÈ£
-    CString strChaName, // Ä³¸¯ÅÍÀÌ¸§
-    WORD wSchool, // Ä³¸¯ÅÍÇÐ±³
-    WORD wHair, // Ä³¸¯ÅÍ ¸Ó¸®¸ð¾ç
-    WORD wFace, // Ä³¸¯ÅÍ ¾ó±¼¸ð¾ç
+	int nIndex, // Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½
+    DWORD dwUserNum, // ï¿½ï¿½ï¿½ï¿½Ú¹ï¿½È£
+    DWORD dwSvrGrp, // ï¿½ï¿½ï¿½ï¿½ï¿½×·ï¿½ï¿½È£
+    CString strChaName, // Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
+    WORD wSchool, // Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+    WORD wHair, // Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¸ï¿½ï¿½ï¿½ï¿½
+    WORD wFace, // Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ó±¼¸ï¿½ï¿½
 	WORD wHairColor,
 	WORD wSex,
 	float fScaleRange,
@@ -51,7 +51,7 @@ CCreateNewCharacter::CCreateNewCharacter(
 
 int CCreateNewCharacter::Execute(CServer* pServer)
 {
-    int nChaNum = 0; // »ý¼ºµÈ Ä³¸¯ÅÍ ¹øÈ£
+    int nChaNum = 0; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
     GLCHARLOGIC_SERVER NewCharLogic;
 	NewCharLogic.INIT_NEW_CHAR((EMCHARINDEX) m_nIndex, 
 								m_dwUserNum, 
@@ -68,19 +68,6 @@ int CCreateNewCharacter::Execute(CServer* pServer)
 
     CAgentServer* pAgentServer = reinterpret_cast<CAgentServer*> (pServer);
     pAgentServer->MsgCreateCharacterBack(nChaNum, m_dwClient, m_dwUserNum, m_strUserIP.GetString(), m_uPort);
-
-	/*dmk14 new create char Announcer*/
-	if (nChaNum > 0)
-	{
-		CString strMesssage;
-		strMesssage.Format ( "Welcome to the game '%s'! from %s. your journey begins now.",m_strChaName.GetString(), GLCONST_CHAR::strSCHOOLNAME[m_wSchool].c_str() );
-
-		GLMSG::SNET_SERVER_GENERALCHAT NetMsg;
-		NetMsg.SETTEXT ( strMesssage.GetString() );
-		NetMsg.bNotify = true;
-		NetMsg.iColor = 4;
-		GLAgentServer::GetInstance().SENDTOALLCLIENT ( &NetMsg );
-	}	
 
     return DB_OK;
 }
@@ -108,7 +95,7 @@ int CDelCharacter::Execute(CServer* pServer)
 }
 
 /**
-* Ä³¸¯ÅÍ»èÁ¦
+* Ä³ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½
 */
 CDaumDelCharacter::CDaumDelCharacter(int nUserNum, int nChaNum, DWORD dwClient, const char* szUserIP, USHORT uPort)
 {
@@ -131,7 +118,7 @@ int CDaumDelCharacter::Execute(CServer* pServer)
 }
 
 /**
-* GSP Ä³¸¯ÅÍ»èÁ¦
+* GSP Ä³ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½
 */
 CGspDelCharacter::CGspDelCharacter(
 	int nUserNum,
@@ -168,7 +155,7 @@ int CGspDelCharacter::Execute( CServer* pServer )
 }
 
 /**
-* Terra Ä³¸¯ÅÍ»èÁ¦
+* Terra Ä³ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½
 */
 CTerraDelCharacter::CTerraDelCharacter(int nUserNum, int nChaNum, DWORD dwClient, const char* szUserIP, USHORT uPort)
 {
@@ -191,7 +178,7 @@ int CTerraDelCharacter::Execute(CServer* pServer)
 }
 
 /**
-* EXCITE:Ä³¸¯ÅÍ »èÁ¦
+* EXCITE:Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 */
 CExciteDelCharacter::CExciteDelCharacter(int nUserNum, int nChaNum, DWORD dwClient, const char* szUserIP, USHORT uPort)
 {
@@ -214,7 +201,7 @@ int CExciteDelCharacter::Execute(CServer* pServer)
 }
 
 /**
-* JAPAN:Ä³¸¯ÅÍ »èÁ¦
+* JAPAN:Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 */
 CJapanDelCharacter::CJapanDelCharacter(int nUserNum, int nChaNum, DWORD dwClient, const char* szUserIP, USHORT uPort)
 {
@@ -336,7 +323,7 @@ int CGetChaFriend::Execute(CServer* pServer)
 
 	COdbcManager::GetInstance()->GetChaFriend(m_nChaNum, vecFriend, RPARAM::nNameType);
 
-	// Agent ¼­¹ö ÇÔ¼ö ½ÇÇà
+	// Agent ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½
 	// pTemp->
 	return NET_OK;
 }
@@ -384,7 +371,7 @@ int CGetChaInfoAndJoin::Execute( CServer* pServer )
 {
 	int nRetCode(0);
 
-	//	Ä³¸¯ÅÍ °¡Á®¿À±â
+	//	Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	nRetCode = COdbcManager::GetInstance()->GetCharacterInfo(
 						m_cCharAgData.m_dwUserID,
 						m_cCharAgData.m_dwCharID,
@@ -396,10 +383,10 @@ int CGetChaInfoAndJoin::Execute( CServer* pServer )
 		return NET_OK;
 	}
 
-    m_cCharAgData.m_tPREMIUM = m_tPremiumDate; // ÇÁ¸®¹Ì¾ö ¸¸·á±â°£
+    m_cCharAgData.m_tPREMIUM = m_tPremiumDate; // ï¿½ï¿½ï¿½ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½â°£
 	m_cCharAgData.m_tCHATBLOCK = m_tChatBlock;
 
-	//	Ä£±¸ ¸ñ·Ï °¡Á®¿À±â.
+	//	Ä£ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 #if defined(KRT_PARAM)
 	std::vector<CHA_FRIEND_SMS> vecFriendSMS;
 	nRetCode = COdbcManager::GetInstance()->GetChaFriendSMS( m_cCharAgData.m_dwCharID, vecFriendSMS, RPARAM::nNameType );
@@ -492,7 +479,7 @@ int CGetChaInfoAndJoin::Execute( CServer* pServer )
 	}
 
 
-	//	Note : ³»ºÎ ¸Þ½ÃÁö ¹ß»ý.
+	//	Note : ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½.
 	//
 	GLMSG::SNETJOIN2AGENTSERVER NetMsg;
 	NetMsg.m_dwClientID = m_dwClientID;
@@ -575,8 +562,8 @@ int CGetChaInfoAndJoinField::Execute ( CServer* pServer )
 		return NET_OK;
 	}
 
-    m_cCharData.m_tPREMIUM = m_tPremiumDate; // Premium Service ¸¸·á½Ã°£
-	m_cCharData.m_tCHATBLOCK = m_tChatBlock; // Chat Block ¸¸·á½Ã°£
+    m_cCharData.m_tPREMIUM = m_tPremiumDate; // Premium Service ï¿½ï¿½ï¿½ï¿½Ã°ï¿½
+	m_cCharData.m_tCHATBLOCK = m_tChatBlock; // Chat Block ï¿½ï¿½ï¿½ï¿½Ã°ï¿½
 
 	nRetCode = COdbcManager::GetInstance()->ReadUserInven( &m_cCharData );
 	if (nRetCode == DB_ERROR)
@@ -593,7 +580,7 @@ int CGetChaInfoAndJoinField::Execute ( CServer* pServer )
 
 	m_cCharData.SETSHOPPURCHASE ( vItem );
 */
-	//	Note : ³»ºÎ ¸Þ½ÃÁö ¹ß»ý.
+	//	Note : ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½.
 	//
 	//*/*/*/*/*/*
 	GLMSG::SNETJOIN2FIELDSERVER NetMsg;
@@ -622,7 +609,7 @@ int CGetChaInfoAndJoinField::Execute ( CServer* pServer )
 }
 
 ///////////////////////////////////////////////////////////////////////////
-// Ä³¸¯ÅÍ¸¦ ¿Â¶óÀÎ »óÅÂ·Î ¸¸µç´Ù.
+// Ä³ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Â¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
 CSetCharacterOnline::CSetCharacterOnline(int nChaNum)
 {
 	m_nChaNum = nChaNum ;
@@ -634,7 +621,7 @@ int CSetCharacterOnline::Execute(CServer* pServer)
 }
 
 ///////////////////////////////////////////////////////////////////////////
-// Ä³¸¯ÅÍ¸¦ ¿ÀÇÁ¶óÀÎ »óÅÂ·Î ¸¸µç´Ù.
+// Ä³ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
 CSetCharacterOffline::CSetCharacterOffline(int nChaNum)
 {
 	m_nChaNum = nChaNum;

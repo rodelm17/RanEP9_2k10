@@ -311,7 +311,7 @@ HRESULT GLGaeaServer::Create ( DWORD dwMaxClient, DxMsgServer *pMsgServer, DxCon
 
 	m_nServiceProvider = nServiceProvider;
 
-	//	Note : ÇÊµå ¼­¹ö ID°¡ ¹«È¿ÀÏ °æ¿ì ( ¿¡¹Ä·¹ÀÌÅÍ ¼³Á¤. )
+	//	Note : ï¿½Êµï¿½ ï¿½ï¿½ï¿½ï¿½ IDï¿½ï¿½ ï¿½ï¿½È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ ( ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. )
 	m_dwFieldSvrID = dwFieldSID;
 	if ( dwFieldSID==FIELDSERVER_MAX )
 	{
@@ -344,17 +344,17 @@ HRESULT GLGaeaServer::Create ( DWORD dwMaxClient, DxMsgServer *pMsgServer, DxCon
 	{
 		SMAPNODE *pMapNode = &(*iter).second;
 
-		//	Note : ÁöÁ¤µÈ ¼­¹ö±º¿¡ Æ÷ÇÔµÇÁö ¾Ê´Â map Àº Á¦¿Ü ½ÃÅ´.
+		//	Note : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ map ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å´.
 		//
 		if ( dwFieldSID!=FIELDSERVER_MAX && pMapNode->dwFieldSID!=dwFieldSID )		continue;
 
-		//	Note : ÇÊµå ¼­¹ö ID°¡ ¹«È¿ÀÏ °æ¿ì ( ¿¡¹Ä·¹ÀÌÅÍ ¼³Á¤. )
+		//	Note : ï¿½Êµï¿½ ï¿½ï¿½ï¿½ï¿½ IDï¿½ï¿½ ï¿½ï¿½È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ ( ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. )
 		if ( dwFieldSID==FIELDSERVER_MAX )
 		{
 			pMapNode->dwFieldSID = 0;
 		}
 
-		//	Note : LandMan »ý¼ºÈÄ ÃÊ±âÈ­.
+		//	Note : LandMan ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­.
 		//
 		GLLandMan *pNewLandMan = /*new GLLandMan;*/NEW_GLLANDMAN();
 		pNewLandMan->SetMapID ( pMapNode->sNativeID, pMapNode->bPeaceZone!=FALSE, pMapNode->bPKZone==TRUE );
@@ -386,7 +386,7 @@ HRESULT GLGaeaServer::Create ( DWORD dwMaxClient, DxMsgServer *pMsgServer, DxCon
 
 	m_cPartyFieldMan.Create ( m_dwMaxClient );
 
-	//	Note : ÄÉ¸¯ÅÍ ÃÊ±â ½ÃÀÛ ¸Ê °ú ÃÊ±â ½ÃÀÛ Gate°¡ Á¤»óÀûÀ¸·Î Á¸Á¦ÇÏ´ÂÁö Á¡°Ë.
+	//	Note : ï¿½É¸ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½ Gateï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	//
 	for ( WORD i=0; i<GLCONST_CHAR::wSCHOOLNUM; ++i )
 	{
@@ -397,7 +397,7 @@ HRESULT GLGaeaServer::Create ( DWORD dwMaxClient, DxMsgServer *pMsgServer, DxCon
 		if ( iter==m_MapList.end() )												continue;
 
 		const SMAPNODE *pMapNode = &(*iter).second;
-		//	Note : ÁöÁ¤µÈ ¼­¹ö±º¿¡ Æ÷ÇÔµÇÁö ¾Ê´Â map Àº Á¦¿Ü ½ÃÅ´.
+		//	Note : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ map ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å´.
 		if ( dwFieldSID!=FIELDSERVER_MAX && pMapNode->dwFieldSID!=dwFieldSID )		continue;
 
 		GLLandMan* pLandMan = GetByMapID ( nidSTARTMAP );
@@ -416,7 +416,7 @@ HRESULT GLGaeaServer::Create ( DWORD dwMaxClient, DxMsgServer *pMsgServer, DxCon
 
 			MessageBox ( NULL, szTemp, "ERROR", MB_OK|MB_ICONEXCLAMATION );
 
-			//strStream.freeze( false );	// Note : std::strstreamÀÇ freeze. ¾È ÇÏ¸é Leak ¹ß»ý.
+			//strStream.freeze( false );	// Note : std::strstreamï¿½ï¿½ freeze. ï¿½ï¿½ ï¿½Ï¸ï¿½ Leak ï¿½ß»ï¿½.
 			continue;
 		}
 
@@ -437,18 +437,18 @@ HRESULT GLGaeaServer::Create ( DWORD dwMaxClient, DxMsgServer *pMsgServer, DxCon
 
 			MessageBox ( NULL, szTemp, "ERROR", MB_OK );
 
-			//strStream.freeze( false );	// Note : std::strstreamÀÇ freeze. ¾È ÇÏ¸é Leak ¹ß»ý.
+			//strStream.freeze( false );	// Note : std::strstreamï¿½ï¿½ freeze. ï¿½ï¿½ ï¿½Ï¸ï¿½ Leak ï¿½ß»ï¿½.
 			continue;
 		}
 	}
 
 	if ( m_pDBMan )
 	{
-		//	Note : Å¬·´ÀÇ Á¤º¸¸¦ db¿¡¼­ ÀÐ¾î¿Â´Ù.
+		//	Note : Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ dbï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½Â´ï¿½.
 		//
 		m_cClubMan.LoadFromDB ( m_pDBMan, true );
 
-		//	Note : ¼±µµ Å¬·´ Áö¿ª ¼³Á¤.
+		//	Note : ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		//
 		VECGUID_DB vecGuidDb;
 		m_pDBMan->GetClubRegion ( vecGuidDb );
@@ -489,14 +489,14 @@ HRESULT GLGaeaServer::Create4Level ( LPDIRECT3DDEVICEQ pd3dDevice )
 
 	OneTimeSceneInit ();
 
-	//	Note : LandMan »ý¼ºÈÄ ÃÊ±âÈ­.
+	//	Note : LandMan ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­.
 	//
 	GLLandMan *pNewLandMan = /*new GLLandMan;*/NEW_GLLANDMAN();
 	pNewLandMan->SetD3dDevice ( m_pd3dDevice );
 	pNewLandMan->SetMapID ( SNATIVEID(0,0), false, true );
 	pNewLandMan->SetEmulator ( true );
 
-	//	Note : »ý¼ºµÈ LandMan µî·Ï.
+	//	Note : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ LandMan ï¿½ï¿½ï¿½.
 	//
 	InsertMap ( pNewLandMan );
 
@@ -628,7 +628,7 @@ PGLCHAR GLGaeaServer::CreatePC ( PCHARDATA2 pCharData, DWORD _dwClientID, DWORD 
 	CLIENTMAP_ITER client_iter;
 	GLCHAR_MAP_ITER name_iter;
 
-	//	Note : user id°¡ Áö±Ý db¿¡ ÀúÀåÁßÀÎÁö Á¡°Ë. ( logout ÇßÁö¸¸ ¾ÆÁ÷ db¿¡ ÀúÀåÀÌ ¾ÈµÈ »óÅÂ·Î ÀÖÀ»¶§. )
+	//	Note : user idï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. ( logout ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Èµï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. )
 	//
 	bDB = FindSaveDBUserID ( pCharData->GetUserID() );
 	if ( bDB )
@@ -649,15 +649,15 @@ PGLCHAR GLGaeaServer::CreatePC ( PCHARDATA2 pCharData, DWORD _dwClientID, DWORD 
 		goto _ERROR;
 	}
 
-	//	Note : °¡ÀÌ¾Æ IDÀÇ ÇÒ´çÀ» Agent ¼­¹ö¿¡¼­ ÇÒ´çÇÏ°Ô µÊ¿¡ µû¶ó
-	//		Àß¸øµÇ¾î °¡ÀÌ¾Æ ID°¡ ¹ÝÈ¯µÇÁö ¾ÊÀº »óÅÂ¿¡¼­ ´Ù½Ã »ç¿ëµÉ °¡´É¼ºÀÌ ÀÖÀ½.
+	//	Note : ï¿½ï¿½ï¿½Ì¾ï¿½ IDï¿½ï¿½ ï¿½Ò´ï¿½ï¿½ï¿½ Agent ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½ï¿½Ï°ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½
+	//		ï¿½ß¸ï¿½ï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½Ì¾ï¿½ IDï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½É¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	if ( m_PCArray[_dwGaeaID] )
 	{
 		CDebugSet::ToFileWithTime ( "_gaea_server_create_pc.txt", "ERR : m_PCArray[_dwGaeaID] exist gaeaid" );
 		goto _ERROR;
 	}
 
-	//	Note : °°Àº Ä³¸¯ÅÍ°¡ ÀÌ¹Ì Á¢¼ÓµÇ¾î ÀÖ´ÂÁö °Ë»çÇÕ´Ï´Ù.
+	//	Note : ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ÓµÇ¾ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Õ´Ï´ï¿½.
 	name_iter = m_PCNameMap.find(pCharData->m_szName);
 	if ( name_iter != m_PCNameMap.end() )
 	{
@@ -668,9 +668,9 @@ PGLCHAR GLGaeaServer::CreatePC ( PCHARDATA2 pCharData, DWORD _dwClientID, DWORD 
 	client_iter = m_PCClientIDMAP.find(_dwClientID);
 	if ( client_iter != m_PCClientIDMAP.end() )
 	{
-		//	Á¾Àü Á¢¼ÓÀÚ¸¦ DropOut ½ÃÅµ´Ï´Ù.
+		//	ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ DropOut ï¿½ï¿½Åµï¿½Ï´ï¿½.
 		DWORD dwGaeaID = (*client_iter).second;
-		//	Note : ÄÉ¸¯ÅÍ°¡ Áö¿öÁø´Ù.
+		//	Note : ï¿½É¸ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		//
 		ReserveDropOutPC(dwGaeaID);
 
@@ -679,13 +679,13 @@ PGLCHAR GLGaeaServer::CreatePC ( PCHARDATA2 pCharData, DWORD _dwClientID, DWORD 
 	}
 
 
-	//	Note : Ä³¸¯ÅÍ ÃÊ±âÈ­.
+	//	Note : Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­.
 	//
 	pPChar = NEW_CHAR();
 
 	pPChar->SetGLGaeaServer( this );
 
-	//	Note : Æ¯Á¤ÇÑ MapID¿¡¼­ »ý¼ºÇÏ°íÀÚ ÇÒ °æ¿ì.
+	//	Note : Æ¯ï¿½ï¿½ï¿½ï¿½ MapIDï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½.
 	//
 	if ( _pStartMap )
 	{
@@ -716,7 +716,7 @@ PGLCHAR GLGaeaServer::CreatePC ( PCHARDATA2 pCharData, DWORD _dwClientID, DWORD 
 			}
 			else
 			{
-				//	Æ¯Á¤ À§Ä¡¿¡¼­ »ý¼ºÄÚÀÚ ÇÒ °æ¿ì.
+				//	Æ¯ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½.
 				vStartPos = _vPos;
 			}
 		}
@@ -776,7 +776,7 @@ PGLCHAR GLGaeaServer::CreatePC ( PCHARDATA2 pCharData, DWORD _dwClientID, DWORD 
 		}
 	}
 
-	//	Note : Ä³¸¯ÅÍ µî·Ï.
+	//	Note : Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½.
 	//
 	pCharData->m_dwThaiCCafeClass = dwThaiCCafeClass;
 	pCharData->m_nMyCCafeClass    = nMyCCafeClass;
@@ -791,12 +791,14 @@ PGLCHAR GLGaeaServer::CreatePC ( PCHARDATA2 pCharData, DWORD _dwClientID, DWORD 
 
 		goto _ERROR;
 	}
+
+
 	
 	pPChar->m_dwClientID = _dwClientID;
 	pPChar->m_dwGaeaID = _dwGaeaID;
 	pPChar->SetPartyID ( m_cPartyFieldMan.GetPartyID ( _dwGaeaID ) );
 	
-	BOOL bOk = DropPC ( pLandMan->GetMapID(), vStartPos, pPChar );
+	BOOL bOk = DropPC ( pLandMan->GetMapID(), vStartPos, pPChar, pCharData->m_sSaveMapID );
 	if ( !bOk )
 	{
 		CDebugSet::ToFileWithTime ( "_gaea_server_create_pc.txt", "DropPC failed [%s]", pCharData->m_szName );
@@ -833,7 +835,7 @@ PGLCHAR GLGaeaServer::CreatePC ( PCHARDATA2 pCharData, DWORD _dwClientID, DWORD 
 	
 			bDifferTempValue  = TRUE;			
 
-			// ¹«Á¶°Ç TempMoney¸¦ Money °ª¿¡ ³ÖÁö ¾Ê´Â´Ù.
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ TempMoneyï¿½ï¿½ Money ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
 			LONGLONG lnGap = pPChar->m_lnMoney - pPChar->m_lnTempMoney;
 			if( lnGap >= 10000 || lnGap <= -10000 )
 			{
@@ -892,7 +894,7 @@ PGLCHAR GLGaeaServer::CreatePC ( PCHARDATA2 pCharData, DWORD _dwClientID, DWORD 
 	{
 		ReserveDropOutPC( pPChar->m_dwGaeaID );
 
-		//	Á¢¼Ó ½ÃµµÀÚ¿¡°Ô  ¸Þ½ÃÁö¸¦ º¸³À´Ï´Ù.
+		//	ï¿½ï¿½ï¿½ï¿½ ï¿½Ãµï¿½ï¿½Ú¿ï¿½ï¿½ï¿½  ï¿½Þ½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.
 		GLMSG::SNETLOBBY_CHARJOIN_FB NetMsgFB;
 		NetMsgFB.emCharJoinFB = EMCJOIN_FB_ERROR;
 		SENDTOAGENT ( _dwClientID, &NetMsgFB );
@@ -927,7 +929,7 @@ PGLCHAR GLGaeaServer::CreatePC ( PCHARDATA2 pCharData, DWORD _dwClientID, DWORD 
 	}
 #endif
 
-	return pPChar;	//	ÄÉ¸¯ÅÍ »ý¼º ¼º°ø.
+	return pPChar;	//	ï¿½É¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 
 _ERROR:
 	if ( pPChar )
@@ -935,29 +937,29 @@ _ERROR:
 		RELEASE_CHAR(pPChar);
 	}
 
-	//	Á¢¼Ó ½ÃµµÀÚ¿¡°Ô  ¸Þ½ÃÁö¸¦ º¸³À´Ï´Ù.
+	//	ï¿½ï¿½ï¿½ï¿½ ï¿½Ãµï¿½ï¿½Ú¿ï¿½ï¿½ï¿½  ï¿½Þ½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.
 	GLMSG::SNETLOBBY_CHARJOIN_FB NetMsgFB;
 	NetMsgFB.emCharJoinFB = EMCJOIN_FB_ERROR;
 	SENDTOAGENT ( _dwClientID, &NetMsgFB );
 
-	return NULL;	//	ÄÉ¸¯ÅÍ »ý¼º ½ÇÆÐ.
+	return NULL;	//	ï¿½É¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 }
 
 
 
 PGLPETFIELD GLGaeaServer::CreatePET ( PGLPET pPetData, DWORD dwOwner, DWORD dwPetID, bool bValid )
 {
-	// DB¿¡¼­ ÆÖÁ¤º¸¸¦ °¡Á®¿Í¾ß ÇÑ´Ù.
+	// DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¾ï¿½ ï¿½Ñ´ï¿½.
 
 	GLMSG::SNETPET_REQ_USEPETCARD_FB NetMsg;
 
 	if ( !pPetData ) return NULL;
 
-	// ¿äÃ» ÄÉ¸¯ÅÍ°¡ À¯È¿¼º Ã¼Å©
+	// ï¿½ï¿½Ã» ï¿½É¸ï¿½ï¿½Í°ï¿½ ï¿½ï¿½È¿ï¿½ï¿½ Ã¼Å©
 	PGLCHAR pOwner = GetChar ( dwOwner );
 	if ( !pOwner ) return NULL;
 
-	// ÆÖFull Check
+	// ï¿½ï¿½Full Check
 	if ( pPetData->IsNotEnoughFull () )
 	{
 		NetMsg.emFB = EMPET_USECARD_FB_NOTENOUGHFULL;
@@ -974,12 +976,12 @@ PGLPETFIELD GLGaeaServer::CreatePET ( PGLPET pPetData, DWORD dwOwner, DWORD dwPe
 
 	PGLPETFIELD pPet(NULL);
 
-	// ´Ù¸¥ ÇÊµå¼­¹ö·Î ³Ñ¾î°¡Áö ¾Ê¾Ò´Ù¸é GLPetField °¡ Á¸ÀçÇÑ´Ù.
-	// ¸ÊÁ¤º¸¿Í ³×ºñ°ÔÀÌ¼Ç¸¸ º¯°æÇØÁØ´Ù.
+	// ï¿½Ù¸ï¿½ ï¿½Êµå¼­ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾î°¡ï¿½ï¿½ ï¿½Ê¾Ò´Ù¸ï¿½ GLPetField ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×ºï¿½ï¿½ï¿½Ì¼Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 	pPet = GetPET ( pOwner->m_dwPetGUID );
 	if ( pPet && m_bEmulator )
 	{
-		// ¸Þ¸ð¸®¿¡ Á¸ÀçÇÏ´Â ÆÖ Á¦°Å
+		// ï¿½Þ¸ð¸®¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		DropOutPET ( pPet->m_dwGUID, true, false );
 		pPet = NULL;
 	}
@@ -989,21 +991,21 @@ PGLPETFIELD GLGaeaServer::CreatePET ( PGLPET pPetData, DWORD dwOwner, DWORD dwPe
 		HRESULT hr = pPet->SetPosition ( pLandMan );
 		if ( FAILED ( hr ) )
 		{
-			// ¸Þ¸ð¸®¿¡ Á¸ÀçÇÏ´Â ÆÖ Á¦°Å
+			// ï¿½Þ¸ð¸®¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			DropOutPET ( pPet->m_dwGUID, true, false );
 			SENDTOCLIENT ( pOwner->m_dwClientID, &NetMsg );
 			return NULL;
 		}
 	}
-	// ½Å±Ô·Î »ý¼ºÇØÁØ´Ù.
+	// ï¿½Å±Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 	else
 	{
-		// ÆÖ»ý¼º
+		// ï¿½Ö»ï¿½ï¿½ï¿½
 		pPet = NEW_PET ();
 		HRESULT hr = pPet->Create ( pLandMan, pOwner, pPetData );
 		if ( FAILED ( hr ) )
 		{
-			// »ý¼º½ÇÆÐ Ã³¸®
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 			RELEASE_PET ( pPet );
 			SENDTOCLIENT ( pOwner->m_dwClientID, &NetMsg );
 			return NULL;
@@ -1014,31 +1016,31 @@ PGLPETFIELD GLGaeaServer::CreatePET ( PGLPET pPetData, DWORD dwOwner, DWORD dwPe
 		m_FreePETGIDs.DelHead ();
 		pPet->m_dwGUID = dwGUID;
 
-		// ÁÖÀÎID ÇÒ´ç
+		// ï¿½ï¿½ï¿½ï¿½ID ï¿½Ò´ï¿½
 		pOwner->m_dwPetGUID = pPet->m_dwGUID;
 		pOwner->m_dwPetID   = dwPetID;
 
-		// ÆÖÀÇ °íÀ¯ID(DBÀúÀå¿ë) ¼³Á¤
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ID(DBï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½ï¿½
 		pPet->SetPetID ( dwPetID );
 	}
 
 	if ( !DropPET ( pPet, pOwner->m_sMapID ) )
 	{
-		// »ý¼º½ÇÆÐ Ã³¸®
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 		m_FreePETGIDs.AddTail ( pPet->m_dwGUID );
 		RELEASE_PET ( pPet );
 		SENDTOCLIENT ( pOwner->m_dwClientID, &NetMsg );
 		return NULL;
 	}
 
-	// ÁÖÀÎ Æ÷ÀÎÅÍ ÇÒ´ç
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò´ï¿½
 	pPet->m_pOwner = pOwner;
 
-	// È°¼ºÈ­ À¯¹« ¼³Á¤
+	// È°ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	if ( bValid ) pPet->SetValid ();
 	else		  pPet->ReSetValid ();
 
-	// È°¼º»óÅÂÀÏ¶§¸¸
+	// È°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½
 	if ( pPet->IsValid () )
 	{
 		NetMsg.emFB				  = EMPET_USECARD_FB_OK;
@@ -1085,7 +1087,7 @@ PGLPETFIELD GLGaeaServer::CreatePET ( PGLPET pPetData, DWORD dwOwner, DWORD dwPe
 			SITEM* pITEM = GLItemMan::GetInstance().GetItem ( sPetItem.sNativeID );
 			if ( !pITEM )	continue;
 
-			// ½ÃÇÑºÎ ¾ÆÀÌÅÛ
+			// ï¿½ï¿½ï¿½Ñºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			if ( pITEM->IsTIMELMT() )
 			{
 				CTimeSpan cSPAN(pITEM->sDrugOp.tTIME_LMT);
@@ -1094,13 +1096,13 @@ PGLPETFIELD GLGaeaServer::CreatePET ( PGLPET pPetData, DWORD dwOwner, DWORD dwPe
 
 				if ( cTIME_CUR > cTIME_LMT )
 				{
-					//	½Ã°£ Á¦ÇÑÀ¸·Î ¾ÆÀÌÅÛ »èÁ¦ ·Î±× ³²±è.
+					//	ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ ï¿½ï¿½ï¿½ï¿½.
 					GLITEMLMT::GetInstance().ReqItemRoute ( sPetItem, ID_CHAR, pOwner->m_dwCharID, ID_CHAR, 0, EMITEM_ROUTE_DELETE, 0 );
 
-					//	¾ÆÀÌÅÛ »èÁ¦.
+					//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 					pPet->m_PutOnItems[i] = SITEMCUSTOM ();
 
-					//	½Ã°£ Á¦ÇÑÀ¸·Î ¾ÆÀÌÅÛ »èÁ¦ ¾Ë¸².
+					//	ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½.
 					GLMSG::SNET_INVEN_DEL_ITEM_TIMELMT NetMsgInvenDelTimeLmt;
 					NetMsgInvenDelTimeLmt.nidITEM = sPetItem.sNativeID;
 					GLGaeaServer::GetInstance().SENDTOCLIENT(pOwner->m_dwClientID,&NetMsgInvenDelTimeLmt);
@@ -1111,7 +1113,7 @@ PGLPETFIELD GLGaeaServer::CreatePET ( PGLPET pPetData, DWORD dwOwner, DWORD dwPe
 
 		SENDTOCLIENT ( pOwner->m_dwClientID, &NetMsg );
 
-		// ÁÖº¯¿¡ ¾Ë¸²
+		// ï¿½Öºï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½
 		GLMSG::SNETPET_CREATE_ANYPET NetMsgBrd;
 		NetMsgBrd.Data = ((GLMSG::SNETPET_DROP_PET*)pPet->ReqNetMsg_Drop ())->Data;
 		pPet->m_pOwner->SendMsgViewAround ( ( NET_MSG_GENERIC* )&NetMsgBrd );
@@ -1135,7 +1137,7 @@ BOOL GLGaeaServer::DropPET ( PGLPETFIELD pPet, SNATIVEID sMapID )
 	if ( pPet->m_dwGUID>=m_dwMaxClient )	return FALSE;
 	m_PETArray[pPet->m_dwGUID] = pPet;
 
-	// ·£µå¿¡ µî·Ï
+	// ï¿½ï¿½ï¿½å¿¡ ï¿½ï¿½ï¿½
 	pPet->m_pLandMan = pLandMan;
 	pPet->m_pLandNode = pLandMan->m_GlobPETList.ADDHEAD ( pPet );
 	pLandMan->RegistPet ( pPet );
@@ -1143,9 +1145,9 @@ BOOL GLGaeaServer::DropPET ( PGLPETFIELD pPet, SNATIVEID sMapID )
 	return TRUE;
 }
 
-// ÀÌ ÇÔ¼ö´Â ÁÖÀÎÀÌ ¸ÊÀ» ÀÌµ¿ÇÏ´Â ¸ðµç ÇàÀ§¿¡ ´ëÇØ¼­
-// È£ÃâµÈ´Ù. (ÁÖÀÎÀÌ °ÔÀÓÀ» Á¾·áÇÏ´Â °æ¿ì¿¡µµ È£ÃâµÊ)
-// µû¶ó¼­ ¼ÒÈ¯¿©ºÎ¸¦ °í·ÁÇØ¾ß ÇÑ´Ù.
+// ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½
+// È£ï¿½ï¿½È´ï¿½. (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ È£ï¿½ï¿½ï¿½)
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Ñ´ï¿½.
 BOOL GLGaeaServer::DropOutPET ( DWORD dwGUID, bool bLeaveFieldServer, bool bMoveMap )
 {
 	if ( dwGUID>=m_dwMaxClient ) 
@@ -1161,10 +1163,10 @@ BOOL GLGaeaServer::DropOutPET ( DWORD dwGUID, bool bLeaveFieldServer, bool bMove
 
 	PGLPETFIELD pPet = m_PETArray[dwGUID];
 
-	// È°µ¿ ¿©ºÎ
+	// È°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	bool bValid = pPet->IsValid ();
 
-	// ¼ÒÈ¯ÀÌ ¾ÈµÈ»óÅÂ·Î ¼­¹ö¸¦ ¶°³ªÁö ¾Ê´Â´Ù¸é
+	// ï¿½ï¿½È¯ï¿½ï¿½ ï¿½ÈµÈ»ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´Ù¸ï¿½
 	if ( !bValid && !bLeaveFieldServer )
 	{
 		//CDebugSet::ToLogFile ( "ERROR : !bValid && !bLeaveFieldServer bValid %d bLeaveFieldServer %d", bValid, bLeaveFieldServer );
@@ -1174,10 +1176,10 @@ BOOL GLGaeaServer::DropOutPET ( DWORD dwGUID, bool bLeaveFieldServer, bool bMove
 	DWORD dwPetGUID = pPet->m_dwGUID;
 	DWORD dwOwnerID = pPet->m_dwOwner;
 
-	// È°µ¿ÁßÀÌ¸é
+	// È°ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
 	if ( bValid )
 	{
-		//	Note : Land ¸®½ºÆ®¿¡¼­ Á¦°Å.
+		//	Note : Land ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		GLLandMan* pLandMan = pPet->m_pLandMan;
 		if ( pLandMan )
 		{
@@ -1190,11 +1192,11 @@ BOOL GLGaeaServer::DropOutPET ( DWORD dwGUID, bool bLeaveFieldServer, bool bMove
 		pPet->ReSetSkillDelay ();
 	}
 
-	// Å¬¶óÀÌ¾ðÆ® ÆÖ »ç¶óÁö°Ô ¸Þ½ÃÁö ¹ß¼Û (PC°¡ °ÔÀÓÀ» Á¾·áÇÏ¸é pOwner ¾øÀ» ¼ö ÀÖ´Ù)
+	// Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ® ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ß¼ï¿½ (PCï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ pOwner ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½)
 	PGLCHAR pOwner = GetChar ( dwOwnerID );
 	if ( pOwner && bValid )
 	{
-		// ½ºÅ³ÀÇ º¸Á¶´É·ÂÄ¡ Á¦°Å
+		// ï¿½ï¿½Å³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½É·ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
 		/*dual pet skill, Juver, 2017/12/27 */
 		pOwner->m_sPETSKILLFACT_A.RESET ();
 		pOwner->m_sPETSKILLFACT_B.RESET ();
@@ -1206,7 +1208,7 @@ BOOL GLGaeaServer::DropOutPET ( DWORD dwGUID, bool bLeaveFieldServer, bool bMove
 		NetMsgFB.bMoveMap = bMoveMap;
 		SENDTOCLIENT ( pOwner->m_dwClientID, &NetMsgFB );
 
-		// ÁÖº¯¿¡ ¾Ë¸²
+		// ï¿½Öºï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½
 		/*dual pet skill, Juver, 2017/12/27 */
 		GLMSG::SNETPET_REQ_SKILLCHANGE_A_BRD NetMsgBRD_A;
 		NetMsgBRD_A.dwGUID   = pPet->m_dwGUID;
@@ -1222,10 +1224,10 @@ BOOL GLGaeaServer::DropOutPET ( DWORD dwGUID, bool bLeaveFieldServer, bool bMove
 		pOwner->SendMsgViewAround ( ( NET_MSG_GENERIC* ) &NetMsgBRD_B );
 	}
 
-	// ÇöÀç ÇÊµå¼­¹ö¸¦ ¶°³ª°Å³ª °ÔÀÓÀ» ¿ÏÀü Á¾·áÇÏ¸é
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Êµå¼­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½
 	if ( bLeaveFieldServer )
 	{
-		// ÆÖÀÇ µ¥ÀÌÅÍ DBÀúÀå
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DBï¿½ï¿½ï¿½ï¿½
 		CSetPetFull* pSaveDB = new CSetPetFull( pOwner->m_dwCharID, pPet->GetPetID (), pPet->m_nFull );
 		if ( m_pDBMan ) m_pDBMan->AddJob ( pSaveDB );
 
@@ -1258,7 +1260,7 @@ BOOL GLGaeaServer::DropOutPET ( DWORD dwGUID, bool bLeaveFieldServer, bool bMove
 			if ( m_pDBMan ) m_pDBMan->AddJob ( pSaveSkill );
 		}
 
-		// ±Û·Î¹ú ¸®½ºÆ®¿¡¼­ Á¦°Å, GUID ¹ÝÈ¯
+		// ï¿½Û·Î¹ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, GUID ï¿½ï¿½È¯
 		RELEASE_PET ( pPet );
 		m_PETArray[dwGUID] = NULL;
 		m_FreePETGIDs.AddTail ( dwGUID );
@@ -1271,7 +1273,7 @@ HRESULT GLGaeaServer::ClearDropObj ()
 {
 	if ( m_PCArray )
 	{
-		//	Note : ÇÃ·¡ÀÌ¾î µå·Ó ¾Æ¿ô Ã³¸®.
+		//	Note : ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ ï¿½Æ¿ï¿½ Ã³ï¿½ï¿½.
 		//
 		for ( DWORD i=0; i<m_dwMaxClient; i++ )
 		{
@@ -1281,7 +1283,7 @@ HRESULT GLGaeaServer::ClearDropObj ()
 		ClearReservedDropOutPC ();
 	}
 
-	//	Note : ÁöÇü Á¤º¸ Á¦°Å.
+	//	Note : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	//
 	/*GLLANDMANNODE* pLandManNode = m_LandManList.m_pHead;
 	for ( ; pLandManNode; pLandManNode = pLandManNode->pNext )
@@ -1351,7 +1353,7 @@ BOOL GLGaeaServer::ValidCheckTarget ( GLLandMan* pLandMan, STARGETID &sTargetID 
 	}
 	/*else
 	{
-		GASSERT(0&&"emCrow°¡ Àß¸øµÈ ÁöÁ¤ÀÚ ÀÔ´Ï´Ù." );
+		GASSERT(0&&"emCrowï¿½ï¿½ ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Ï´ï¿½." );
 	}
 	*/
 
@@ -1369,7 +1371,7 @@ GLACTOR* GLGaeaServer::GetTarget ( const GLLandMan* pLandMan, const STARGETID &s
 	{
 	case CROW_PC:
 		{
-			// °°Àº ¸Ê¿¡ ÀÖ´Â PC¸¸ °Ë»ö
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½Ö´ï¿½ PCï¿½ï¿½ ï¿½Ë»ï¿½
 			PGLCHAR pChar = GLGaeaServer::GetInstance().GetChar ( sTargetID.dwID );
 			if ( pChar && pChar->m_sMapID == pLandMan->GetMapID() ) return pChar;
 		}
@@ -1405,7 +1407,7 @@ GLACTOR* GLGaeaServer::GetTarget ( const GLLandMan* pLandMan, const STARGETID &s
 
 	//case CROW_PET:	break;	// PetData
 
-	//default:	GASSERT(0&&"emCrow°¡ Àß¸øµÈ ÁöÁ¤ÀÚ ÀÔ´Ï´Ù." );
+	//default:	GASSERT(0&&"emCrowï¿½ï¿½ ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Ï´ï¿½." );
 	};
 
 	return NULL;
@@ -1415,7 +1417,7 @@ const D3DXVECTOR3& GLGaeaServer::GetTargetPos ( const GLLandMan* pLandMan, const
 {
 	GASSERT(pLandMan);
 
-	//	Note : Å¸°ÙÀÇ À§Ä¡ Á¤º¸¸¦ °¡Á®¿È.
+	//	Note : Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 	if ( sTargetID.emCrow == CROW_PC )
 	{
 		PGLCHAR pChar = GLGaeaServer::GetInstance().GetChar ( sTargetID.dwID );
@@ -1442,7 +1444,7 @@ const D3DXVECTOR3& GLGaeaServer::GetTargetPos ( const GLLandMan* pLandMan, const
 	}
 	/*else
 	{
-		GASSERT(0&&"emCrow°¡ Àß¸øµÈ ÁöÁ¤ÀÚ ÀÔ´Ï´Ù." );
+		GASSERT(0&&"emCrowï¿½ï¿½ ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Ï´ï¿½." );
 	}
 	*/
 
@@ -1454,7 +1456,7 @@ WORD GLGaeaServer::GetTargetBodyRadius ( GLLandMan* pLandMan, STARGETID &sTarget
 {
 	GASSERT(pLandMan);
 
-	//	Note : Å¸°ÙÀÇ À§Ä¡ Á¤º¸¸¦ °¡Á®¿È.
+	//	Note : Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 	if ( sTargetID.emCrow == CROW_PC )
 	{
 		PGLCHAR pChar = GLGaeaServer::GetInstance().GetChar ( sTargetID.dwID );
@@ -1481,7 +1483,7 @@ WORD GLGaeaServer::GetTargetBodyRadius ( GLLandMan* pLandMan, STARGETID &sTarget
 	}
 	/*else
 	{
-		GASSERT(0&&"emCrow°¡ Àß¸øµÈ ÁöÁ¤ÀÚ ÀÔ´Ï´Ù." );
+		GASSERT(0&&"emCrowï¿½ï¿½ ï¿½ß¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Ï´ï¿½." );
 	}
 	*/
 
@@ -1501,16 +1503,16 @@ GLARoundSlot* GLGaeaServer::GetARoundSlot ( const STARGETID &sTargetID )
 	return NULL;
 }
 
-BOOL GLGaeaServer::DropPC ( SNATIVEID MapID, D3DXVECTOR3 vPos, PGLCHAR pPC )
+BOOL GLGaeaServer::DropPC ( SNATIVEID MapID, D3DXVECTOR3 vPos, PGLCHAR pPC, SNATIVEID sLastMapID )
 {
 	GLLandMan* pLandMan = GetByMapID ( MapID );
 	if ( !pLandMan )	return FALSE;
 
-	//	Note : À§Ä¡·Î ³»ºñ°ÔÀÌ¼Ç ÃÊ±âÈ­.
+	//	Note : ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ ï¿½Ê±ï¿½È­.
 	//
 	pPC->SetNavi ( pLandMan->GetNavi(), vPos );
 
-	//	Note : °ü¸® ID ºÎ¿©.
+	//	Note : ï¿½ï¿½ï¿½ï¿½ ID ï¿½Î¿ï¿½.
 	//
 	pPC->m_sMapID = MapID;
 
@@ -1520,24 +1522,60 @@ BOOL GLGaeaServer::DropPC ( SNATIVEID MapID, D3DXVECTOR3 vPos, PGLCHAR pPC )
 	pPC->m_pLandMan = pLandMan;
 	pPC->m_pLandNode = pLandMan->m_GlobPCList.ADDHEAD ( pPC );
 
-	//	Note : GLLandManÀÇ ¼¿¿¡ µî·ÏÇÏ´Â ÀÛ¾÷.
-	//		GLLandMan::RegistChar(pPC) ÀÛ¾÷ÀÌ GLGaeaServer::RequestLandIn ()ÀÌ È£ÃâµÉ ¶§±îÁö À¯º¸.
+	//	Note : GLLandManï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Û¾ï¿½.
+	//		GLLandMan::RegistChar(pPC) ï¿½Û¾ï¿½ï¿½ï¿½ GLGaeaServer::RequestLandIn ()ï¿½ï¿½ È£ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	//
 	pPC->m_dwCeID = 0;
 	pPC->m_pQuadNode = NULL;
 	pPC->m_pCellNode = NULL;
 
-	//	Note : PC NAME map ¿¡ µî·Ï.
+	//	Note : PC NAME map ï¿½ï¿½ ï¿½ï¿½ï¿½.
 	GASSERT ( m_PCNameMap.find(pPC->GetCharData2().m_szName)==m_PCNameMap.end() );
 	m_PCNameMap [ std::string(pPC->GetCharData2().m_szName) ] = pPC;
 
-	//	Note : PC Client map ¿¡ µî·Ï.
+	//	Note : PC Client map ï¿½ï¿½ ï¿½ï¿½ï¿½.
 	GASSERT ( m_PCClientIDMAP.find(pPC->m_dwClientID)==m_PCClientIDMAP.end() );
 	m_PCClientIDMAP[pPC->m_dwClientID] = pPC->m_dwGaeaID;
 
-	//	Note : CID map ¿¡ µî·Ï.
+	//	Note : CID map ï¿½ï¿½ ï¿½ï¿½ï¿½.
 	GASSERT ( m_mapCHARID.find(pPC->m_dwCharID)==m_mapCHARID.end() );
 	m_mapCHARID[pPC->m_dwCharID] = pPC->m_dwGaeaID;
+
+	// ========================================
+	// First Login Welcome Announcement System
+	// ========================================
+	// Author: Ace17
+	// Date: September 3, 2025
+	// Description: Sends welcome announcement to all players when a new character enters the game world for the first time using isNew parameter
+	// Function: DropPC - Called when character enters the game world
+	// Purpose: Welcome new players and announce their arrival to the community
+	// ========================================
+	
+		// Check if it's a new character using character selection location logic
+	// Logic: NEW CHARACTER = (Character Selection Location is -1 from database)
+	bool bLastMapBlank = (sLastMapID.dwID == -1);
+	
+	// Debug: Log the values to see what's happening
+	/* CDebugSet::ToFileWithTime("_first_login_debug.txt", "DropPC - %s: LastMapBlank=%d, LastMapID=(%d,%d), CurrentMapID=(%d,%d), Level=%d",
+							  pPC->GetCharData2().m_szName, bLastMapBlank,
+							  sLastMapID.wMainID, sLastMapID.wSubID,
+							  MapID.wMainID, MapID.wSubID, pPC->GetCharData2().m_wLevel); */
+
+	// Send welcome announcement if it's a new character (last map blank)
+	if (bLastMapBlank) {
+		CString strMessage;
+		strMessage.Format("Welcome to the game '%s'! from %s. Your journey begins now!",
+						  pPC->GetCharData2().m_szName,
+						  GLCONST_CHAR::strSCHOOLNAME[pPC->GetCharData2().m_wSchool].c_str());
+		GLMSG::SNET_SERVER_GENERALCHAT NetMsg;
+		NetMsg.SETTEXT(strMessage.GetString());
+		NetMsg.bNotify = true;
+		NetMsg.iColor = 4;
+		SENDTOALLCLIENT(&NetMsg);
+		
+		/* CDebugSet::ToFileWithTime("_first_login_debug.txt", "WELCOME SENT: %s (ID:%d)", 
+								  pPC->GetCharData2().m_szName, pPC->m_dwCharID); */
+	}
 
 	return TRUE;
 }
@@ -1550,7 +1588,7 @@ BOOL GLGaeaServer::DropOutPC ( DWORD dwGaeaPcID, bool bForce )
 	PGLCHAR pPC = m_PCArray[dwGaeaPcID];
 	if ( !pPC )		return FALSE;
 
-	//	Note : ¸¸¾à »óÁ¡ÀÌ ¿­·Á ÀÖ´Â »óÅÂÀÌ¸é »óÁ¡À» ´Ý¾ÆÁØ´Ù.
+	//	Note : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý¾ï¿½ï¿½Ø´ï¿½.
 	//
 	if ( pPC->m_sPMarket.IsOpen() )
 	{
@@ -1582,27 +1620,27 @@ BOOL GLGaeaServer::DropOutPC ( DWORD dwGaeaPcID, bool bForce )
 
 	pPC->ResetViewAround ();
 
-	//	Note : Gaea Àü¿ª ¸®½ºÆ®¿¡¼­ Á¦°Å.
+	//	Note : Gaea ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	m_PCArray[dwGaeaPcID] = NULL;
 	
 	if ( pPC->m_pGaeaNode )
 		m_GaeaPCList.DELNODE ( pPC->m_pGaeaNode );
 
-	//	Note : Land ¸®½ºÆ®¿¡¼­ Á¦°Å.
+	//	Note : Land ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	GLLandMan *pLandMan = pPC->m_pLandMan;
 	if ( pLandMan )		pLandMan->RemoveChar ( pPC );
 
-	//	Note : PC NAME map ¿¡¼­ Á¦°Å.
+	//	Note : PC NAME map ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	GLCHAR_MAP_ITER iterPC = m_PCNameMap.find ( std::string(pPC->GetCharData2().m_szName) );
 	GASSERT ( iterPC!=m_PCNameMap.end() );
 	m_PCNameMap.erase ( iterPC );
 
-	//	Note : CLIENTID map ¿¡¼­ Á¦°Å.
+	//	Note : CLIENTID map ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	CLIENTMAP_ITER client_iter = m_PCClientIDMAP.find ( pPC->m_dwClientID );
 	GASSERT ( client_iter!=m_PCClientIDMAP.end() );
 	m_PCClientIDMAP.erase ( client_iter );
 
-	//	Note : CID map ¿¡¼­ Á¦°Å.
+	//	Note : CID map ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	CLIENTMAP_ITER cid_iter = m_mapCHARID.find ( pPC->m_dwCharID );
 	GASSERT ( cid_iter!=m_mapCHARID.end() );
 	m_mapCHARID.erase ( cid_iter );
@@ -1619,7 +1657,7 @@ BOOL GLGaeaServer::DropOutPC ( DWORD dwGaeaPcID, bool bForce )
 		}
 	}
 
-	//	Note : ¸Þ¸ð¸® ¹ÝÈ¯.
+	//	Note : ï¿½Þ¸ï¿½ ï¿½ï¿½È¯.
 	RELEASE_CHAR(pPC);
 
 	return TRUE;
@@ -1634,10 +1672,10 @@ BOOL GLGaeaServer::SaveCharDB ( DWORD dwGaeaID )
 
 		if ( m_pDBMan )
 		{
-			//	Note : ÄÉ¸¯ÅÍ ÀúÀå ¿äÃ».
+			//	Note : ï¿½É¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã».
 			SetSaveDBUserID(pChar->GetUserID());
 
-			//	Note : Å¬·´ Ã¢°í ÀúÀå ¿äÃ».
+			//	Note : Å¬ï¿½ï¿½ Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã».
 			if ( pChar->m_dwGuild!=CLUB_NULL )
 			{
 				GLCLUB *pCLUB = GLGaeaServer::GetInstance().GetClubMan().GetClub ( pChar->m_dwGuild );
@@ -1647,7 +1685,7 @@ BOOL GLGaeaServer::SaveCharDB ( DWORD dwGaeaID )
 				}
 			}
 
-			//	Note : ÄÉ¸¯ÅÍ ÀúÀå ¿äÃ».
+			//	Note : ï¿½É¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã».
 			CDbActSaveChar *pSaveDB = new CDbActSaveChar;
 			pSaveDB->SetInfo ( pChar->m_dwClientID, pChar->m_dwGaeaID, pChar );
 			m_pDBMan->AddJob ( pSaveDB );
@@ -1659,10 +1697,10 @@ BOOL GLGaeaServer::SaveCharDB ( DWORD dwGaeaID )
 
 BOOL GLGaeaServer::ReserveDropOutPC ( DWORD dwGaeaID, CDbActToAgentMsg* pDbActToAgentMsg )
 {
-	// * ÁÖÀÇ
-	// pDbActToAgentMsg ÀÇ Default °¡ NULL ÀÌ´Ù.
-	// ¿©±â¼­ NULL Ã¼Å©¸¦ ÇØ¹ö¸®¸é Ä³¸¯ÅÍ°¡ Á¤»óÀûÀ¸·Î DROP µÇÁö ¾Ê¾Æ¼­
-	// ¼­¹ö¾È¿¡ ³²¾ÆÀÖ°Ô µÈ´Ù.
+	// * ï¿½ï¿½ï¿½ï¿½
+	// pDbActToAgentMsg ï¿½ï¿½ Default ï¿½ï¿½ NULL ï¿½Ì´ï¿½.
+	// ï¿½ï¿½ï¿½â¼­ NULL Ã¼Å©ï¿½ï¿½ ï¿½Ø¹ï¿½ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DROP ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Æ¼ï¿½
+	// ï¿½ï¿½ï¿½ï¿½ï¿½È¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö°ï¿½ ï¿½È´ï¿½.
 	if (dwGaeaID == GAEAID_NULL) return FALSE;
 
 	EnterCriticalSection(&m_CSPCLock);
@@ -1673,7 +1711,7 @@ BOOL GLGaeaServer::ReserveDropOutPC ( DWORD dwGaeaID, CDbActToAgentMsg* pDbActTo
 			DWORD dwUserID = pChar->GetUserID();
 			m_reqSaveDBUserID.insert ( dwUserID );
 
-			//	Note : ÄÉ¸¯ÅÍÀÇ db ÀÛ¾÷À» ¿¹¾à¿¡ µé¾î°¨.
+			//	Note : ï¿½É¸ï¿½ï¿½ï¿½ï¿½ï¿½ db ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½à¿¡ ï¿½ï¿½î°¨.
 			m_reqDropOutChar.push_back ( SDROPOUTINFO(dwGaeaID,dwUserID,pDbActToAgentMsg) );
 		}
 	}
@@ -1696,7 +1734,7 @@ BOOL GLGaeaServer::ClearReservedDropOutPC ()
 			if ( pChar )
 			{
 				// PET
-				// ¸ÊÀÌµ¿½Ã Pet »èÁ¦
+				// ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ Pet ï¿½ï¿½ï¿½ï¿½
 				DropOutPET ( pChar->m_dwPetGUID, true, true );
 				
 				/*skill summon, Juver, 2017/10/09 */
@@ -1705,7 +1743,7 @@ BOOL GLGaeaServer::ClearReservedDropOutPC ()
 				
 				SaveVehicle( pChar->m_dwClientID, dwGaea, true );			
 
-				// ÀÎ´øÀÏ °æ¿ì ÀÎ´ø ¹ÛÀ¸·Î ÀÌµ¿ÇÑ´Ù.
+				// ï¿½Î´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Î´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ñ´ï¿½.
 				if( pChar->m_pLandMan->IsInstantMap() )
 				{
 					GLLandMan* pInLandMan = NULL;
@@ -1719,7 +1757,7 @@ BOOL GLGaeaServer::ClearReservedDropOutPC ()
 					pOutGateMan = &pChar->m_pLandMan->GetLandGateMan();
 					if( !pOutGateMan ) goto drop_pc;
 
-					// ¹«Á¶°Ç Ã¹¹øÂ° °ÔÀÌÆ®·Î ÀÌµ¿ÇÑ´Ù.
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ñ´ï¿½.
 					DWORD dwGateID = 0;
 					DWORD dwOutGateID = 0;
 					SNATIVEID sMoveMapId;
@@ -1730,7 +1768,7 @@ BOOL GLGaeaServer::ClearReservedDropOutPC ()
 						if( pOutGate ) break;
 					}
 
-					// Gate¸¦ ¸ø Ã£¾ÒÀ»°æ¿ì
+					// Gateï¿½ï¿½ ï¿½ï¿½ Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					if( !pOutGate )
 					{
 						dwOutGateID			  = GLCONST_CHAR::dwSTARTGATE[pChar->m_wSchool];
@@ -1745,7 +1783,7 @@ BOOL GLGaeaServer::ClearReservedDropOutPC ()
 						dwOutGateID = pOutGate->GetToGateID( DxLandGate::DEFAULT_GATE_OUT_INDEX );			
 					}
 
-					//	Note : ¸ñÇ¥ °ÔÀÌÆ® °¡Á®¿À±â.					//
+					//	Note : ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.					//
 
 					pInGateMan = &pInLandMan->GetLandGateMan ();
 					if ( !pInGateMan )		goto drop_pc;
@@ -1764,26 +1802,26 @@ BOOL GLGaeaServer::ClearReservedDropOutPC ()
 
 				}
 				
-				//	Note : ÇöÁ¦ À§Ä¡ ÀúÀå.
+				//	Note : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½.
 				//
 drop_pc:
 				pChar->SavePosition ();
 
-				//	Note : »ç¸ÁÇÑ »óÅÂ·Î Á¦°Å½Ã.
+				//	Note : ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½Å½ï¿½.
 				//
 				if ( pChar->IsSTATE(EM_ACT_DIE) )
 				{
-					//	Note : ºÎÈ°½Ã °æÇèÄ¡ °¨¼Ò.
+					//	Note : ï¿½ï¿½È°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½.
 					pChar->ReBirthDecExp ();
 
-					//	 Note : ÇöÁ¦ À§Ä¡¸¦ ¸¶Áö¸· ±ÍÈ¯ À§Ä¡·Î ÀúÀå.
+					//	 Note : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 					//
 					pChar->SaveLastCall ();
 				}
 
 				if ( m_pDBMan )
 				{
-					//	Note : Å¬·´ Ã¢°í ÀúÀå.
+					//	Note : Å¬ï¿½ï¿½ Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 					if ( pChar->m_dwGuild!=CLUB_NULL )
 					{
 						GLCLUB *pCLUB = GLGaeaServer::GetInstance().GetClubMan().GetClub ( pChar->m_dwGuild );
@@ -1794,18 +1832,18 @@ drop_pc:
 						}
 					}
 
-					//	Note : ÄÉ¸¯ÅÍ db¿¡ ÀúÀå ¿äÃ».
+					//	Note : ï¿½É¸ï¿½ï¿½ï¿½ dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã».
 					//
 					CDbActSaveChar *pSaveDB = new CDbActSaveChar;
 					pSaveDB->SetInfo ( pChar->m_dwClientID, pChar->m_dwGaeaID, pChar );
 					m_pDBMan->AddJob ( pSaveDB );
 
-					//	Note : db ÀúÀåÈÄ ¹ß»ý ¸Þ½ÃÁö ¿äÃ»ÀÌ ÀÖÀ» °æ¿ì Ã³¸®.
+					//	Note : db ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½.
 					//
 					if ( (*iter).m_pMsg )	m_pDBMan->AddJob ( (*iter).m_pMsg );
 				}
 
-				//	Note : ÄÉ¸¯ÅÍ°¡ Áö¿öÁø´Ù.
+				//	Note : ï¿½É¸ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 				//
 				/*dmk14 offline vend new code*/
 				DropOutPC(dwGaea,true);
@@ -1888,14 +1926,14 @@ BOOL GLGaeaServer::RequestReBirth ( const DWORD dwGaeaID, const SNATIVEID &sNID_
 		vStartPos = _vPos;
 	}
 
-	//	 Note : ÇöÁ¦ À§Ä¡¸¦ ¸¶Áö¸· ±ÍÈ¯ À§Ä¡·Î ÀúÀå.
+	//	 Note : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	//
 	pPC->SaveLastCall ();
 
-	//	Note : ÀÚ½ÅÀÌ º» ÁÖº¯ ¼¿À» Á¤¸®.
+	//	Note : ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Öºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	pPC->ResetViewAround ();
 
-	//	Note : Á¾Àü ¸Ê¿¡ ÀÖ´ø °ü¸® ³ëµå »èÁ¦.
+	//	Note : ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	//
 	if ( pPC->m_pLandNode )
 		pPC->m_pLandMan->m_GlobPCList.DELNODE ( pPC->m_pLandNode );
@@ -1903,20 +1941,20 @@ BOOL GLGaeaServer::RequestReBirth ( const DWORD dwGaeaID, const SNATIVEID &sNID_
 	if ( pPC->m_pQuadNode && pPC->m_pCellNode )
 		pPC->m_pQuadNode->pData->m_PCList.DELNODE ( pPC->m_pCellNode );
 
-	//	Note : »õ·Î¿î ¸Ê À§Ä¡·Î ³»ºñ°ÔÀÌ¼Ç ÃÊ±âÈ­.
+	//	Note : ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¼ï¿½ ï¿½Ê±ï¿½È­.
 	//
 	pPC->SetNavi ( pLandMan->GetNavi(), vStartPos );
 
-	//	Note : »õ·Î¿î °ü¸® ID ºÎ¿©.
+	//	Note : ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ID ï¿½Î¿ï¿½.
 	//
 	pPC->m_sMapID = sNID_Map;
 
 	pPC->m_pLandMan = pLandMan;
 	pPC->m_pLandNode = pLandMan->m_GlobPCList.ADDHEAD ( pPC );
 
-	//	Note : GLLandManÀÇ ¼¿¿¡ µî·ÏÇÏ´Â ÀÛ¾÷.
+	//	Note : GLLandManï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Û¾ï¿½.
 	//
-	//RegistChar ( pPC ); --> ( GLGaeaServer::RequestLandIn ()ÀÌ È£ÃâµÉ ¶§±îÁö À¯º¸µÊ. )
+	//RegistChar ( pPC ); --> ( GLGaeaServer::RequestLandIn ()ï¿½ï¿½ È£ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. )
 
 	pPC->m_dwCeID = 0;
 	pPC->m_pQuadNode = NULL;
@@ -1942,7 +1980,7 @@ void GLGaeaServer::FrameMoveInstantMap( float fElapsedTime )
 	size_t i, size = m_vecLandMan.size();
 	for( i = 0; i < size; i++ )
 	{
-		// ÀÎ´øÀÏ °æ¿ì¿¡¸¸ Ã³¸®ÇØ¾ßÇÒ°Íµé
+		// ï¿½Î´ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½Ò°Íµï¿½
 		if( m_vecLandMan[i]->IsInstantMap() )
 		{
 			m_dwInstantMapNum ++;
@@ -1950,7 +1988,7 @@ void GLGaeaServer::FrameMoveInstantMap( float fElapsedTime )
 			if ( m_vecLandMan[i]->IsInstantMapStuck() )
 				m_dwInstantMapStuckNum ++;
 
-			// ¸¸¾à ÀÎ´ø¿¡ ¾Æ¹«µµ ¾ø°Å³ª Á¦ÇÑ ½Ã°£ ÃÊ°úÇÏ¸é »èÁ¦
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½Î´ï¿½ï¿½ï¿½ ï¿½Æ¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½Ê°ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½
 			if( m_vecLandMan[i]->IsDeleteInstantMap( fElapsedTime ) )
 			{
 				DeleteInstantMap( i );
@@ -1966,7 +2004,7 @@ HRESULT GLGaeaServer::FrameMove ( float fTime, float fElapsedTime )
 {
 	if ( !m_bUpdate )	return S_OK;
 
-	//	Note : Á¦°Å ¸®½ºÆ®¿¡ µî·ÏµÈ ÄÉ¸¯ÅÍ ¿ÀºêÁ§Æ® Á¦°ÅÇØÁÖ±â.
+	//	Note : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½Ïµï¿½ ï¿½É¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½.
 	//
 	PROFILE_BEGIN("ClearReservedDropOutPC()");
 	ClearReservedDropOutPC ();
@@ -1984,16 +2022,16 @@ HRESULT GLGaeaServer::FrameMove ( float fTime, float fElapsedTime )
 	/*character disconnect function, EJCode, 2018/11/25 */
 	CharacterDisconnectUpdate( fElapsedTime );
 
-	// ¿¹¾à ¸Þ½ÃÁöµé Ã³¸®
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 	ReserveMessageProcess();
 
-	// DropOut ¿¹¾à Ã³¸®
+	// DropOut ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
 	ClearReserveDropOutPet ();
 	ClearReserveDropOutSummon ();
 	
 	m_cClubMan.FrameMoveField( fTime, fElapsedTime );
 
-	// ¼±µµÀü ³¡³­Á÷ÈÄ ÀÜ¿© Å¬·´¿øµé Ã¼Å©
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ü¿ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 	if ( GLGuidanceFieldMan::GetInstance().IsCheckExtraGuild () )
 	{
 		GLGuidanceFieldMan::GetInstance().CheckExtraGuild ( fElapsedTime );
@@ -2007,7 +2045,7 @@ HRESULT GLGaeaServer::FrameMove ( float fTime, float fElapsedTime )
 		m_fVarCheckTimer = 0.0f;
 	}
 
-	//	Note : Á¦°Å ¸®½ºÆ®¿¡ µî·ÏµÈ ÄÉ¸¯ÅÍ ¿ÀºêÁ§Æ® Á¦°ÅÇØÁÖ±â.
+	//	Note : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½Ïµï¿½ ï¿½É¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½.
 	//
 	PROFILE_BEGIN("ClearReservedDropOutPC()");
 	ClearReservedDropOutPC ();
@@ -2061,7 +2099,7 @@ BOOL GLGaeaServer::ReserveServerStop ()
 {
 	m_bReservedStop = true;
 
-	// ÁÖº¯À» Á¤¸®ÇÑ´Ù.
+	// ï¿½Öºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	
 	for ( DWORD i=0; i<m_dwMaxClient; i++ )
 	{
@@ -2073,7 +2111,7 @@ BOOL GLGaeaServer::ReserveServerStop ()
 		}
 	}
 
-	// ¸ðµç ÇÊµå¼­¹öÀÇ ¸Ê¿¡ ÀÖ´Â ¿ÀºêÁ§Æ®(Ä³¸¯ÅÍ Á¦¿Ü)¸¦ Á¦°ÅÇÑ´Ù.
+	// ï¿½ï¿½ï¿½ ï¿½Êµå¼­ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®(Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	/*GLLANDMANNODE* pLandManNode = m_LandManList.m_pHead;
 	for ( ; pLandManNode; pLandManNode = pLandManNode->pNext )
 	{
@@ -2093,7 +2131,7 @@ BOOL GLGaeaServer::ReserveServerStop ()
 
 	//m_LandManList.DELALL();
 
-	// Å¬¶óÀÌ¾ðÆ®¿¡°Ô ¼­¹öÅ×½ºÆ®¸¦ À§ÇÑ ¸ØÃãÀ» ¾Ë¸²
+	// Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½×½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½
 	GLMSG::SNET_REQ_SERVERTEST_FB NetMsgFB;
 	SENDTOALLCLIENT ( &NetMsgFB );
 
@@ -2129,7 +2167,7 @@ BOOL GLGaeaServer::RequestUsePETCARD ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::
 		return FALSE;
 	}
 
-	// ¸ÊÁøÀÔ°¡´É¿©ºÎ Ã¼Å©
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ô°ï¿½ï¿½É¿ï¿½ï¿½ï¿½ Ã¼Å©
 	GLLandMan* pLandMan = GetByMapID ( pOwner->m_sMapID );
 	if ( !pLandMan )					return FALSE;
 	if ( !pLandMan->IsPetActivity () )
@@ -2139,7 +2177,7 @@ BOOL GLGaeaServer::RequestUsePETCARD ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::
 		return FALSE;
 	}
 
-	// ÆÖÀÌ È°¼ºÈ­ µÇ¾îÀÖÀ¸¸é
+	// ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	PGLPETFIELD pMyPet = GetPET ( pOwner->m_dwPetGUID );
 	// if ( pMyPet && pMyPet->IsValid () ) return FALSE;
 
@@ -2178,7 +2216,7 @@ BOOL GLGaeaServer::RequestUsePETCARD ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::
 	PCROWDATA pCrowData = GLCrowDataMan::GetInstance().GetCrowData ( pItem->sPet.sPetID );
 	if ( !pCrowData )					   return E_FAIL;
 
-	// ¿¡¹Ä·¹ÀÌÅÍ ¸ðµå
+	// ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	if ( m_bEmulator )
 	{
 		PGLPET pPet = GLCONST_PET::GetPetData ( pItem->sPet.emPetType );
@@ -2191,16 +2229,16 @@ BOOL GLGaeaServer::RequestUsePETCARD ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::
 		GLPET NewPet(*pPet);
 		NewPet.m_sPetID = pItem->sPet.sPetID;
 
-		// ÆÖÀ» »ý¼ºÇØÁØ´Ù
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½
 		CreatePET ( &NewPet, dwGaeaID, 0 );
 
 		return S_OK;
 	}
 
-	// ½Å±Ô»ý¼º
+	// ï¿½Å±Ô»ï¿½ï¿½ï¿½
 	if ( pInvenItem->sItemCustom.dwPetID == 0 )
 	{
-		// È¤½Ã ÆÖÀÌ ÀÖÀ¸¸é (ÇÏ³ªÀÇ ÄÉ¸¯ÅÍ°¡ µ¿½Ã¿¡ º¹¼ö°³ÀÇ ÆÖÀ» ¸¸µå´Â °ÍÀ» ¹æÁö)
+		// È¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½É¸ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½Ã¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 		if ( pMyPet ) 
 		{
 			if ( !DropOutPET ( pOwner->m_dwPetGUID, true, false ) )
@@ -2231,21 +2269,21 @@ BOOL GLGaeaServer::RequestUsePETCARD ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::
 
 		m_pDBMan->AddJob ( pDbAction );
 
-		// ÀÏ´Ü »ý¼ºÁßÀÎ ¹øÈ£ÀÓÀ» ¾Ë¸®±â À§ÇØ
+		// ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		pInvenItem->sItemCustom.dwPetID = UINT_MAX;
 
 		pOwner->m_bGetPetFromDB = true;
 	}
-	// DB¿¡¼­ µ¥ÀÌÅÍ ºÒ·¯¿Í¼­ ÆÖ¼ÒÈ¯
+	// DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½Í¼ï¿½ ï¿½Ö¼ï¿½È¯
 	else 
 	{
-		// ÀÌ¹Ì ÆÖÀ» ºÎ¸£°í ÀÖÀ¸¸é
+		// ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if ( pOwner->m_bGetPetFromDB ) return TRUE;
 
-        // ÆÖÀÌ Á¤»óÀûÀ¸·Î DropOut µÇÁö ¾Ê°í ¼­¹ö¿¡ ÀÜÁ¸ÇÏ´Â °æ¿ì°¡ »ý°å´Ù...(^^;;;)
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DropOut ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ì°¡ ï¿½ï¿½ï¿½ï¿½ï¿½...(^^;;;)
 		if ( pMyPet && pMyPet->IsValid () ) DropOutPET ( pMyPet->m_dwGUID, true, false );
 
-		// ÆÖÀÌ ·ÎÁ÷¿¡ ³²¾Æ ÀÖÀ¸¸é
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if ( pMyPet && pMyPet->GetPetID () == pInvenItem->sItemCustom.dwPetID )
 		{
 			GLPET* pPet = dynamic_cast<GLPET*>(pMyPet);
@@ -2253,7 +2291,7 @@ BOOL GLGaeaServer::RequestUsePETCARD ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::
 			return TRUE;
 		}
 
-		// ·ÎÁ÷¿¡ ³²¾ÆÀÖ´Â ÆÖ°ú ÆÖÄ«µåÀÇ ¹øÈ£°¡ ¼­·Î ´Ù¸£¸é
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Ö°ï¿½ ï¿½ï¿½Ä«ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½ï¿½
 		if ( pMyPet && pMyPet->GetPetID () != pInvenItem->sItemCustom.dwPetID )
 		{
 			if ( !DropOutPET ( pMyPet->m_dwGUID, true, false ) )
@@ -2272,7 +2310,7 @@ BOOL GLGaeaServer::RequestUsePETCARD ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::
 		PGLPET pNewPet = new GLPET ();
 		pNewPet->ASSIGN ( *pPet );
 
-		// DBÀÛ¾÷ ½ÇÆÐ½Ã È¤Àº »ý¼ºÈÄ ¸Þ¸ð¸® ÇØÁ¦ÇØÁà¶ó
+		// DBï¿½Û¾ï¿½ ï¿½ï¿½ï¿½Ð½ï¿½ È¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		CGetPet* pDbAction = new CGetPet ( pNewPet, pInvenItem->sItemCustom.dwPetID, dwClientID, pOwner->m_dwCharID,
 										   pNetMsg->wPosX, pNetMsg->wPosY );
 		m_pDBMan->AddJob ( pDbAction );
@@ -2288,7 +2326,7 @@ BOOL GLGaeaServer::RequestRevivePet ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::S
 	PGLCHAR pOwner = GetChar ( dwGaeaID );
 	if ( !pOwner ) return FALSE;
 
-	// ¾ÆÀÌÅÛÀÌ ÆÖÄ«µåÀÎÁö Ã¼Å©
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 	SINVENITEM* pInvenItem = pOwner->m_cInventory.FindPosItem ( pNetMsg->wPosX, pNetMsg->wPosY );
 	if ( !pInvenItem ) return FALSE;
 	
@@ -2296,7 +2334,7 @@ BOOL GLGaeaServer::RequestRevivePet ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::S
 	if ( !pItem )      return FALSE;
 	if ( pItem->sBasicOp.emItemType != ITEM_PET_CARD ) return FALSE;
 
-	// ¼Õ¿¡µç ¾ÆÀÌÅÛÀÌ ÆÖºÎÈ°Ä«µåÀÎÁö Ã¼Å©
+	// ï¿½Õ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Öºï¿½È°Ä«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 	const SITEMCUSTOM sHold = pOwner->GET_HOLD_ITEM ();
 
 	SITEM* pHoldItem = GLItemMan::GetInstance().GetItem ( sHold.sNativeID );
@@ -2304,10 +2342,10 @@ BOOL GLGaeaServer::RequestRevivePet ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::S
 	
 	if ( pHoldItem->sBasicOp.emItemType != ITEM_PET_REVIVE ) return FALSE;
 
-	// Æê ¾×¼Ç ·Î±×
+	// ï¿½ï¿½ ï¿½×¼ï¿½ ï¿½Î±ï¿½
 	GLITEMLMT::GetInstance().ReqPetAction( pNetMsg->dwPetID, pInvenItem->sItemCustom.sNativeID, EMPET_ACTION_REVIVE, 0 );
 
-	// »èÁ¦µÈ ÆÖÀ» ºÎÈ°ÇÏ°í »õ·Ó°Ô »ý¼ºÇÏ´Â ÄÚµå (¹Ýµå½Ã Full ÀÌ 100.00% ¿©¾ß ÇÔ!)
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½Ó°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Úµï¿½ (ï¿½Ýµï¿½ï¿½ Full ï¿½ï¿½ 100.00% ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½!)
 	CRestorePet* pDbActionRestore = new CRestorePet ( pNetMsg->dwPetID, 
 													  dwClientID,
 													  pOwner->m_dwCharID, 
@@ -2323,7 +2361,7 @@ BOOL GLGaeaServer::RevivePet ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNETPET_
 	PGLCHAR pOwner = GetChar ( dwGaeaID );
 	if ( !pOwner ) return FALSE;
 
-	// ¾ÆÀÌÅÛÀÌ ÆÖÄ«µåÀÎÁö Ã¼Å©
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 	SINVENITEM* pInvenItem = pOwner->m_cInventory.FindPosItem ( pNetMsg->wPosX, pNetMsg->wPosY );
 	if ( !pInvenItem ) return FALSE;
 	
@@ -2331,7 +2369,7 @@ BOOL GLGaeaServer::RevivePet ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNETPET_
 	if ( !pItem )      return FALSE;
 	if ( pItem->sBasicOp.emItemType != ITEM_PET_CARD ) return FALSE;
 
-	// ¼Õ¿¡µç ¾ÆÀÌÅÛÀÌ ÆÖºÎÈ°Ä«µåÀÎÁö Ã¼Å©
+	// ï¿½Õ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Öºï¿½È°Ä«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼Å©
 	const SITEMCUSTOM sHold = pOwner->GET_HOLD_ITEM ();
 
 	SITEM* pHoldItem = GLItemMan::GetInstance().GetItem ( sHold.sNativeID );
@@ -2339,7 +2377,7 @@ BOOL GLGaeaServer::RevivePet ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNETPET_
 	
 	if ( pHoldItem->sBasicOp.emItemType != ITEM_PET_REVIVE ) return FALSE;
 
-	// ±âÁ¸ÀÇ ÆÖ Á¦°Å
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	if ( pOwner->m_dwPetID == pInvenItem->sItemCustom.dwPetID )
 	{
 		DropOutPET ( pOwner->m_dwPetGUID, true, false );
@@ -2351,28 +2389,28 @@ BOOL GLGaeaServer::RevivePet ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNETPET_
 		if ( m_pDBMan ) m_pDBMan->AddJob ( pDbAction );
 	}
 
-	// ÆÖÄ«µåÀÇ ÆÖID¸¦ ºÎÈ°½ÃÅ² ÆÖID·Î º¯°æ.
+	// ï¿½ï¿½Ä«ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½IDï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½Å² ï¿½ï¿½IDï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	pInvenItem->sItemCustom.dwPetID = pNetMsg->dwPetID;
 
-	// ÆÖ ºÎÈ°Ä«µå »ç¿ë·Î±× ³²±è
+	// ï¿½ï¿½ ï¿½ï¿½È°Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½Î±ï¿½ ï¿½ï¿½ï¿½ï¿½
 	GLITEMLMT::GetInstance().ReqItemRoute ( sHold, ID_CHAR, 0, ID_CHAR, pOwner->m_dwCharID, EMITEM_ROUTE_DELETE, sHold.wTurnNum );
 
-	// ¼Õ¿¡µç ÆÖºÎÈ° Ä«µå¸¦ Á¦°ÅÇØÁØ´Ù.
+	// ï¿½Õ¿ï¿½ï¿½ï¿½ ï¿½Öºï¿½È° Ä«ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 	pOwner->RELEASE_HOLD_ITEM ();
 
 	GLMSG::SNETPC_PUTON_RELEASE NetMsg_ReleaseHold(SLOT_HOLD);
 	GLGaeaServer::GetInstance().SENDTOCLIENT( dwClientID, &NetMsg_ReleaseHold );
 
-	// ÆÖ ºÎÈ° ¼º°øÀ» ¾Ë¸²
+	// ï¿½ï¿½ ï¿½ï¿½È° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½
 	GLMSG::SNETPET_REQ_REVIVE_FB NetMsg;
 	NetMsg.emFB = EMPET_REQ_REVIVE_FB_OK;
 	NetMsg.dwPetID = pNetMsg->dwPetID;
 	GLGaeaServer::GetInstance().SENDTOCLIENT( dwClientID, &NetMsg );
 
-	// ºÎÈ°µÈ ÆÖÄ«µåÀÇ Á¤º¸¸¦ ¾Ë·ÁÁØ´Ù.
+	// ï¿½ï¿½È°ï¿½ï¿½ ï¿½ï¿½Ä«ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë·ï¿½ï¿½Ø´ï¿½.
 	PGLPET pPetInfo = new GLPET ();
 
-	// DBÀÛ¾÷ ½ÇÆÐ½Ã È¤Àº »ý¼ºÈÄ ¸Þ¸ð¸® ÇØÁ¦ÇØÁà¶ó
+	// DBï¿½Û¾ï¿½ ï¿½ï¿½ï¿½Ð½ï¿½ È¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	CGetPet* pDbActionGetPet = new CGetPet ( pPetInfo, pNetMsg->dwPetID, dwClientID, pOwner->m_dwCharID, 
 											 pNetMsg->wPosX, pNetMsg->wPosY, false, true );
 	m_pDBMan->AddJob ( pDbActionGetPet );
@@ -2413,7 +2451,7 @@ void GLGaeaServer::CreatePETOnDB ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNET
 	}
 
 
-	// ¸ÊÁøÀÔ°¡´É¿©ºÎ Ã¼Å©
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ô°ï¿½ï¿½É¿ï¿½ï¿½ï¿½ Ã¼Å©
 	GLLandMan* pLandMan = GetByMapID ( pOwner->m_sMapID );
 	if ( !pLandMan )					return;
 	if ( !pLandMan->IsPetActivity () )
@@ -2428,13 +2466,13 @@ void GLGaeaServer::CreatePETOnDB ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNET
 	PCROWDATA pCrowData = GLCrowDataMan::GetInstance().GetCrowData ( pItem->sPet.sPetID );
 	if ( !pCrowData ) return;
 	
-	// ÆÖ ¾ÆÀÌµð ¼³Á¤
+	// ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
 	pInvenItem->sItemCustom.dwPetID = pNetMsg->dwPetID;
 
 	PGLPET pPet = GLCONST_PET::GetPetData ( pItem->sPet.emPetType );
 	if ( !pPet ) return;
 
-	// ½Å±Ô»ý¼º
+	// ï¿½Å±Ô»ï¿½ï¿½ï¿½
 	GLPET NewPet;
 	NewPet.ASSIGN ( *pPet );
 	NewPet.m_emTYPE = pItem->sPet.emPetType;
@@ -2445,12 +2483,12 @@ void GLGaeaServer::CreatePETOnDB ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNET
 	if ( !pMyPet ) return;
 
 	/*	
-	// ¸¸¾à ¿©±â¼­ ¼º°øÇÏ¸é ¼ÒÀ¯±ÇÀ» »ý¼ºÇØÁØ´Ù.
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 	CExchangePet* pDbAction = new CExchangePet ( pOwner->m_dwCharID, pNetMsg->dwPetID );
 	m_pDBMan->AddJob ( pDbAction );
 	*/
 
-	// ÆÖÄ«µåÀÇ Á¤º¸µµ ¼öÁ¤ÇØÁØ´Ù.
+	// ï¿½ï¿½Ä«ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 	GLMSG::SNETPET_REQ_PETCARDINFO_FB NetMsg;
 
 	NetMsg.emTYPE				= pMyPet->m_emTYPE;
@@ -2481,13 +2519,13 @@ void GLGaeaServer::CreatePETOnDB ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNET
 
 	SENDTOCLIENT ( dwClientID, &NetMsg );
 
-	// ·Î±×¿¡ ÃÖÃÊ»ý¼ºÀ» ³²±è
+	// ï¿½Î±×¿ï¿½ ï¿½ï¿½ï¿½Ê»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	GLITEMLMT::GetInstance().ReqItemRoute ( pInvenItem->sItemCustom, ID_CHAR, pOwner->m_dwCharID, ID_CHAR, 0, EMITEM_ROUTE_PETCARD, 1 );
 }
 
 void GLGaeaServer::GetPETInfoFromDB ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNETPET_GETPET_FROMDB_FB* pNetMsg )
 {
-	// [ÁÖÀÇ]DB¿¡¼­ ³Ö¾îÁÖÁö ¾Ê¾Æ¼­ pNetMsg->pPet->m_dwPetID °ªÀº À¯È¿ÇÏÁö ¾Ê´Ù.
+	// [ï¿½ï¿½ï¿½ï¿½]DBï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Æ¼ï¿½ pNetMsg->pPet->m_dwPetID ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½.
 
 	GLMSG::SNETPET_REQ_USEPETCARD_FB NetMsgFB;
 
@@ -2498,7 +2536,7 @@ void GLGaeaServer::GetPETInfoFromDB ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::S
 		return;
 	}
 
-	// DB¿¡ ¾øÀ¸¸é ±×³É ÃÊ±â°ªÀ¸·Î ³Ñ¾î¿À´Â °æ¿ì°¡ ÀÖÀ¸¹Ç·Î Ã¼Å©ÇØÁØ´Ù.
+	// DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×³ï¿½ ï¿½Ê±â°ªï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì°¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ Ã¼Å©ï¿½ï¿½ï¿½Ø´ï¿½.
 	if ( pNetMsg->pPet->m_emTYPE == PET_TYPE_NONE )
 	{
 		SAFE_DELETE ( pNetMsg->pPet );
@@ -2506,7 +2544,7 @@ void GLGaeaServer::GetPETInfoFromDB ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::S
 	}
 
 
-	// ÆÖÄ«µå Á¤º¸ ¹ß½Å
+	// ï¿½ï¿½Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß½ï¿½
 	if ( pNetMsg->bTrade || pNetMsg->bCardInfo )
 	{
 		GLMSG::SNETPET_REQ_PETCARDINFO_FB NetMsgFB;
@@ -2531,16 +2569,16 @@ void GLGaeaServer::GetPETInfoFromDB ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::S
 
 		SENDTOCLIENT ( dwClientID, &NetMsgFB );
 	}
-	// ÆÖ ¾Ç¼¼¼­¸®ÀÇ ½ÃÈ¿¼º °Ë»ç
+	// ï¿½ï¿½ ï¿½Ç¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¿ï¿½ï¿½ ï¿½Ë»ï¿½
 	else if ( pNetMsg->bLMTItemCheck )
 	{
 		
 		if ( pChar )
 		{
-			// ¾ø¾Ù²¨ ¾ø¾Ö°í
+			// ï¿½ï¿½ï¿½Ù²ï¿½ ï¿½ï¿½ï¿½Ö°ï¿½
 			pNetMsg->pPet->UpdateTimeLmtItem ( pChar );
 			
-			// ³Ö¾îÁÙ²¨ ³Ö¾îÁØ´Ù.
+			// ï¿½Ö¾ï¿½ï¿½Ù²ï¿½ ï¿½Ö¾ï¿½ï¿½Ø´ï¿½.
 			for ( WORD i = 0; i < PET_ACCETYPE_SIZE; ++i )
 			{
 				CItemDrop cDropItem;
@@ -2561,7 +2599,7 @@ void GLGaeaServer::GetPETInfoFromDB ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::S
 			CDeletePet* pDbAction = new CDeletePet ( pChar->m_dwCharID, pNetMsg->dwPetID );
 			if ( m_pDBMan ) m_pDBMan->AddJob ( pDbAction );
 			
-			// ÆÖÀÌ »èÁ¦µÇ¸é ºÎÈ°Á¤º¸¸¦ Å¬¶óÀÌ¾ðÆ®¿¡ ¾Ë·ÁÁÜ.
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ ï¿½ï¿½È°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ ï¿½Ë·ï¿½ï¿½ï¿½.
 			CGetRestorePetList *pDbAction1 = new CGetRestorePetList ( pChar->m_dwCharID, pChar->m_dwClientID );
 			if ( m_pDBMan ) m_pDBMan->AddJob ( pDbAction1 );
 		}
@@ -2569,7 +2607,7 @@ void GLGaeaServer::GetPETInfoFromDB ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::S
 	else
 	{
 
-		// ¸ÊÁøÀÔ°¡´É¿©ºÎ Ã¼Å©
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ô°ï¿½ï¿½É¿ï¿½ï¿½ï¿½ Ã¼Å©
 		GLLandMan* pLandMan = GetByMapID ( pChar->m_sMapID );
 		if ( !pLandMan || !pLandMan->IsPetActivity () )
 		{
@@ -2581,7 +2619,7 @@ void GLGaeaServer::GetPETInfoFromDB ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::S
 			return;
 		}
 
-		// ÆÖÀ» »ý¼ºÇØÁØ´Ù
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½
 		CreatePET ( pNetMsg->pPet, dwGaeaID, pNetMsg->dwPetID );
 		if ( pChar ) pChar->m_bGetPetFromDB = false;
 	}
@@ -2599,7 +2637,7 @@ void GLGaeaServer::GetPETInfoFromDBError( DWORD dwClientID, DWORD dwGaeaID, GLMS
 		return;
 	}
 
-	// ÆÖÄ«µå Á¤º¸ ¹ß½Å
+	// ï¿½ï¿½Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß½ï¿½
 	if ( pNetMsg->bTrade || pNetMsg->bCardInfo || pNetMsg->bLMTItemCheck )
 	{
 		return;
@@ -2817,7 +2855,7 @@ BOOL GLGaeaServer::ReqActiveVehicle ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::S
 		return E_FAIL;
 	}
 
-	// ¸Ê¼ÒÈ¯°¡´É¿©ºÎ Ã¼Å©
+	// ï¿½Ê¼ï¿½È¯ï¿½ï¿½ï¿½É¿ï¿½ï¿½ï¿½ Ã¼Å©
 	GLLandMan* pLandMan = GetByMapID ( pOwner->m_sMapID );
 	if ( !pLandMan )					return FALSE;
 	if ( !pLandMan->IsVehicleActivity () && pNetMsg->bActive )
@@ -2867,7 +2905,7 @@ BOOL GLGaeaServer::ReqActiveVehicle ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::S
 		return E_FAIL;
 	}
 
-	// ÀÓ½Ã ÄÚµå
+	// ï¿½Ó½ï¿½ ï¿½Úµï¿½
 	pOwner->ActiveVehicle( pNetMsg->bActive, false );
 
 	return TRUE;
@@ -2891,7 +2929,7 @@ void GLGaeaServer::SetActiveVehicle ( DWORD dwClientID, DWORD dwGaeaID, bool bAc
 		return;
 	}
 
-	// ¸Ê¼ÒÈ¯°¡´É¿©ºÎ Ã¼Å©
+	// ï¿½Ê¼ï¿½È¯ï¿½ï¿½ï¿½É¿ï¿½ï¿½ï¿½ Ã¼Å©
 	GLLandMan* pLandMan = GetByMapID ( pOwner->m_sMapID );
 	if ( !pLandMan )					return;
 	if ( !pLandMan->IsVehicleActivity () && bActive )
@@ -2952,10 +2990,10 @@ BOOL GLGaeaServer::ReqGetVehicle( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNETP
 		return FALSE;
 	}
 
-	// Å»°Í È°¼ºÈ­ ( ºÒ°¡´ÉÇÑ °æ¿ì ) 
+	// Å»ï¿½ï¿½ È°ï¿½ï¿½È­ ( ï¿½Ò°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ) 
 	if ( pOwner->m_bVehicle ) return FALSE;
 
-	// Å»°Í ¹Ì ÀåÂø
+	// Å»ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	SITEMCUSTOM& sItemCustom = pOwner->m_PutOnItems[SLOT_VEHICLE];
 	if ( sItemCustom.sNativeID == NATIVEID_NULL() )
 	{
@@ -2964,7 +3002,7 @@ BOOL GLGaeaServer::ReqGetVehicle( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNETP
 		return E_FAIL;
 	}
 
-	// ÀåÂøÇÑ ¾ÆÀÌÅÛ°ú ¿äÃ»ÇÑ ¾ÆÀÌÅÛÀÌ ´Ù¸¦¶§
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Û°ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ï¿½ï¿½
 	if ( sItemCustom.sNativeID != pNetMsg->nItemID )
 	{
 		NetMsgFB.emFB = EMVEHICLE_GET_FB_NOITEM;
@@ -2973,7 +3011,7 @@ BOOL GLGaeaServer::ReqGetVehicle( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNETP
 	}
 
 
-	// ¿äÃ»ÇÑ ¾ÆÀÌÅÛ ¹ÌÁ¸Àç
+	// ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	SITEM* pItem = GLItemMan::GetInstance().GetItem ( sItemCustom.sNativeID );
 	if ( !pItem )
 	{
@@ -2989,7 +3027,7 @@ BOOL GLGaeaServer::ReqGetVehicle( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNETP
 	}
 
 
-	// ¿¡¹Ä·¹ÀÌÅÍ ¸ðµå
+	// ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	if ( m_bEmulator )
 	{
 		PGLVEHICLE pVehicle = GLCONST_VEHICLE::GetVehicleData ( pItem->sVehicle.emVehicleType );
@@ -3018,7 +3056,7 @@ BOOL GLGaeaServer::ReqGetVehicle( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNETP
 		return S_OK;
 	}
 
-	// ½Å±Ô»ý¼º
+	// ï¿½Å±Ô»ï¿½ï¿½ï¿½
 	if ( sItemCustom.dwVehicleID == 0 )
 	{
 		PGLVEHICLE pVehicle = GLCONST_VEHICLE::GetVehicleData ( pItem->sVehicle.emVehicleType );
@@ -3037,18 +3075,18 @@ BOOL GLGaeaServer::ReqGetVehicle( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNETP
 
 		m_pDBMan->AddJob ( pDbAction );
 
-		// ÀÏ´Ü »ý¼ºÁßÀÎ ¹øÈ£ÀÓÀ» ¾Ë¸®±â À§ÇØ
+		// ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		sItemCustom.dwVehicleID = UINT_MAX;
 
 		pOwner->m_bGetVehicleFromDB = true;
 	}
-	// DB¿¡¼­ Å»°Í Á¤º¸ °¡Á®¿É´Ï´Ù.
+	// DBï¿½ï¿½ï¿½ï¿½ Å»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½É´Ï´ï¿½.
 	else 
 	{
-		// ÀÌ¹Ì Å»°Í ºÎ¸£°í ÀÖÀ¸¸é Äµ½½
+		// ï¿½Ì¹ï¿½ Å»ï¿½ï¿½ ï¿½Î¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Äµï¿½ï¿½
 		if ( pOwner->m_bGetVehicleFromDB ) return TRUE;
 
-		// ·ÎÁ÷¿¡ Å»°ÍÀÇ Á¤º¸°¡ °°´Ù¸é
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½
 		if ( pOwner->m_sVehicle.m_dwGUID == sItemCustom.dwVehicleID )
 		{
 			CreateVehicle ( dwClientID, dwGaeaID, sItemCustom.dwVehicleID );
@@ -3065,7 +3103,7 @@ BOOL GLGaeaServer::ReqGetVehicle( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNETP
 		PGLVEHICLE pNewVehicle = new GLVEHICLE ();
 		pNewVehicle->ASSIGN ( *pVehicle );
 
-		// DBÀÛ¾÷ ½ÇÆÐ½Ã È¤Àº »ý¼ºÈÄ ¸Þ¸ð¸® ÇØÁ¦ÇØÁà¶ó
+		// DBï¿½Û¾ï¿½ ï¿½ï¿½ï¿½Ð½ï¿½ È¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		CGetVehicle* pDbAction = new CGetVehicle ( pNewVehicle, sItemCustom.dwVehicleID, dwClientID,pOwner->m_dwCharID );
 		m_pDBMan->AddJob ( pDbAction );
 
@@ -3080,13 +3118,13 @@ BOOL GLGaeaServer::CreateVehicle( DWORD dwClientID, DWORD dwGaeaID, DWORD dwVehi
 
 	GLMSG::SNETPC_GET_VEHICLE_FB NetMsg;
 
-	// ¿äÃ» ÄÉ¸¯ÅÍ°¡ À¯È¿¼º Ã¼Å©
+	// ï¿½ï¿½Ã» ï¿½É¸ï¿½ï¿½Í°ï¿½ ï¿½ï¿½È¿ï¿½ï¿½ Ã¼Å©
 	PGLCHAR pOwner = GetChar ( dwGaeaID );
 	if ( !pOwner ) return FALSE;
 
 	const CTime cTIME_CUR = CTime::GetCurrentTime();
 
-    // Å»°Í ¾ÆÀÌÅÛ ½ÃÈ¿¼º Ã¼Å© 
+    // Å»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¿ï¿½ï¿½ Ã¼Å© 
 	SITEMCUSTOM sCUSTOM = pOwner->m_PutOnItems[SLOT_VEHICLE];
 	if ( sCUSTOM.sNativeID == NATIVEID_NULL() ) return FALSE;
 	SITEM *pITEM = GLItemMan::GetInstance().GetItem ( sCUSTOM.sNativeID );
@@ -3100,10 +3138,10 @@ BOOL GLGaeaServer::CreateVehicle( DWORD dwClientID, DWORD dwGaeaID, DWORD dwVehi
 
 		if ( cTIME_CUR > cTIME_LMT )
 		{
-			//	½Ã°£ Á¦ÇÑÀ¸·Î ¾ÆÀÌÅÛ »èÁ¦ ·Î±× ³²±è.
+			//	ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			GLITEMLMT::GetInstance().ReqItemRoute ( sCUSTOM, ID_CHAR, pOwner->m_dwCharID, ID_CHAR, 0, EMITEM_ROUTE_DELETE, sCUSTOM.wTurnNum );
 
-			//	½Ã°£ Á¦ÇÑÀ¸·Î ¾ÆÀÌÅÛ »èÁ¦ ¾Ë¸².
+			//	ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½.
 			GLMSG::SNET_INVEN_DEL_ITEM_TIMELMT NetMsgInvenDelTimeLmt;
 			NetMsgInvenDelTimeLmt.nidITEM = sCUSTOM.sNativeID;
 			SENDTOCLIENT(dwClientID,&NetMsgInvenDelTimeLmt);
@@ -3112,10 +3150,10 @@ BOOL GLGaeaServer::CreateVehicle( DWORD dwClientID, DWORD dwGaeaID, DWORD dwVehi
 			{
 				SaveVehicle( dwClientID, dwGaeaID, false );
 
-				// È°µ¿ÁßÀÌ¸é »ç¶óÁö°Ô ÇØÁØ´Ù.
+				// È°ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø´ï¿½.
 				pOwner->m_sVehicle.UpdateTimeLmtItem ( pOwner );
 
-				// ³Ö¾îÁÙ²¨ ³Ö¾îÁØ´Ù.
+				// ï¿½Ö¾ï¿½ï¿½Ù²ï¿½ ï¿½Ö¾ï¿½ï¿½Ø´ï¿½.
 				for ( WORD i = 0; i < VEHICLE_ACCETYPE_SIZE; ++i )
 				{
 					CItemDrop cDropItem;
@@ -3138,14 +3176,14 @@ BOOL GLGaeaServer::CreateVehicle( DWORD dwClientID, DWORD dwGaeaID, DWORD dwVehi
 				if ( pDBMan ) pDBMan->AddJob ( pDeleteVehicle );
 			}
 
-			//	¾ÆÀÌÅÛ Á¦°Å.
+			//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			pOwner->RELEASE_SLOT_ITEM ( SLOT_VEHICLE );
 
-			//	[ÀÚ½Å¿¡°Ô]  ¾ÆÀÌÅÆ Á¦°Å.
+			//	[ï¿½Ú½Å¿ï¿½ï¿½ï¿½]  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			GLMSG::SNETPC_PUTON_RELEASE NetMsg_Release(SLOT_VEHICLE);
 			SENDTOCLIENT(dwClientID,&NetMsg_Release);
 
-			//	Note : ÁÖº¯ »ç¶÷µé¿¡°Ô ¾ÆÀÌÅÆ Á¦°Å.
+			//	Note : ï¿½Öºï¿½ ï¿½ï¿½ï¿½ï¿½é¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			GLMSG::SNETPC_PUTON_RELEASE_BRD NetMsgReleaseBrd;
 			NetMsgReleaseBrd.dwGaeaID = dwGaeaID;
 			NetMsgReleaseBrd.emSlot = SLOT_VEHICLE;
@@ -3182,7 +3220,7 @@ BOOL GLGaeaServer::CreateVehicle( DWORD dwClientID, DWORD dwGaeaID, DWORD dwVehi
 		SITEM* pITEM = GLItemMan::GetInstance().GetItem ( sVehicleItem.sNativeID );
 		if ( !pITEM )	continue;
 
-		// ½ÃÇÑºÎ ¾ÆÀÌÅÛ
+		// ï¿½ï¿½ï¿½Ñºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if ( pITEM->IsTIMELMT() )
 		{
 			CTimeSpan cSPAN(pITEM->sDrugOp.tTIME_LMT);
@@ -3191,13 +3229,13 @@ BOOL GLGaeaServer::CreateVehicle( DWORD dwClientID, DWORD dwGaeaID, DWORD dwVehi
 
 			if ( cTIME_CUR > cTIME_LMT )
 			{
-				//	½Ã°£ Á¦ÇÑÀ¸·Î ¾ÆÀÌÅÛ »èÁ¦ ·Î±× ³²±è.
+				//	ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ ï¿½ï¿½ï¿½ï¿½.
 				GLITEMLMT::GetInstance().ReqItemRoute ( sVehicleItem, ID_CHAR, pOwner->m_dwCharID, ID_CHAR, 0, EMITEM_ROUTE_DELETE, 0 );
 
-				//	¾ÆÀÌÅÛ »èÁ¦.
+				//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 				pOwner->m_sVehicle.m_PutOnItems[i] = SITEMCUSTOM ();
 
-				//	½Ã°£ Á¦ÇÑÀ¸·Î ¾ÆÀÌÅÛ »èÁ¦ ¾Ë¸².
+				//	ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½.
 				GLMSG::SNET_INVEN_DEL_ITEM_TIMELMT NetMsgInvenDelTimeLmt;
 				NetMsgInvenDelTimeLmt.nidITEM = sVehicleItem.sNativeID;
 				SENDTOCLIENT(pOwner->m_dwClientID,&NetMsgInvenDelTimeLmt);
@@ -3213,7 +3251,7 @@ BOOL GLGaeaServer::CreateVehicle( DWORD dwClientID, DWORD dwGaeaID, DWORD dwVehi
 
 	SENDTOCLIENT ( pOwner->m_dwClientID, &NetMsg );
 
-	// ÁÖº¯¿¡ ¾Ë¸²
+	// ï¿½Öºï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½
 	GLMSG::SNETPC_GET_VEHICLE_BRD NetMsgBrd;
 	NetMsgBrd.dwGaeaID = pOwner->m_dwGaeaID;
 	NetMsgBrd.emTYPE = pOwner->m_sVehicle.m_emTYPE;
@@ -3267,7 +3305,7 @@ void GLGaeaServer::CreateVehicleOnDB ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::
 		return;
 	}
 
-	// Å»°Í ¾ÆÀÌµð ¼³Á¤
+	// Å»ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½
 	sItemCustom.dwVehicleID = pNetMsg->dwVehicleID;
 
 	PGLVEHICLE pVehicle = GLCONST_VEHICLE::GetVehicleData ( pItem->sVehicle.emVehicleType );
@@ -3293,7 +3331,7 @@ void GLGaeaServer::CreateVehicleOnDB ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::
 	CreateVehicle ( dwClientID, dwGaeaID, pNetMsg->dwVehicleID );
 
 
-	// Å»°Í ¾ÆÀÌÅÛÀÇ Á¤º¸µµ ¼öÁ¤ÇØÁØ´Ù.
+	// Å»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 	GLMSG::SNET_VEHICLE_REQ_ITEM_INFO_FB NetMsg;
 
 	NetMsg.emTYPE		= pOwner->m_sVehicle.m_emTYPE;
@@ -3313,13 +3351,13 @@ void GLGaeaServer::CreateVehicleOnDB ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::
 
 	SENDTOCLIENT ( dwClientID, &NetMsg );
 
-	// ·Î±×¿¡ ÃÖÃÊ»ý¼ºÀ» ³²±è
+	// ï¿½Î±×¿ï¿½ ï¿½ï¿½ï¿½Ê»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	GLITEMLMT::GetInstance().ReqItemRoute ( sItemCustom, ID_CHAR, pOwner->m_dwCharID, ID_CHAR, 0, EMITEM_ROUTE_VEHICLE, 1 );
 }
 
 void GLGaeaServer::GetVehicleInfoFromDB ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNET_VEHICLE_GET_FROMDB_FB* pNetMsg )
 {
-	// DB¿¡ ¾øÀ¸¸é ±×³É ÃÊ±â°ªÀ¸·Î ³Ñ¾î¿À´Â °æ¿ì°¡ ÀÖÀ¸¹Ç·Î Ã¼Å©ÇØÁØ´Ù.
+	// DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×³ï¿½ ï¿½Ê±â°ªï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì°¡ ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ Ã¼Å©ï¿½ï¿½ï¿½Ø´ï¿½.
 	if ( pNetMsg->pVehicle->m_emTYPE == VEHICLE_TYPE_NONE )
 	{
 		SAFE_DELETE ( pNetMsg->pVehicle );
@@ -3327,7 +3365,7 @@ void GLGaeaServer::GetVehicleInfoFromDB ( DWORD dwClientID, DWORD dwGaeaID, GLMS
 	}
 
 
-		// º¸µå ¾ÆÀÌÅÛ Á¤º¸ ¹ß½Å
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß½ï¿½
 	if ( pNetMsg->bCardInfo )
 	{
 
@@ -3349,7 +3387,7 @@ void GLGaeaServer::GetVehicleInfoFromDB ( DWORD dwClientID, DWORD dwGaeaID, GLMS
 		SENDTOCLIENT ( dwClientID, &NetMsgFB );
 
 	}
-	// º¸µå ¾Ç¼¼¼­¸®ÀÇ ½ÃÈ¿¼º °Ë»ç
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¿ï¿½ï¿½ ï¿½Ë»ï¿½
 	else if ( pNetMsg->bLMTItemCheck )
 	{
 		
@@ -3357,10 +3395,10 @@ void GLGaeaServer::GetVehicleInfoFromDB ( DWORD dwClientID, DWORD dwGaeaID, GLMS
 		if ( pChar )
 		{
 			pNetMsg->pVehicle->m_dwGUID = pNetMsg->dwVehicleNum;
-			// ¾ø¾Ù²¨ ¾ø¾Ö°í
+			// ï¿½ï¿½ï¿½Ù²ï¿½ ï¿½ï¿½ï¿½Ö°ï¿½
 			pNetMsg->pVehicle->UpdateTimeLmtItem ( pChar );
 			
-			// ³Ö¾îÁÙ²¨ ³Ö¾îÁØ´Ù.
+			// ï¿½Ö¾ï¿½ï¿½Ù²ï¿½ ï¿½Ö¾ï¿½ï¿½Ø´ï¿½.
 			for ( WORD i = 0; i < VEHICLE_ACCETYPE_SIZE; ++i )
 			{
 				CItemDrop cDropItem;
@@ -3385,7 +3423,7 @@ void GLGaeaServer::GetVehicleInfoFromDB ( DWORD dwClientID, DWORD dwGaeaID, GLMS
 	}
 	else
 	{
-		// Å»°ÍÀ» »ý¼ºÇØÁØ´Ù.
+		// Å»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
 		PGLCHAR pOwner = GetChar ( dwGaeaID );
 		if ( !pOwner ) return;
 
@@ -3447,13 +3485,13 @@ void GLGaeaServer::SaveVehicle( DWORD dwClientID, DWORD dwGaeaID, bool bLeaveFie
 	}
 
 
-	// Å»°Í¿¡ Å¸°í ÀÖ´Ù¸é ºñÈ°¼º ½ÃÄÑÁØ´Ù.....
+	// Å»ï¿½Í¿ï¿½ Å¸ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½ï¿½È°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.....
 	if ( pChar->m_bVehicle )
 	{
 		pChar->ActiveVehicle( false, bLeaveFieldServer );		
 	}	
 
-	// º¸µå µ¥ÀÌÅÍ DBÀúÀå
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DBï¿½ï¿½ï¿½ï¿½
 	CSetVehicleBattery* pSaveDB = new CSetVehicleBattery( dwClientID, pChar->m_dwCharID, dwVehicleGUID, pChar->m_sVehicle.m_nFull );
 	if ( m_pDBMan ) m_pDBMan->AddJob ( pSaveDB );
 
@@ -3481,24 +3519,24 @@ void GLGaeaServer::GetVehicleItemInfo ( DWORD dwClientID, DWORD dwGaeaID, GLMSG:
 	PGLCHAR pChar = GetChar ( dwGaeaID );
 	if ( !pChar ) return;
 
-			// ÆÖ »ý¼º¿©ºÎ È®ÀÎ
+			// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	if ( pNetMsg->dwVehicleID == 0 ) return;
 
-	// °Å·¡½Ã »ç¿ëµÉ ÆÖÄ«µå Á¤º¸ÀÌ¸é
+	// ï¿½Å·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
 	if ( pNetMsg->bTrade )
 	{
 		PGLVEHICLE pVehicleInfo = new GLVEHICLE ();
 
-		// DBÀÛ¾÷ ½ÇÆÐ½Ã È¤Àº »ý¼ºÈÄ ¸Þ¸ð¸® ÇØÁ¦ÇØÁà¶ó
+		// DBï¿½Û¾ï¿½ ï¿½ï¿½ï¿½Ð½ï¿½ È¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		CGetVehicle* pDbAction = new CGetVehicle ( pVehicleInfo, pNetMsg->dwVehicleID, dwClientID, pChar->m_dwCharID, false, false, true );
 		m_pDBMan->AddJob ( pDbAction );
 	}
-	// ÀÎº¥Åä¸®,Ã¢°í¿¡ »ç¿ëµÉ ÆÖÄ«µå Á¤º¸ÀÌ¸é
+	// ï¿½Îºï¿½ï¿½ä¸®,Ã¢ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
 	else
 	{
 		PGLVEHICLE pVehicleInfo = new GLVEHICLE ();
 
-		// DBÀÛ¾÷ ½ÇÆÐ½Ã È¤Àº »ý¼ºÈÄ ¸Þ¸ð¸® ÇØÁ¦ÇØÁà¶ó
+		// DBï¿½Û¾ï¿½ ï¿½ï¿½ï¿½Ð½ï¿½ È¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		CGetVehicle* pDbAction = new CGetVehicle ( pVehicleInfo, pNetMsg->dwVehicleID, dwClientID, pChar->m_dwCharID,  false, true );
 		m_pDBMan->AddJob ( pDbAction );
 	}
@@ -3666,7 +3704,7 @@ BOOL GLGaeaServer::ReqSearchResultShopItem ( DWORD dwClientID, DWORD dwGaeaID, G
 }
 
 
-// ¸ðµç Å¬·´ÀÇ ¹èÆ²ÀÇ ÇöÀç »óÈ²À» ÀúÀåÇÑ´Ù. ( Å³/µ¥½º¸¦ ÀúÀåÇÑ´Ù. ) 
+// ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ²ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È²ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½. ( Å³/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½. ) 
 BOOL GLGaeaServer::SaveClubBattle()
 {
 	EnterCriticalSection(&m_CSPCLock);
@@ -3686,11 +3724,11 @@ BOOL GLGaeaServer::SaveClubBattle()
 			{
 				GLCLUBBATTLE &sClubBattle = (*pos).second;
 
-				//	µ¿¸ÍÀåÅ¬·´¸¸ ±â·Ï
+				//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 				if ( sClubBattle.m_bAlliance && cCLUB.m_dwID != cCLUB.m_dwAlliance )
 					continue;
 
-				//	db¿¡ ÀúÀå ( A±âÁØ, B±âÁØ ÀúÀå )
+				//	dbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ( Aï¿½ï¿½ï¿½ï¿½, Bï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ )
 				CSaveClubBattle *pDbAction = new CSaveClubBattle ( cCLUB.m_dwID, 
 																   sClubBattle.m_dwCLUBID, 
 																   sClubBattle.m_wKillPointDB + sClubBattle.m_wKillPointTemp, 
@@ -3776,7 +3814,7 @@ void GLGaeaServer::DelPlayHostileAllianceBattle( DWORD dwClub_P, DWORD dwClub_S 
 	GLCLUB *pCLUB_S = m_cClubMan.GetClub ( dwClub_S );
 	if ( !pCLUB_S )	return;
 
-	// ÀÚ½Å Å¬·´
+	// ï¿½Ú½ï¿½ Å¬ï¿½ï¿½
 	CLUB_ALLIANCE_ITER pos = pCLUB_P->m_setAlliance.begin();
 	CLUB_ALLIANCE_ITER end = pCLUB_P->m_setAlliance.end();
 	for ( ; pos!=end; ++pos )
@@ -4024,10 +4062,10 @@ BOOL GLGaeaServer::DropSummon ( PGLSUMMONFIELD pSummon, SNATIVEID sMapID )
 	GLLandMan* pLandMan = GetByMapID ( sMapID );
 	if ( !pLandMan ) return FALSE;
 
-	// ±Û·Î¹ú¿¡ µî·Ï
+	// ï¿½Û·Î¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	m_SummonArray[pSummon->m_dwGUID] = pSummon;
 
-	// ·£µå¿¡ µî·Ï
+	// ï¿½ï¿½ï¿½å¿¡ ï¿½ï¿½ï¿½
 	pSummon->m_pLandMan  = pLandMan;
 	pSummon->m_pLandNode = pLandMan->m_GlobSummonList.ADDHEAD ( pSummon );
 	pLandMan->RegistSummon ( pSummon );
@@ -4035,9 +4073,9 @@ BOOL GLGaeaServer::DropSummon ( PGLSUMMONFIELD pSummon, SNATIVEID sMapID )
 	return TRUE;
 }
 
-// ÀÌ ÇÔ¼ö´Â ÁÖÀÎÀÌ ¸ÊÀ» ÀÌµ¿ÇÏ´Â ¸ðµç ÇàÀ§¿¡ ´ëÇØ¼­
-// È£ÃâµÈ´Ù. (ÁÖÀÎÀÌ °ÔÀÓÀ» Á¾·áÇÏ´Â °æ¿ì¿¡µµ È£ÃâµÊ)
-// µû¶ó¼­ ¼ÒÈ¯¿©ºÎ¸¦ °í·ÁÇØ¾ß ÇÑ´Ù.
+// ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½
+// È£ï¿½ï¿½È´ï¿½. (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ È£ï¿½ï¿½ï¿½)
+// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Ñ´ï¿½.
 BOOL GLGaeaServer::DropOutSummon ( DWORD dwGUID )
 {
 	if ( dwGUID>=m_dwMaxClient ) 
@@ -4060,17 +4098,17 @@ BOOL GLGaeaServer::DropOutSummon ( DWORD dwGUID )
 		return FALSE;
 	}
 
-	// È°µ¿ ¿©ºÎ
+	// È°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	bool bValid = pSummon->IsValid ();
 
 	DWORD dwSummonGUID = pSummon->m_dwGUID;
 	DWORD dwOwnerID	   = pSummon->m_dwOwner;
 	DWORD dwSummonArrayIndex = pSummon->m_wArrayIndex;
 
-	// È°µ¿ÁßÀÌ¸é
+	// È°ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½
 	if ( bValid )
 	{
-		//	Note : Land ¸®½ºÆ®¿¡¼­ Á¦°Å.
+		//	Note : Land ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		GLLandMan* pLandMan = pSummon->m_pLandMan;
 		if ( pLandMan )
 		{
@@ -4083,7 +4121,7 @@ BOOL GLGaeaServer::DropOutSummon ( DWORD dwGUID )
 //		pSummon->ReSetSkillDelay ();
 	}
 
-	// Å¬¶óÀÌ¾ðÆ® ÆÖ »ç¶óÁö°Ô ¸Þ½ÃÁö ¹ß¼Û (PC°¡ °ÔÀÓÀ» Á¾·áÇÏ¸é pOwner ¾øÀ» ¼ö ÀÖ´Ù)
+	// Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ® ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ß¼ï¿½ (PCï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ pOwner ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½)
 	PGLCHAR pOwner = GetChar ( dwOwnerID );
 	if ( pOwner && bValid )
 	{
@@ -4118,7 +4156,7 @@ BOOL GLGaeaServer::DropOutSummon ( DWORD dwGUID )
 		}
 	}
 
-	// ÇöÀç ÇÊµå¼­¹ö¸¦ ¶°³ª°Å³ª °ÔÀÓÀ» ¿ÏÀü Á¾·áÇÏ¸é
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Êµå¼­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½
 
 	RELEASE_SUMMON ( pSummon );
 	m_SummonArray[dwGUID] = NULL;
@@ -4134,7 +4172,7 @@ BOOL GLGaeaServer::SaveNpcCommission( DWORD dwCharID, DWORD dwUserID, LONGLONG l
 
 	GLChar* pChar = GLGaeaServer::GetInstance().GetCharID( dwCharID );
 
-	//  Ä³¸¯ÅÍ°¡ °°Àº ÇÊµå¿¡ ÀÖÀ»°æ¿ì 
+	//  Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Êµå¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	if ( pChar ) 
 	{
 		pChar->UpdateNpcCommission( lnCommission );
@@ -4162,7 +4200,7 @@ BOOL GLGaeaServer::SaveNpcCommissionDB( DWORD dwCharID, DWORD dwUserID, LONGLONG
 	CUpdateUserMoneyAdd* pDbAction = new CUpdateUserMoneyAdd ( dwUserID, lnCommission );
 	m_pDBMan->AddJob ( pDbAction );
 
-//	UserLastInfo ¾÷µ¥ÀÌÆ®
+//	UserLastInfo ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 #if defined ( TW_PARAM ) || defined ( HK_PARAM ) || defined ( _RELEASED )	
 	
 	CUpdateUserLastInfoAdd* pDbActionLast = new CUpdateUserLastInfoAdd ( dwUserID, lnCommission );
@@ -4176,7 +4214,7 @@ BOOL GLGaeaServer::SaveNpcCommissionDB( DWORD dwCharID, DWORD dwUserID, LONGLONG
 
 BOOL GLGaeaServer::ReqClubDeathMatchRanking ( DWORD dwClientID, DWORD dwGaeaID, GLMSG::SNET_CLUB_DEATHMATCH_RANKING_REQ* pNetMsg )
 {
-	// ¿äÃ» ÄÉ¸¯ÅÍ°¡ À¯È¿¼º Ã¼Å©
+	// ï¿½ï¿½Ã» ï¿½É¸ï¿½ï¿½Í°ï¿½ ï¿½ï¿½È¿ï¿½ï¿½ Ã¼Å©
 	PGLCHAR pChar = GetChar ( dwGaeaID );
 	if ( !pChar ) return FALSE;	
 	

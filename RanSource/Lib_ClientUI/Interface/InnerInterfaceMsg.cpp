@@ -247,14 +247,14 @@ void CInnerInterface::TranslateUIMessage ( UIGUID ControlID, DWORD dwMsg )
 
 				if (RPROFILE::bMOVABLE_ON_CHAT )
 				{
-					//	m_bFirstControlÀÌ ¾Æ´Ï¶ó¸é,
-					//	Å°°¡ ´­·¯Á®µµ, TranslateMessage.. Áï ÀÌ ÇÔ¼ö ¾ÈÀ¸·Î
-					//	µé¾î¿ÀÁö ¾Ê´Â´Ù.
-					//	¸¸¾à, Ã¤ÆÃ¹Ú½ºÀ§¿¡¼­ ÁÂÅ¬¸¯À» ÇÒ °æ¿ì,
-					//	m_bFirstControlÀº Ã¤ÆÃ¹Ú½ºÀÌ¹Ç·Î,
-					//	¾Æ·¡ÀÇ VisibleTest¸¦ ÇÏ´Â ÄÁÆ®·ÑµéÀº ¾Æ¹« »ó°üÀÌ ¾ø°ÔµÈ´Ù.
-					//	ÀÌ·²°æ¿ì, Ä³¸¯ÅÍ°¡ ¾Æ·¡ÀÇ ÄÁÆ®·ÑµéÀÌ ¿­·ÁÁ®ÀÖÀ½¿¡µµ
-					//	¶Ù¾î´Ù´Ï°Ô µÈ´Ù.
+					//	m_bFirstControlï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½,
+					//	Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, TranslateMessage.. ï¿½ï¿½ ï¿½ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+					//	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
+					//	ï¿½ï¿½ï¿½ï¿½, Ã¤ï¿½Ã¹Ú½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½,
+					//	m_bFirstControlï¿½ï¿½ Ã¤ï¿½Ã¹Ú½ï¿½ï¿½Ì¹Ç·ï¿½,
+					//	ï¿½Æ·ï¿½ï¿½ï¿½ VisibleTestï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½Æ®ï¿½Ñµï¿½ï¿½ï¿½ ï¿½Æ¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ÔµÈ´ï¿½.
+					//	ï¿½Ì·ï¿½ï¿½ï¿½ï¿½, Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+					//	ï¿½Ù¾ï¿½Ù´Ï°ï¿½ ï¿½È´ï¿½.
 					if( IsOpenWindowToMoveBlock() )
 					{
 						SetCharMoveBlock ();
@@ -291,9 +291,9 @@ void CInnerInterface::TranslateUIMessage ( UIGUID ControlID, DWORD dwMsg )
 		}
 	}
 
-	if ( MODAL_WINDOW <= ControlID ) //	NOTE :¸ð´ÞÃ³¸®
+	if ( MODAL_WINDOW <= ControlID ) //	NOTE :ï¿½ï¿½ï¿½Ã³ï¿½ï¿½
 	{
-		// MEMO : ¾Æ·¡ ÇÔ¼ö´Â ´ÙÁß ¸ð´Þ ¶§¹®¿¡ ³ÖÀº °ÍÀÌ´Ù. ÀÏ´Ü »©ÀÚ...
+		// MEMO : ï¿½Æ·ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½. ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½...
 		//CModalWindow* pModalWindow = (CModalWindow*)FindControl( ControlID );
 		if ( m_pModalWindow )
 		{
@@ -362,7 +362,7 @@ void CInnerInterface::TranslateUIMessage ( UIGUID ControlID, DWORD dwMsg )
 			{
 				HideGroup ( ControlID );
 
-//				#ifdef CH_PARAM // Áß±¹ ÀÎÅÍÆäÀÌ½º º¯°æ
+//				#ifdef CH_PARAM // ï¿½ß±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //					UpdatePotionTrayPosition();
 //				#endif
 
@@ -554,7 +554,7 @@ void CInnerInterface::TranslateUIMessage ( UIGUID ControlID, DWORD dwMsg )
 				{
 					if( m_pSubMasterSet )
 					{
-						// ÇöÀç ¼±ÅÃµÈ ÀÎµ¦½ºÀÇ Å¬·´¸â¹öÀÇ ÀÌ¸§À» ¾ò¾î¿Í¼­ ¼­ºê¸¶½ºÅÍÃ¢¿¡ ³Ñ±ä´Ù.
+						// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ãµï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½ê¸¶ï¿½ï¿½ï¿½ï¿½Ã¢ï¿½ï¿½ ï¿½Ñ±ï¿½ï¿½.
 						DWORD dwCharID = m_pClubWindow->GetClubMemberID();
 						CString strName = m_pClubWindow->GetClubMemberName();
 						m_pSubMasterSet->SetSubMasterName( strName );
@@ -576,7 +576,7 @@ void CInnerInterface::TranslateUIMessage ( UIGUID ControlID, DWORD dwMsg )
 			if( UIMSG_ADDNAME_TO_CHATBOX & dwMsg )
 			{
 				GetChat()->BEGIN_PRIVATE_CHAT ( m_pFriendWindow->GET_FRIEND_NAME () );
-				m_pChat->REFRESH_FRIEND_LIST(); // Ã¤ÆÃÃ¢ÀÇ Ä£±¸¸®½ºÆ®¸¦ »õ·Î °»½ÅÇÑ´Ù.
+				m_pChat->REFRESH_FRIEND_LIST(); // Ã¤ï¿½ï¿½Ã¢ï¿½ï¿½ Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 				ShowGroupFocus ( BASIC_CHAT_BOX );
 			}
 			else if( UIMSG_EDIT_END & dwMsg )
@@ -720,7 +720,7 @@ void	CInnerInterface::DisplayChatMessage ( int nType, const char *szName, const 
 		
 		switch ( nType )
 		{
-		case CHAT_TYPE_GLOBAL:		// °ü¸®¿ë ±Û·Î¹ú ¸Þ½ÃÁö
+		case CHAT_TYPE_GLOBAL:		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û·Î¹ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½
 			{
 				/*staff name in chat, Juver, 2017/12/26 */
 				strCombine.Format ( "[%s](%s):%s", ID2GAMEWORD("ADMIN_NAME"), szName, strTemp );
@@ -730,7 +730,7 @@ void	CInnerInterface::DisplayChatMessage ( int nType, const char *szName, const 
 			}
 			break;
 
-		case CHAT_TYPE_NORMAL:		// ÀÏ¹ÝÀû Ã¤ÆÃ ¸Þ½ÃÁö
+		case CHAT_TYPE_NORMAL:		// ï¿½Ï¹ï¿½ï¿½ï¿½ Ã¤ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½
 			{
 				strCombine.Format ( "[%s](%s):%s",ID2GAMEWORD("CHAT_OPTION",0), szName, strTemp );
 
@@ -739,7 +739,7 @@ void	CInnerInterface::DisplayChatMessage ( int nType, const char *szName, const 
 			}
 			break;
 
-		case CHAT_TYPE_PARTY:		// ÆÄÆ¼¿ø¿¡°Ô Àü´ÞµÇ´Â ¸Þ½ÃÁö
+		case CHAT_TYPE_PARTY:		// ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ÞµÇ´ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½
 			{
 				strCombine.Format ( "[%s](%s):%s",ID2GAMEWORD("CHAT_OPTION",2), szName, strTemp );
 
@@ -748,14 +748,14 @@ void	CInnerInterface::DisplayChatMessage ( int nType, const char *szName, const 
 			}
 			break;
 
-		case CHAT_TYPE_PRIVATE:		// °³ÀÎÀûÀÎ ¸Þ½ÃÁö, ±Ó¸», ¼Ó»èÀÓ
+		case CHAT_TYPE_PRIVATE:		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½, ï¿½Ó¸ï¿½, ï¿½Ó»ï¿½ï¿½ï¿½
 			{
 				 /*item link, Juver, 2017/07/31 */
 				m_pChat->AddChat ( szName, strTemp, CHAT_PRIVATE,&sItemLink );
 			}
 			break;
 
-        case CHAT_TYPE_GUILD:		// ±æµå¿ø¿¡°Ô Àü´ÞµÇ´Â ¸Þ½ÃÁö
+        case CHAT_TYPE_GUILD:		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ÞµÇ´ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½
 			{
 				strCombine.Format ( "[%s](%s):%s",ID2GAMEWORD("CHAT_OPTION",3), szName, strTemp );	
 
@@ -824,7 +824,7 @@ void	CInnerInterface::DisplayChatMessage ( int nType, const char *szName, const 
 
 					m_pAdminMessageDisplay->AddText ( strCombine, NS_UITEXTCOLOR::ADMIN_COLOR );
 
-					// °³Çà ±â´ÉÀ» À§ÇØ AddText¸¦ ¿©·¯¹ø ÇÑ´Ù.
+					// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ AddTextï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 					/*int i, nSize = strlen(szMsg);
 					for( i = 0; i < nSize; i++ )
 					{
@@ -865,7 +865,7 @@ void	CInnerInterface::DisplayChatMessage ( int nType, const char *szName, const 
 
 						DWORD dwIDColor = NS_UITEXTCOLOR::IDCOLOR;
 
-						////	ÀÌ¸§ »ö (PK_COLOR)
+						////	ï¿½Ì¸ï¿½ ï¿½ï¿½ (PK_COLOR)
 						//PGLCHARCLIENT pCHAR = GLGaeaClient::GetInstance().GetChar ( sTargetID.dwID );
 						//if ( !pCHAR ) return ;
 						//dwColor = pCHAR->GET_PK_COLOR ();
@@ -925,7 +925,7 @@ void	CInnerInterface::DisplayComboWhoreMessage ( const char *szName )
 //			if ( UIMSG_ADDNAME_TO_CHATBOX & dwMsg )
 //			{
 //				GetChat()->BEGIN_PRIVATE_CHAT ( m_pFriendWindow->GET_FRIEND_NAME () );
-//				m_pChat->REFRESH_FRIEND_LIST(); // Ã¤ÆÃÃ¢ÀÇ Ä£±¸¸®½ºÆ®¸¦ »õ·Î °»½ÅÇÑ´Ù.
+//				m_pChat->REFRESH_FRIEND_LIST(); // Ã¤ï¿½ï¿½Ã¢ï¿½ï¿½ Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 //				ShowGroupFocus ( BASIC_CHAT_BOX );
 //			}
 //			else if ( UIMSG_EDIT_END & dwMsg )
@@ -946,7 +946,7 @@ void	CInnerInterface::DisplayComboWhoreMessage ( const char *szName )
 //		break;	
 //	}
 //
-//	if( MODAL_WINDOW <= ControlID ) // MEMO : ¾ÆÀÌµð°¡ ¸ð´ÞÀÌ¸é...
+//	if( MODAL_WINDOW <= ControlID ) // MEMO : ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½...
 //	{
 //		if( dwMsg & UIMSG_INVISIBLE )
 //		{

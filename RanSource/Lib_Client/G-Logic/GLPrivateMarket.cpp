@@ -11,10 +11,17 @@ GLPrivateMarket::GLPrivateMarket(void) :
 	m_emSale(EM_SALE_TYPE_NORMAL)	//offline vend
 {
 	m_invenSALE.SetState ( EM_SALE_INVEN_X, EM_SALE_INVEN_Y );
+	
+	// SECURITY FIX: Initialize critical section for thread safety
+	// This prevents race conditions when multiple threads access private market data
+	InitializeCriticalSection(&m_csPMarketLock);
 }
 
 GLPrivateMarket::~GLPrivateMarket(void)
 {
+	// SECURITY FIX: Clean up critical section to prevent resource leaks
+	// This ensures proper cleanup when the private market object is destroyed
+	DeleteCriticalSection(&m_csPMarketLock);
 }
 
 bool GLPrivateMarket::DoMarketOpen ()
@@ -129,7 +136,7 @@ bool GLPrivateMarket::RegItem(const SINVENITEM &sInvenItem, LONGLONG llPRICE, DW
 
 	SITEMCUSTOM sITEMCUSTOM = sInvenItem.sItemCustom;
 
-	//	Note : °ãÄ§ °¡´ÉÀÏ °æ¿ì µ¿ÀÏÇÑ Á¾·ùÀÇ ¾ÆÀÌÅÛÀÌ ÀÌ¹Ì µî·ÏµÇ¾î ÀÖ´ÂÁö °Ë»ç.
+	//	Note : ï¿½ï¿½Ä§ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ÏµÇ¾ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½.
 	if ( pITEM->ISPILE() )
 	{
 		bool bREG = IsRegItem ( sInvenItem.sItemCustom.sNativeID );
@@ -138,24 +145,24 @@ bool GLPrivateMarket::RegItem(const SINVENITEM &sInvenItem, LONGLONG llPRICE, DW
 		sITEMCUSTOM.wTurnNum = (WORD) dwNUM;
 	}
 	
-	//	Note : °ãÄ§ÀÌ ¾Æ´Ò °æ¿ì´Â ÆÇ¸Å ¼ö·® 1°³·Î Á¦ÇÑ.
+	//	Note : ï¿½ï¿½Ä§ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	if ( !pITEM->ISPILE() )
 	{
 		dwNUM = 1;
 	}
 
-	//	Note : µé¾î°¥ ½½·ÔÀÌ ÁöÁ¤µÇ¾î ÀÖÁö ¾ÊÀ» °æ¿ì.
+	//	Note : ï¿½ï¿½î°¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½.
 	if ( sSALEPOS==SNATIVEID(false) )
 	{
 		BOOL bOK = m_invenSALE.FindInsrtable ( pITEM->sBasicOp.wInvenSizeX, pITEM->sBasicOp.wInvenSizeY, sSALEPOS.wMainID, sSALEPOS.wSubID );
 		if ( !bOK )									return false;
 	}
 
-	//	Note : ÀÎº¥Åä¸®¿¡ µî·Ï.
+	//	Note : ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ï¿½.
 	BOOL bOK = m_invenSALE.InsertItem ( sITEMCUSTOM, sSALEPOS.wMainID, sSALEPOS.wSubID );
 	if ( !bOK )										return false;
 
-	//	Note : ÆÇ¸Å Á¤º¸ µî·Ï.
+	//	Note : ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½.
 	SSALEITEM sSALE;
 	sSALE.sSALEPOS = sSALEPOS;
 	sSALE.sITEMCUSTOM = sInvenItem.sItemCustom;
@@ -230,16 +237,41 @@ bool GLPrivateMarket::DisItem( SNATIVEID sSALEPOS, bool bSearchMarket )
 
 bool GLPrivateMarket::DoSale ( SNATIVEID sSALEPOS, DWORD dwNUM, bool bSearchMarket )
 {
+	// SECURITY FIX: Enter critical section to prevent race conditions
+	// This ensures only one thread can modify the sale item at a time
+	// Prevents multiple players from purchasing the same item simultaneously
+	EnterCriticalSection(&m_csPMarketLock);
+	
 	MAPITEM_ITER pos = m_mapSALE.find ( sSALEPOS.dwID );
-	if ( pos==m_mapSALE.end() )						return false;
+	if ( pos==m_mapSALE.end() )
+	{
+		// SECURITY FIX: Always release lock before returning
+		LeaveCriticalSection(&m_csPMarketLock);
+		return false;
+	}
 	
 	SSALEITEM &sSALE = (*pos).second;
 
-	if ( sSALE.bSOLD )								return false;
-	if ( sSALE.dwNUMBER < dwNUM )					return false;
+	// SECURITY FIX: Check if item is already sold (prevents double purchase)
+	if ( sSALE.bSOLD )
+	{
+		LeaveCriticalSection(&m_csPMarketLock);
+		return false;
+	}
+	
+	// SECURITY FIX: Check if enough quantity available (prevents negative quantity)
+	if ( sSALE.dwNUMBER < dwNUM )
+	{
+		LeaveCriticalSection(&m_csPMarketLock);
+		return false;
+	}
 
+	// SECURITY FIX: Atomic decrement to prevent race conditions
+	// This ensures the quantity is properly decremented even with concurrent access
 	sSALE.dwNUMBER -= dwNUM;
 
+	// SECURITY FIX: Mark as sold when quantity reaches zero
+	// This prevents further purchases of the same item
 	if ( 0==sSALE.dwNUMBER )
 	{
 		sSALE.bSOLD = true;
@@ -255,9 +287,10 @@ bool GLPrivateMarket::DoSale ( SNATIVEID sSALEPOS, DWORD dwNUM, bool bSearchMark
 				}
 			}
 		}
-
 	}
 
+	// SECURITY FIX: Always release lock before returning
+	LeaveCriticalSection(&m_csPMarketLock);
 	return true;
 }
 

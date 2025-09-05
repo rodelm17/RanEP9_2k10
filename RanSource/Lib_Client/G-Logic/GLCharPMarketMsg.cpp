@@ -22,7 +22,7 @@ HRESULT GLChar::MsgPMarketTitle ( NET_MSG_GENERIC* nmg )
 		return S_FALSE;
 	}
 
-	//	Note : ÃÊ±âÈ­¸¦ ÇàÇÑ´Ù.
+	//	Note : ï¿½Ê±ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
 	m_sPMarket.DoMarketClose();
 
 	m_sPMarket.SetTITLE ( pNetMsg->szPMarketTitle );
@@ -56,7 +56,7 @@ HRESULT GLChar::MsgPMarketReqItem ( NET_MSG_GENERIC* nmg )
 		return S_FALSE;
 	}
 
-	//	Note : µî·ÏÇÒ ¼ö ÀÖ´Â ÇÑµµ¸¦ ³Ñ¾î¼­°í ÀÖ½À´Ï´Ù.
+	//	Note : ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½Ñµï¿½ï¿½ï¿½ ï¿½Ñ¾î¼­ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.
 	if ( m_sPMarket.GetItemNum() >= GLPrivateMarket::EMMAX_SALE_NUM )
 	{
 		NetMsgFB.emFB = EMPMARKET_REGITEM_FB_MAXNUM;
@@ -73,7 +73,7 @@ HRESULT GLChar::MsgPMarketReqItem ( NET_MSG_GENERIC* nmg )
 		return S_FALSE;
 	}
 
-	// ÆÖÄ«µåÀÌ¸é¼­ ÆÖÀÌ È°¼ºÈ­ µÇ¾î ÀÖÀ¸¸é »óÁ¡¿¡ µî·ÏÇÒ ¼ö ¾ø´Ù.
+	// ï¿½ï¿½Ä«ï¿½ï¿½ï¿½Ì¸é¼­ ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ ï¿½Ç¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	if ( pITEM->sBasicOp.emItemType == ITEM_PET_CARD )
 	{
 		PGLPETFIELD pMyPet = GLGaeaServer::GetInstance().GetPET ( m_dwPetGUID );
@@ -87,7 +87,7 @@ HRESULT GLChar::MsgPMarketReqItem ( NET_MSG_GENERIC* nmg )
 
 	DWORD dwNum = pNetMsg->dwNum;
 
-	//	Note : ÀÌ¹Ì µî·ÏµÈ ¾ÆÀÌÅÛÀÎÁö °Ë»ç.
+	//	Note : ï¿½Ì¹ï¿½ ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½.
 	bool bREGPOS = m_sPMarket.IsRegInvenPos ( SNATIVEID(pNetMsg->wPosX,pNetMsg->wPosY) );
 	if ( bREGPOS )
 	{
@@ -96,7 +96,7 @@ HRESULT GLChar::MsgPMarketReqItem ( NET_MSG_GENERIC* nmg )
 		return S_FALSE;
 	}
 
-	//	°Å·¡¿É¼Ç
+	//	ï¿½Å·ï¿½ï¿½É¼ï¿½
 	/*item wrapper, Juver, 2018/01/12 */
 	if ( pITEM->sBasicOp.emItemType != ITEM_WRAPPER_BOX )
 	{
@@ -117,7 +117,7 @@ HRESULT GLChar::MsgPMarketReqItem ( NET_MSG_GENERIC* nmg )
 
 	}
 	
-	// GMCharEdit ·Î ³ÖÀº ¾ÆÀÌÅÛÀº ÆÇ¸Å°¡ ºÒ°¡´ÉÇÏ´Ù.
+	// GMCharEdit ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¸Å°ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.
 	/*item wrapper, Juver, 2018/01/12 */
 	if ( pINVENITEM->sItemCustom.IsGM_GENITEM() && pITEM->sBasicOp.emItemType != ITEM_WRAPPER_BOX )
 	{
@@ -126,7 +126,7 @@ HRESULT GLChar::MsgPMarketReqItem ( NET_MSG_GENERIC* nmg )
 		return FALSE;
 	}
 
-	//	Note : °ãÄ§ °¡´ÉÀÏ °æ¿ì µ¿ÀÏÇÑ Á¾·ùÀÇ ¾ÆÀÌÅÛÀÌ ÀÌ¹Ì µî·ÏµÇ¾î ÀÖ´ÂÁö °Ë»ç.
+	//	Note : ï¿½ï¿½Ä§ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½ï¿½ÏµÇ¾ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½.
 	if ( pITEM->ISPILE() )
 	{
 		bool bREG = m_sPMarket.IsRegItem ( nidITEM );
@@ -137,7 +137,7 @@ HRESULT GLChar::MsgPMarketReqItem ( NET_MSG_GENERIC* nmg )
 			return S_FALSE;
 		}
 
-		//	Note : ¼ÒÁöÇÏ°í ÀÖ´Â °³¼ö ¸¹Å­ ÆÇ¸Å °¡´É.
+		//	Note : ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å­ ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		DWORD dwTURN = m_cInventory.CountTurnItem ( nidITEM );
 		if ( dwNum >= dwTURN )
 		{
@@ -226,7 +226,7 @@ HRESULT GLChar::MsgPMarketOpen ( NET_MSG_GENERIC* nmg )
 	GLMSG::SNETPC_PMARKET_OPEN *pNetMsg = (GLMSG::SNETPC_PMARKET_OPEN *) nmg;
 	GLMSG::SNETPC_PMARKET_OPEN_FB	NetMsgFB;
 
-	//// »óÁ¡ ¿­°í ¿òÁ÷ÀÌ´Â°Í ¹æÁö
+	//// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´Â°ï¿½ ï¿½ï¿½ï¿½ï¿½
 	//if ( !IsACTION ( GLAT_IDLE ) )
 	//{
 	//	NetMsgFB.emFB = EMPMARKET_OPEN_FB_FAIL;
@@ -306,14 +306,14 @@ HRESULT GLChar::MsgPMarketOpen ( NET_MSG_GENERIC* nmg )
 		return S_FALSE;
 	}
 
-	//	[ÀÚ½Å¿¡°Ô] ÀÎ¹ê ¾ÆÀÌÅÆ ¼Ò¸ð½ÃÅ´.
+	//	[ï¿½Ú½Å¿ï¿½ï¿½ï¿½] ï¿½Î¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò¸ï¿½ï¿½Å´.
 	DoDrugInvenItem ( pNetMsg->wPosX, pNetMsg->wPosY );
 
-	//	Note : ÀÚ±â ÀÚ½Å¿¡°Ô.
+	//	Note : ï¿½Ú±ï¿½ ï¿½Ú½Å¿ï¿½ï¿½ï¿½.
 	NetMsgFB.emFB = EMPMARKET_OPEN_FB_OK;
 	GLGaeaServer::GetInstance().SENDTOCLIENT ( m_dwClientID, (NET_MSG_GENERIC*) &NetMsgFB );
 
-	//	Note : ÁÖº¯ ¸ðµÎ¿¡°Ô.
+	//	Note : ï¿½Öºï¿½ ï¿½ï¿½Î¿ï¿½ï¿½ï¿½.
 	GLMSG::SNETPC_PMARKET_OPEN_BRD NetMsgBRD;
 	NetMsgBRD.dwGaeaID = m_dwGaeaID;
 	StringCchCopy ( NetMsgBRD.szPMarketTitle, CHAT_MSG_SIZE+1, m_sPMarket.GetTitle().c_str() );
@@ -327,7 +327,7 @@ HRESULT GLChar::MsgPMarketOpen ( NET_MSG_GENERIC* nmg )
 	GLGaeaServer::GetInstance().SENDTOAGENT ( m_dwClientID, &NetMsg );
 
 	// Add Search Item Data
-	// ¸¸ÀÏ »óÁ¡À» ÇÐ¿ø ±¤Àå¿¡¼­ ¿­¾ú´Ù¸é ¾ÆÀÌÅÛ °Ë»ö ¸®½ºÆ®¿¡ Ãß°¡ÇÑ´Ù.
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¿ï¿½ ï¿½ï¿½ï¿½å¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ñ´ï¿½.
 	if( m_sMapID.wMainID == 22 && m_sMapID.wSubID == 0 )
 	{
 		GLGaeaServer::GetInstance().InsertSearchShop( m_dwGaeaID );
@@ -343,12 +343,12 @@ HRESULT GLChar::MsgPMarketClose ( NET_MSG_GENERIC* nmg )
 
 	m_sPMarket.DoMarketClose();
 
-	//	ÁÖº¯¿¡°Ô °³ÀÎ»óÁ¡ Á¾·á ¾Ë¸².
+	//	ï¿½Öºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½.
 	GLMSG::SNETPC_PMARKET_CLOSE_BRD	NetMsgBRD;
 	NetMsgBRD.dwGaeaID = m_dwGaeaID;
 	SendMsgViewAround ( (NET_MSG_GENERIC *) &NetMsgBRD );
 
-	//	ÀÚ½Å¿¡°Ô °³ÀÎ»óÁ¡ Á¾·á ¾Ë¸².
+	//	ï¿½Ú½Å¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½.
 	GLGaeaServer::GetInstance().SENDTOCLIENT ( m_dwClientID, (NET_MSG_GENERIC*) &NetMsgBRD );
 
 	//offline vend
@@ -358,7 +358,7 @@ HRESULT GLChar::MsgPMarketClose ( NET_MSG_GENERIC* nmg )
 	GLGaeaServer::GetInstance().SENDTOAGENT ( m_dwClientID, &NetMsg );
 
 	// Add Search Item Data
-	// ¸¸ÀÏ »óÁ¡À» ÇÐ¿ø ±¤Àå¿¡¼­ ¿­¾ú´Ù°¡ ´Ý¾Ò´Ù¸é ¾ÆÀÌÅÛ °Ë»ö ¸®½ºÆ®¿¡¼­ »èÁ¦ÇÑ´Ù.
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¿ï¿½ ï¿½ï¿½ï¿½å¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù°ï¿½ ï¿½Ý¾Ò´Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	if( m_sMapID.wMainID == 22 && m_sMapID.wSubID == 0 )
 	{
 		GLGaeaServer::GetInstance().EraseSearchShop( m_dwGaeaID );
@@ -387,13 +387,13 @@ void GLChar::ReqNetMsg_PMarketItem ( DWORD dwClientID )
 		NetMsgBrd.bSOLD = sSALEITEM.bSOLD;
 		GLGaeaServer::GetInstance().SENDTOCLIENT ( dwClientID, (NET_MSG_GENERIC*) &NetMsgBrd );
 
-		// »óÁ¡ÀÇ ¾ÆÀÌÅÛÀÌ ÆÖÄ«µåÀÌ¸é ÆÖÄ«µå Á¤º¸ ¿äÃ»
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä«ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»
 		SITEM* pItem = GLItemMan::GetInstance().GetItem ( sSALEITEM.sITEMCUSTOM.sNativeID );
 		if ( pItem && pItem->sBasicOp.emItemType == ITEM_PET_CARD )
 		{
 			PGLPET pPetInfo = new GLPET ();
 
-			// DBÀÛ¾÷ ½ÇÆÐ½Ã È¤Àº »ý¼ºÈÄ ¸Þ¸ð¸® ÇØÁ¦ÇØÁà¶ó
+			// DBï¿½Û¾ï¿½ ï¿½ï¿½ï¿½Ð½ï¿½ È¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			CGetPet* pDbAction = new CGetPet ( pPetInfo, sSALEITEM.sITEMCUSTOM.dwPetID, dwClientID, m_dwCharID, 
 											   0,0,false, false, true );
 			GLDBMan* pDBMan = GLGaeaServer::GetInstance().GetDBMan ();
@@ -427,7 +427,7 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 		return S_FALSE;
 	}
 
-	//	Note : °³ÀÎ»óÁ¡ÀÌ ¿ÀÇÂ»óÅÂÀÎÁö °Ë»ç.
+	//	Note : ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½.
 	if ( !pCHAR->m_sPMarket.IsOpen() )
 	{
 		NetMsgFB.emFB = EMPMARKET_BUY_FB_FAIL;
@@ -435,7 +435,7 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 		return S_FALSE;
 	}
 
-	//	Note : ÆÇ¸ÅÁßÀÎ ¹°Ç° Á¤º¸.
+	//	Note : ï¿½Ç¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½.
 	const SSALEITEM *pSALEITEM = pCHAR->m_sPMarket.GetItem ( pNetMsg->sSALEPOS );
 	if ( !pSALEITEM )
 	{
@@ -444,7 +444,7 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 		return S_FALSE;
 	}
 
-	//	Note : ÆÇ¸ÅÁßÀÎ ¹°Ç°ÀÌ ÀÌ¹Ì ÆÇ¸Å¿Ï·á‰ç´ÂÁö °Ë»ç.
+	//	Note : ï¿½Ç¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½Ì¹ï¿½ ï¿½Ç¸Å¿Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½.
 	if ( pSALEITEM->bSOLD )
 	{
 		NetMsgFB.emFB = EMPMARKET_BUY_FB_SOLD;
@@ -471,7 +471,7 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 	SITEM *pITEM = GLItemMan::GetInstance().GetItem ( pSALEITEM->sITEMCUSTOM.sNativeID );
 	if ( !pITEM )					return S_FALSE;
 
-	// ½ÃÇÑºÎ ¾ÆÀÌÅÛ
+	// ï¿½ï¿½ï¿½Ñºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if( pITEM->IsTIMELMT() )
 	{
 		CTimeSpan cSPAN(pITEM->sDrugOp.tTIME_LMT);
@@ -488,7 +488,7 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 		}
 	}
 
-	// ÄÚ½ºÆ¬
+	// ï¿½Ú½ï¿½Æ¬
 	if( pSALEITEM->sITEMCUSTOM.nidDISGUISE != SNATIVEID(false) )
 	{
 		if( pSALEITEM->sITEMCUSTOM.tDISGUISE != 0 )
@@ -514,7 +514,7 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 		dwNum = 1;
 	}
 
-	//	Note : ±¸ÀÔÇÒ ¼ö·® ¸¹Å­ ³²¾Æ ÀÖ´ÂÁö °Ë»ç.
+	//	Note : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½.
 	if ( pSALEITEM->dwNUMBER < dwNum )
 	{
 		NetMsgFB.emFB = EMPMARKET_BUY_FB_NUM;
@@ -525,7 +525,7 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 		return S_FALSE;
 	}
 
-	//	Note : ÀÚ±ÝÀÌ ÃæºÐÇÑÁö °Ë»ç.
+	//	Note : ï¿½Ú±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½.
 	if ( m_lnMoney < (dwNum*pSALEITEM->llPRICE) )
 	{
 		NetMsgFB.emFB = EMPMARKET_BUY_FB_LOWMONEY;
@@ -533,7 +533,7 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 		return S_FALSE;
 	}
 
-	//	Note : ÀÎº¥ÀÇ °ø°£ÀÌ ÃæºÐÇÑÁö °Ë»ç.
+	//	Note : ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½.
 	WORD wINVENX = pITEM->sBasicOp.wInvenSizeX;
 	WORD wINVENY = pITEM->sBasicOp.wInvenSizeY;
 
@@ -559,7 +559,7 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 		return E_FAIL;
 	}
 
-	//	Note : °³ÀÎ»óÁ¡¿¡ µî·ÏµÈ ¾ÆÀÌÅÛÀÌ¶û ½ÇÁ¦·Î ÀÎº¥Åä¸®¿¡ ÀÖ´Â ¾ÆÀÌÅÛÀÌ ÀÏÄ¡ÇÏ´ÂÁö °Ë»ç.
+	//	Note : ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ïµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ä¸®ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½Ï´ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½.
 	//
 	BOOL bVALID_ITEM(FALSE);
 	if ( pITEM->ISPILE() )
@@ -577,6 +577,8 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 		}
 	}
 
+	// SECURITY FIX: Fail transaction if item validation fails
+	// This prevents invalid purchases and potential exploits
 	if ( !bVALID_ITEM )
 	{
 		NetMsgFB.emFB = EMPMARKET_BUY_FB_FAIL;
@@ -585,7 +587,7 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 	}
 
 	// Add Search Item Data
-	//	Note : °³ÀÎ »óÁ¡ÀÇ Á¤º¸ °»½Å.
+	//	Note : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	bool bSALE;
 	if( m_sMapID.wMainID == 22 && m_sMapID.wSubID == 0 )
 	{
@@ -595,26 +597,26 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 	}
 	if ( !bSALE )
 	{
-		GASSERT(0&&"GLChar::MsgPMarketBuy()¿¡¼­ Ä¡¸íÀû ¿À·ù ¹ß°ß.");
+		GASSERT(0&&"GLChar::MsgPMarketBuy()ï¿½ï¿½ï¿½ï¿½ Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½.");
 		NetMsgFB.emFB = EMPMARKET_BUY_FB_FAIL;
 		GLGaeaServer::GetInstance().SENDTOCLIENT ( m_dwClientID, (NET_MSG_GENERIC*) &NetMsgFB );
 		return E_FAIL;
 	}
 
-	//	Note : °Å·¡ ¼öÇà.
+	//	Note : ï¿½Å·ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	if ( !pITEM->ISPILE() )
 	{
 		BOOL bDEL = pCHAR->m_cInventory.DeleteItem ( pSALEITEM->sINVENPOS.wMainID, pSALEITEM->sINVENPOS.wSubID );
 		if ( !bDEL )
 		{
-			//	Note : Ä¡¸íÀû¿À·ù. ( »çÀü¿¡ dataÀÇ ¹«°á¼ºÀ» Á¡°ËÇÏ¿´±â ¶§¹®¿¡ ¹®Á¦°¡ ¹ß»ýÇÏ¸é ¾ÈµÊ. )
-			GASSERT(0&&"GLChar::MsgPMarketBuy()¿¡¼­ Ä¡¸íÀû ¿À·ù ¹ß°ß.");
+			//	Note : Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ( ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ dataï¿½ï¿½ ï¿½ï¿½ï¿½á¼ºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï¸ï¿½ ï¿½Èµï¿½. )
+			GASSERT(0&&"GLChar::MsgPMarketBuy()ï¿½ï¿½ï¿½ï¿½ Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½.");
 			NetMsgFB.emFB = EMPMARKET_BUY_FB_FAIL;
 			GLGaeaServer::GetInstance().SENDTOCLIENT ( m_dwClientID, (NET_MSG_GENERIC*) &NetMsgFB );
 			return E_FAIL;
 		}
 
-		//	Note : »èÁ¦ ¸Þ½ÃÁö.
+		//	Note : ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½.
 		GLMSG::SNETPC_INVEN_DELETE NetMsgDelete;
 		NetMsgDelete.wPosX = pSALEITEM->sINVENPOS.wMainID;
 		NetMsgDelete.wPosY = pSALEITEM->sINVENPOS.wSubID;
@@ -624,8 +626,8 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 		BOOL bFOUND = m_cInventory.FindInsrtable ( wINVENX, wINVENY, wPosX, wPosY );
 		if ( !bFOUND )
 		{
-			//	Note : Ä¡¸íÀû¿À·ù. ( »çÀü¿¡ dataÀÇ ¹«°á¼ºÀ» Á¡°ËÇÏ¿´±â ¶§¹®¿¡ ¹®Á¦°¡ ¹ß»ýÇÏ¸é ¾ÈµÊ. )
-			GASSERT(0&&"GLChar::MsgPMarketBuy()¿¡¼­ Ä¡¸íÀû ¿À·ù ¹ß°ß.");
+			//	Note : Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ( ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ dataï¿½ï¿½ ï¿½ï¿½ï¿½á¼ºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï¸ï¿½ ï¿½Èµï¿½. )
+			GASSERT(0&&"GLChar::MsgPMarketBuy()ï¿½ï¿½ï¿½ï¿½ Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½.");
 			NetMsgFB.emFB = EMPMARKET_BUY_FB_FAIL;
 			GLGaeaServer::GetInstance().SENDTOCLIENT ( m_dwClientID, (NET_MSG_GENERIC*) &NetMsgFB );
 			return E_FAIL;
@@ -634,8 +636,8 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 		BOOL bINSERT = m_cInventory.InsertItem ( pSALEITEM->sITEMCUSTOM, wPosX, wPosY );
 		if ( !bINSERT )
 		{
-			//	Note : Ä¡¸íÀû¿À·ù. ( »çÀü¿¡ dataÀÇ ¹«°á¼ºÀ» Á¡°ËÇÏ¿´±â ¶§¹®¿¡ ¹®Á¦°¡ ¹ß»ýÇÏ¸é ¾ÈµÊ. )
-			GASSERT(0&&"GLChar::MsgPMarketBuy()¿¡¼­ Ä¡¸íÀû ¿À·ù ¹ß°ß.");
+			//	Note : Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ( ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ dataï¿½ï¿½ ï¿½ï¿½ï¿½á¼ºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï¸ï¿½ ï¿½Èµï¿½. )
+			GASSERT(0&&"GLChar::MsgPMarketBuy()ï¿½ï¿½ï¿½ï¿½ Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½.");
 			NetMsgFB.emFB = EMPMARKET_BUY_FB_FAIL;
 			GLGaeaServer::GetInstance().SENDTOCLIENT ( m_dwClientID, (NET_MSG_GENERIC*) &NetMsgFB );
 			return E_FAIL;
@@ -644,25 +646,25 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 		SINVENITEM *pINSERTITEM = m_cInventory.GetItem ( wPosX, wPosY );
 		if ( !pINSERTITEM )
 		{
-			//	Note : Ä¡¸íÀû¿À·ù. ( »çÀü¿¡ dataÀÇ ¹«°á¼ºÀ» Á¡°ËÇÏ¿´±â ¶§¹®¿¡ ¹®Á¦°¡ ¹ß»ýÇÏ¸é ¾ÈµÊ. )
-			GASSERT(0&&"GLChar::MsgPMarketBuy()¿¡¼­ Ä¡¸íÀû ¿À·ù ¹ß°ß.");
+			//	Note : Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ( ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ dataï¿½ï¿½ ï¿½ï¿½ï¿½á¼ºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï¸ï¿½ ï¿½Èµï¿½. )
+			GASSERT(0&&"GLChar::MsgPMarketBuy()ï¿½ï¿½ï¿½ï¿½ Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½.");
 			NetMsgFB.emFB = EMPMARKET_BUY_FB_FAIL;
 			GLGaeaServer::GetInstance().SENDTOCLIENT ( m_dwClientID, (NET_MSG_GENERIC*) &NetMsgFB );
 			return E_FAIL;
 		}
 
-		//	Note : ±¸ÀÔÀÚ ÀÎº¥¿¡ ¾ÆÀÌÅÛ »ðÀÔ ¸Þ½ÃÁö.
+		//	Note : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½.
 		GLMSG::SNETPC_INVEN_INSERT NetMsg_Inven;
 		NetMsg_Inven.Data = *pINSERTITEM;
 		GLGaeaServer::GetInstance().SENDTOCLIENT(m_dwClientID,&NetMsg_Inven);
 
-		//	Note :¾ÆÀÌÅÛÀÇ ¼ÒÀ¯ ÀÌÀü °æ·Î ±â·Ï.
-		// ¿î¿µÆÀ¿¡¼­ »óÁ¡ ¾ÆÀÌÅÛ °Å·¡¿¡ ´ëÇÑ ¾ÆÀÌÅÛ Á¤º¸¿äÃ»À¸·Î ÀÎÇØ¼­ ¾ÆÀÌÅÛ °ãÄ§ »ó°ü¾øÀÌ ¹«Á¶°Ç ·Î±×¸¦ ³²±â°Ô ¼öÁ¤
+		//	Note :ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½.
+		// ï¿½î¿µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä§ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î±×¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		//GLITEMLMT::GetInstance().ReqItemRoute ( pSALEITEM->sITEMCUSTOM, ID_CHAR, pCHAR->m_dwCharID, ID_CHAR, m_dwCharID, EMITEM_ROUTE_CHAR, pSALEITEM->sITEMCUSTOM.wTurnNum );
 
 /*
-		// È¹µæÇÑ ¾ÆÀÌÅÛÀÌ ÆÖÄ«µå && »ý¼ºµÈ ÆÖÀÌ¶ó¸é ¼ÒÀ¯±ÇÀ» ÀÌÀüÇÑ´Ù.
-		// ÆÖ¾ÆÀÌµð°¡ 0 ÀÌ ¾Æ´Ï¸é ÆÖÄ«µåÀÌ¸é¼­ DB¿¡ ÆÖÀÌ »ý¼ºµÈ °ÍÀÌ´Ù.
+		// È¹ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä«ï¿½ï¿½ && ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
+		// ï¿½Ö¾ï¿½ï¿½Ìµï¿½ 0 ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½Ä«ï¿½ï¿½ï¿½Ì¸é¼­ DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½.
 		if ( pITEM->sBasicOp.emItemType == ITEM_PET_CARD && pSALEITEM->sITEMCUSTOM.dwPetID != 0 )
 		{
 			CExchangePet* pDbAction = new CExchangePet ( m_dwCharID, pSALEITEM->sITEMCUSTOM.dwPetID );
@@ -676,20 +678,20 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 		bool bDELETE = pCHAR->DeletePileItem ( pSALEITEM->sITEMCUSTOM.sNativeID, (WORD) dwNum );
 		if ( !bDELETE )
 		{
-			//	Note : Ä¡¸íÀû¿À·ù. ( »çÀü¿¡ dataÀÇ ¹«°á¼ºÀ» Á¡°ËÇÏ¿´±â ¶§¹®¿¡ ¹®Á¦°¡ ¹ß»ýÇÏ¸é ¾ÈµÊ. )
-			GASSERT(0&&"GLChar::MsgPMarketBuy()¿¡¼­ Ä¡¸íÀû ¿À·ù ¹ß°ß.");
+			//	Note : Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ( ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ dataï¿½ï¿½ ï¿½ï¿½ï¿½á¼ºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï¸ï¿½ ï¿½Èµï¿½. )
+			GASSERT(0&&"GLChar::MsgPMarketBuy()ï¿½ï¿½ï¿½ï¿½ Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½.");
 			NetMsgFB.emFB = EMPMARKET_BUY_FB_FAIL;
 			GLGaeaServer::GetInstance().SENDTOCLIENT ( m_dwClientID, (NET_MSG_GENERIC*) &NetMsgFB );
 			return E_FAIL;
 		}
 
-		//	Note : ¾ÆÀÌÅÛÀ» ÀÎº¥¿¡ ³Ö¾îÁØ´Ù.
+		//	Note : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ø´ï¿½.
 		//
 		bool bINSERT = InsertPileItem ( pSALEITEM->sITEMCUSTOM, (WORD) dwNum );
 		if ( !bINSERT )
 		{
-			//	Note : Ä¡¸íÀû¿À·ù. ( »çÀü¿¡ dataÀÇ ¹«°á¼ºÀ» Á¡°ËÇÏ¿´±â ¶§¹®¿¡ ¹®Á¦°¡ ¹ß»ýÇÏ¸é ¾ÈµÊ. )
-			GASSERT(0&&"GLChar::MsgPMarketBuy()¿¡¼­ Ä¡¸íÀû ¿À·ù ¹ß°ß.");
+			//	Note : Ä¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. ( ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ dataï¿½ï¿½ ï¿½ï¿½ï¿½á¼ºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï¸ï¿½ ï¿½Èµï¿½. )
+			GASSERT(0&&"GLChar::MsgPMarketBuy()ï¿½ï¿½ï¿½ï¿½ Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½.");
 			NetMsgFB.emFB = EMPMARKET_BUY_FB_FAIL;
 			GLGaeaServer::GetInstance().SENDTOCLIENT ( m_dwClientID, (NET_MSG_GENERIC*) &NetMsgFB );
 			return E_FAIL;
@@ -711,7 +713,7 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 		pCHAR->SendMsgViewAround ( (NET_MSG_GENERIC*) &NetMsgBrd );
 	}
 
-	//	Note : ±¸ÀÔ, ÆÇ¸Å ¼º°ø FB.
+	//	Note : ï¿½ï¿½ï¿½ï¿½, ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½ FB.
 	NetMsgFB.dwGaeaID = pNetMsg->dwGaeaID;
 	NetMsgFB.emFB = EMPMARKET_BUY_FB_OK;
 	NetMsgFB.sSALEPOS = pNetMsg->sSALEPOS;
@@ -720,7 +722,7 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 	GLGaeaServer::GetInstance().SENDTOCLIENT ( m_dwClientID, (NET_MSG_GENERIC*) &NetMsgFB );
 	GLGaeaServer::GetInstance().SENDTOCLIENT ( pCHAR->m_dwClientID, (NET_MSG_GENERIC*) &NetMsgFB );
 
-	//	Note : µ· ÀÌÀü.
+	//	Note : ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 	LONGLONG lnPRICE = dwNum * pSALEITEM->llPRICE;
 
 	CheckMoneyUpdate( m_lnMoney, lnPRICE, FALSE, "Buy From PC." );
@@ -737,7 +739,7 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 		GLGuidance *pGuid = m_pLandMan->m_pGuidance;
 		if ( pGuid && !pGuid->m_bBattle )
 		{
-			//	Note : Å¬·´ÀÇ ¼öÀÍ ¹ß»ý.
+			//	Note : Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½.
 			LONGLONG lnCommission = lnPRICE-lnGIVE;
 		
 			GLClubMan &cClubMan = GLGaeaServer::GetInstance().GetClubMan();
@@ -746,7 +748,7 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 			{
 				pCLUB->m_lnIncomeMoney += lnCommission;
 
-				// Å¬·´ ¼öÀÔÀÌ 1¾ï ÀÌ»óÀÏ °æ¿ì ·Î±×¸¦ ³²±ä´Ù.
+				// Å¬ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Î±×¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
 				if( lnCommission > 	EMCLUBINCOMEMONEY_LOG )
 					GLITEMLMT::GetInstance().ReqMoneyExc( ID_USER, pCHAR->m_dwCharID, 
 														  ID_CLUB, pCLUB->m_dwID,
@@ -774,11 +776,11 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 	// Save to Private Market Log file
 	CDebugSet::ToFileWithTime("PrivateMarketLogs.txt", strTemp);
 
-	//	Note :¾ÆÀÌÅÛÀÇ ¼ÒÀ¯ ÀÌÀü °æ·Î ±â·Ï.
-	//  ¿î¿µÆÀ¿¡¼­ »óÁ¡ ¾ÆÀÌÅÛ °Å·¡¿¡ ´ëÇÑ ¾ÆÀÌÅÛ Á¤º¸¿äÃ»À¸·Î ÀÎÇØ¼­ ¾ÆÀÌÅÛ °ãÄ§ »ó°ü¾øÀÌ ¹«Á¶°Ç ·Î±×¸¦ ³²±â°Ô ¼öÁ¤
+	//	Note :ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½.
+	//  ï¿½î¿µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä§ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î±×¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	GLITEMLMT::GetInstance().ReqItemRoute ( pSALEITEM->sITEMCUSTOM, ID_CHAR, pCHAR->m_dwCharID, ID_CHAR, m_dwCharID, EMITEM_ROUTE_CHAR, pSALEITEM->sITEMCUSTOM.wTurnNum );
 
-	//	Note : µ· ±â·Ï.
+	//	Note : ï¿½ï¿½ ï¿½ï¿½ï¿½.
 	GLITEMLMT::GetInstance().ReqMoneyExc ( ID_CHAR, m_dwCharID, ID_CHAR, pCHAR->m_dwCharID, lnGIVE, EMITEM_ROUTE_CHAR );
 
 	GLITEMLMT::GetInstance().ReqMoneyExc ( ID_CHAR, m_dwCharID, ID_CHAR, 0, m_lnMoney, EMITEM_ROUTE_CHAR );
@@ -801,14 +803,14 @@ HRESULT GLChar::MsgPMarketBuy ( NET_MSG_GENERIC* nmg )
 	}
 #endif
 
-	//	Note : ±¸ÀÔÀÚ ÀÎº¥ ±Ý¾× º¯È­.
-	//	±Ý¾× º¯È­ Å¬¶óÀÌ¾ðÆ®¿¡ ¾Ë·ÁÁÜ.
+	//	Note : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ ï¿½Ý¾ï¿½ ï¿½ï¿½È­.
+	//	ï¿½Ý¾ï¿½ ï¿½ï¿½È­ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ ï¿½Ë·ï¿½ï¿½ï¿½.
 	GLMSG::SNETPC_UPDATE_MONEY NetMsgM1;
 	NetMsgM1.lnMoney = m_lnMoney;
 	GLGaeaServer::GetInstance().SENDTOCLIENT ( m_dwClientID, &NetMsgM1 );
 
-	//	Note : ÆÇ¸ÅÀÚ ÀÎº¥ ±Ý¾× º¯È­.
-	//	±Ý¾× º¯È­ Å¬¶óÀÌ¾ðÆ®¿¡ ¾Ë·ÁÁÜ.
+	//	Note : ï¿½Ç¸ï¿½ï¿½ï¿½ ï¿½Îºï¿½ ï¿½Ý¾ï¿½ ï¿½ï¿½È­.
+	//	ï¿½Ý¾ï¿½ ï¿½ï¿½È­ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ ï¿½Ë·ï¿½ï¿½ï¿½.
 	GLMSG::SNETPC_UPDATE_MONEY NetMsgM2;
 	NetMsgM2.lnMoney = pCHAR->m_lnMoney;
 	GLGaeaServer::GetInstance().SENDTOCLIENT ( pCHAR->m_dwClientID, &NetMsgM2 );

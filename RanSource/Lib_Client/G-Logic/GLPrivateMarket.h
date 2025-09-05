@@ -2,6 +2,8 @@
 
 #include <hash_map>
 #include "./GLInventory.h"
+// SECURITY FIX: Add Windows header for critical section protection
+#include <windows.h>
 
 
 struct SSALEITEM
@@ -70,6 +72,11 @@ protected:
 	MAPSEARCH	m_mapSearchItem;
 
 	EM_SALE_TYPE m_emSale;	//offline vend
+
+	// SECURITY FIX: Add critical section to prevent race conditions in private market operations
+	// This protects against multiple players purchasing the same item simultaneously
+	// and prevents item duplication exploits
+	CRITICAL_SECTION	m_csPMarketLock;
 public:
 	bool FindInsertPos ( SNATIVEID nidITEM, SNATIVEID &sSALEPOS );
 
